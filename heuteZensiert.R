@@ -15,6 +15,7 @@
 library(jpeg)
 library(tidyverse)
 library(lubridate)
+library(stringr)
 
 
 
@@ -105,7 +106,7 @@ encodeCensored <- function(censored){
 
 decodeCensored <- function(censoredInformation){
   # reverse encodeCensored()
-  censored_comp.key <- unlist(strsplit(censoredInformation, "\\d+"))[-1]
+  censored_comp.key <- unlist(str_extract_all(censoredInformation, "\\D+"))  # http://stackoverflow.com/questions/42476058/strsplit-returns-invisible-element
   censored_comp.key <- ifelse(censored_comp.key == "T", TRUE, FALSE)
   censored_comp.comp <- as.numeric(unlist(strsplit(censoredInformation, "[T|F]")))
   
