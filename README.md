@@ -15,4 +15,4 @@ Der etwas reißerische Begriff Zensur wurde mit Absicht gewählt.
 3) Da einzelne eMails an `Zuschauerredaktion@zdf.de` leider keine sichtbaren Folgen nach sich ziehen, möchten die Initiatoren eine große Masse zu mobilisieren, um den Druck auf das ZDF zu erhöhen. Gleiche Leistung für gleichen Rundfunkbeitrag!  
 4) Ziel ist es datengratragene Krtik am ZDF zu üben, der resuliterende Datensatz ist frei verfügbar. 
 
-![Kuchendiagramm](./Kuchendiagramm2.png)  
+![Kuchendiagramm](./heuteStatisik.png)  

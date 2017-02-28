@@ -7,7 +7,12 @@
 #' 1) Im Falle von Zensur Statistiken per Twitterbot verbreitet werden.
 #' 2) Ein Datenarchiv für Medien-&Justizwissenschaftler erstellt werden.
 #'  
-#' Contribution welcome. Helfe mit 
+#' Contribution welcome. Helfe mit :-)
+#' 
+#' Usage: 
+#' Rscript --vanilla heuteZensiert.R h19 `date +%Y%m%d`
+#' Rscript --vanilla heuteZensiert.R hjo `date --date="-2 day" +%Y%m%d`
+
 
 
 
@@ -16,16 +21,49 @@ library(jpeg)
 library(tidyverse)
 library(lubridate)
 library(stringr)
+library(anytime)
 
 
 
 # Parameter
-## Datum
-#(date <- as.Date("170223", format="%y%m%d"))
-(date <- Sys.Date()-1)  # gestern
-## Sendung
-sendung <- "_h19"
-sendung <- "_hjo"
+## Manage Parameter. Vorbereitung für CRONTAB
+# www.r-bloggers.com/passing-arguments-to-an-r-script-from-command-lines/
+args = commandArgs(trailingOnly=TRUE)
+if (length(args)==0) {
+  ### Keine Argumente
+  warning("Keine Argumente. Verwende default", call.=FALSE)
+  sendung <- "h19"
+  date <- Sys.Date()
+  
+} else if (length(args)==1) {
+  ### Sendung angegeben. Datum fehlt
+  sendung <- args[1]
+  date <- Sys.Date()  # Heute
+  
+} else if (length(args)==2){
+  ### Sendung und Datum angegenen
+  sendung <- args[1]
+  date <- anytime::anydate(args[2])
+  if(is.na(date))
+    stop("Argument 2 ist kein Datum. Siehe ?anytime")
+}
+### Checke ob Sendung zulässig
+if(!sendung %in% c("h19", "hjo"))
+  stop("Sendung weder h19 (ZDF 19Uhr Nachrichten) noch hjo (heute Journal")
+sendung <- paste0("_", sendung)  # returns "_h19" or "_hjo"
+### Komponierte Tweet [1]
+header <- function(sendung, date){
+  if(sendung == "_h19")
+    sendung <- "ZDF Heute 19Uhr"
+  if(sendung == "_hjo")
+    sendung <- "ZDF Heute Journal"
+  
+  date <- format(date, format = "%d.%m.%Y")
+  
+  paste(sendung, "vom", date)
+}
+tweet <- c(header(sendung, date))
+
 ## Zielbild
 zielbild <- "heuteZensiert.jpg"
 ## Framerate in Sekunden
@@ -42,7 +80,8 @@ logfile <- "Logfile.csv"
 # mediathekview: https://rodlzdf-a.akamaihd.net/none/zdf/17/02/170213_h19/1/170213_h19_2328k_p35v13.mp4
 URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
               format(date, "%y"), "/", format(date, "%m"), "/", 
-              format(date, "%y%m%d"), sendung, "/1/", format(date, "%y%m%d"), sendung, "_476k_p9v13.mp4")
+              format(date, "%y%m%d"), sendung, "/1/", format(date, "%y%m%d"), 
+              sendung, "_476k_p9v13.mp4")
 
 ## Tempdir
 Temp <- tempdir()
@@ -50,18 +89,20 @@ dir.create(Temp)
 TempImg <- paste0(Temp, "/img%03d.jpg")
 ## Download. Dauert ein paar Minuten...
 cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg)
-okay <- try(system(cmd))
-if(okay)
+nokay <- try(system(cmd))
+if(nokay){
+  (tweet <- c(tweet, "Konnte nicht geladen werden"))
   stop(paste("Streamfehler in", URL))
+}
 
 
 
 # Suche Zielbild in Stream
 ## Zielbild laden
 aim <- readJPEG(zielbild)
-raster <- as.raster(aim)
-par(ask=FALSE)
-plot(as.raster(aim))
+# raster <- as.raster(aim)
+# par(ask=FALSE)
+# plot(as.raster(aim))
 
 ## Liste Frames auf
 img <- list.files(Temp, ".jpg$", full.names = TRUE)
@@ -76,12 +117,11 @@ equalCensor <- function(frame, censor = aim){
   img.d <- censor - frame
   #plot(as.raster(abs(img.d)))
   #print(summary(img.d))
-  round(mean(img.d),3)
+  round(mean(img.d),3) == 0
 }
-img.dif <- sapply(img, FUN = equalCensor, simplify = TRUE)
+censored <- sapply(img, FUN = equalCensor, simplify = TRUE)
 
-## Interpretiere Ergebinsse
-censored <- near(0, img.dif)
+## Prozent zensiert
 prozentZensiert <- length(censored[which(censored)])/length(censored)
 prozentZensiert <- paste0(round(prozentZensiert, 3) * 100, "%")
 
@@ -93,7 +133,8 @@ encodeCensored <- function(censored){
   #' Input `censored` booleanscher Vector. TRUE (1) sind zensierte Frames, FALSE (0) sind online verfügbar
   #' bspw. 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111000000011110000000000000
   #' entspricht 88F5T7F4T13F (88*FALSE 5*TRUE 7*FALSE 4*TRUE 13*FALSE)
-  censored_out <- c(which(diff(censored)==1), which(diff(censored)==-1), length(censored))
+  censored_out <- c(which(diff(censored)==1), which(diff(censored)==-1), 
+                    length(censored))
   censored_out <- as.numeric(levels(ordered(censored_out)))
 
   censored_comp <- data_frame(comp = c(censored_out[1], diff(censored_out)),
@@ -103,16 +144,13 @@ encodeCensored <- function(censored){
   
   paste0(censored_comp, collapse = "")
 }
-
 decodeCensored <- function(censoredInformation){
   # reverse encodeCensored()
   censored_comp.key <- unlist(str_extract_all(censoredInformation, "\\D+"))  # http://stackoverflow.com/questions/42476058/strsplit-returns-invisible-element
   censored_comp.key <- ifelse(censored_comp.key == "T", TRUE, FALSE)
   censored_comp.comp <- as.numeric(unlist(strsplit(censoredInformation, "[T|F]")))
-  
   # censored_comp <- data_frame(comp = censored_comp.comp,
   #                             key = censored_comp.key)
-  
   unlist(sapply(c(1:length(censored_comp.comp)), FUN = function(i){
     rep(censored_comp.key[i], censored_comp.comp[i])}))
 }
@@ -131,34 +169,26 @@ cat(paste0(output, "\n"), file = logfile, append = TRUE)
 
 # Zensur? Twittere Statisik
 if(!TRUE %in% censored){  # Gesamte Sendung online.
-  print("Super Sendung")
+  (tweet <- c(tweet, "Super Sendung"))
   # ENDE
   
 }else{  # Teile Nachrichtensendung fehlen
-  # Visualization
-  ## Abbildungs Überschrifft
-  header <- function(sendung, date){
-    if(sendung == "_h19")
-      sendung <- "ZDF Heute 19Uhr"
-    if(sendung == "_hjo")
-      sendung <- "ZDF Heute Journal"
-    
-    date <- format(date, format = "%d.%m.%Y")
-    
-    paste(sendung, "vom", date)
-  }
+  (tweet <- c(tweet, paste(prozentZensiert, 
+                           "der Sendung wurden nicht im Internet gezeigt.")))
   
-  ## Timecode
-  if(length(img.dif) != length(img))
+  
+  
+  # Visualization
+    ## Timecode
+  if(length(censored) != length(img))
     stop("Missing Frame?")
-  imgn <- 1:length(img.dif)
+  imgn <- 1:length(censored)
   timecode <- seconds_to_period(imgn*res)
   
   ## Baue dataframe
   df <- data.frame(
     imgn = imgn,
     Minute  = timecode,
-    dif = img.dif,
     Zensiert = censored,
     Online = ifelse(censored, "Nein!", "Ja")
     
@@ -179,16 +209,21 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
     geom_col() +
     scale_color_manual(values= colors) +
     scale_fill_manual(values = colors) +
-    geom_text(data = startZensur, aes(label = Minute), color="Gray20", nudge_y = 0.2) +
+    geom_text(data = startZensur, aes(label = Minute), 
+              color="Gray20", nudge_y = 0.2) +
     
     # Label Start
     geom_vline(xintercept = 0.5, color= "Gray20") +  # TODO: Kosmetische korrektur. Start bei exact 12Uhr
-    geom_text(aes(x = 0), label = "Start:", color="Gray20", nudge_y = 0.15, nudge_x = 4) +
+    geom_text(aes(x = 0), 
+              label = "Start:", color="Gray20", nudge_y = 0.15, nudge_x = 4) +
     
     # Label Zensiert
-    geom_point(aes(x = 0, y = 0), color="white", size = 50, alpha = 0.5, show.legend = FALSE) + 
-    geom_text(aes(x = 0, y = 0), label = prozentZensiert,
-              color="Black", size = 15, show.legend = FALSE) +
+    geom_point(aes(x = 0, y = 0), 
+               color="white", size = 50, alpha = 0.5, 
+               show.legend = FALSE) + 
+    geom_text(aes(x = 0, y = 0), 
+              label = prozentZensiert, color="Black", size = 15, 
+              show.legend = FALSE) +
     
     # Theming
     theme_minimal() +
@@ -198,8 +233,9 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
           legend.position = "bottom") +
     
     # Labels
-    labs(title = header(sendung, date),
-         subtitle = "Anteil fehlender Bildbeiträge in der Online-Version")
+    labs(title = tweet[1],
+         subtitle = tweet[2],
+         caption = "www.github.com/georoen/heuteZensiert")
   
   
   ## Rausspeichern
@@ -207,7 +243,7 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
   
   ### Bild Hintergrund mit Imagick hinzufügen
   #http://unix.stackexchange.com/a/243545
-  cmd <- "composite -blend 80 Kuchendiagramm.png Hintergrund.png Kuchendiagramm2.png"
+  cmd <- "composite -blend 80 Kuchendiagramm.png ./extra/Hintergrund.png Kuchendiagramm.png"
   system(cmd)
   
   
