@@ -14,6 +14,7 @@
 #' Rscript --vanilla heuteZensiert.R hjo `date --date="-2 day" +%Y%m%d`
 
 
+setwd("~/Programmierung/heuteZensiert/")
 
 
 # Packages
@@ -239,11 +240,11 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
   
   
   ## Rausspeichern
-  ggsave("Kuchendiagramm.png", width = 3, height = 3, scale = 2, dpi = 150)
+  ggsave("heuteStatisik.png", width = 3, height = 3, scale = 2, dpi = 150)
   
   ### Bild Hintergrund mit Imagick hinzufügen
   #http://unix.stackexchange.com/a/243545
-  cmd <- "composite -blend 80 Kuchendiagramm.png ./extra/Hintergrund.png Kuchendiagramm.png"
+  cmd <- "composite -blend 80 heuteStatisik.png ./extra/Hintergrund.png heuteStatisik.png"
   system(cmd)
 
 }  # ENDE
