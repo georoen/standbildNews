@@ -62,7 +62,7 @@ header <- function(sendung, date){
   
   paste(sendung, "vom", date)
 }
-tweet <- c(header(sendung, date))
+msg <- c(header(sendung, date))
 
 ## Zielbild
 zielbild <- "heuteZensiert.jpg"
@@ -91,7 +91,7 @@ TempImg <- paste0(Temp, "/img%03d.jpg")
 cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg)
 nokay <- try(system(cmd))
 if(nokay){
-  (tweet <- c(tweet, "Konnte nicht geladen werden"))
+  (msg <- c(msg, "Konnte nicht geladen werden"))
   stop(paste("Streamfehler in", URL))
 }
 
@@ -169,11 +169,11 @@ cat(paste0(output, "\n"), file = logfile, append = TRUE)
 
 # Zensur? Twittere Statisik
 if(!TRUE %in% censored){  # Gesamte Sendung online.
-  (tweet <- c(tweet, "Super Sendung"))
+  (msg <- c(msg, "Super Sendung"))
   # ENDE
   
 }else{  # Teile Nachrichtensendung fehlen
-  (tweet <- c(tweet, paste(prozentZensiert, 
+  (msg <- c(msg, paste(prozentZensiert, 
                            "der Sendung wurden nicht im Internet gezeigt.")))
   
   
@@ -233,8 +233,8 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
           legend.position = "bottom") +
     
     # Labels
-    labs(title = tweet[1],
-         subtitle = tweet[2],
+    labs(title = msg[1],
+         subtitle = msg[2],
          caption = "www.github.com/georoen/heuteZensiert")
   
   
@@ -245,11 +245,10 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
   #http://unix.stackexchange.com/a/243545
   cmd <- "composite -blend 80 Kuchendiagramm.png ./extra/Hintergrund.png Kuchendiagramm.png"
   system(cmd)
-  
-  
-  
-  # Twittern
-  
-}  # ENDE
 
+}  # ENDE
 unlink(Temp, recursive = TRUE)
+
+
+
+# Twittern
