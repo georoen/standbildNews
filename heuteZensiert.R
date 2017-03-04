@@ -29,9 +29,10 @@ library(anytime)
 # Parameter
 ## Manage Parameter. Vorbereitung für CRONTAB
 # www.r-bloggers.com/passing-arguments-to-an-r-script-from-command-lines/
+# args <- list(sen = "hjo", date = Sys.Date())
 args = commandArgs(trailingOnly=TRUE)
 if (length(args)==0) {
-  ### Keine Argumente
+  ### Keine Argumente. Run Defaults = 19Uhr von date( <HEUTE> )
   warning("Keine Argumente. Verwende default", call.=FALSE)
   sendung <- "h19"
   date <- Sys.Date()
@@ -55,13 +56,13 @@ sendung <- paste0("_", sendung)  # returns "_h19" or "_hjo"
 ### Komponierte Tweet [1]
 header <- function(sendung, date){
   if(sendung == "_h19")
-    sendung <- "ZDF Heute 19Uhr"
+    s.name <- "ZDF Heute 19Uhr"
   if(sendung == "_hjo")
-    sendung <- "ZDF Heute Journal"
+    s.name <- "ZDF Heute Journal"
   
   date <- format(date, format = "%d.%m.%Y")
   
-  paste(sendung, "vom", date)
+  paste(s.name, "vom", date)
 }
 msg <- c(header(sendung, date))
 
@@ -70,15 +71,19 @@ zielbild <- "heuteZensiert.jpg"
 ## Framerate in Sekunden
 res <- 10
 ## Logfile
-logfile <- "Logfile.csv"
-
-
+#logfile <- "Logfile.csv"
+catlog <- function(msg, file = "Logfile.csv") {
+  cat(msg, file, append = TRUE)
+  message(msg)
+}
 
 # Nachrichtensendung herunterladen
 ## Paste0 URL
-# heute 19 uhr 
-# offiziell: https://downloadzdf-a.akamaihd.net/mp4/zdf/17/02/170225_hjo/1/170225_hjo_476k_p9v13.mp4
-# mediathekview: https://rodlzdf-a.akamaihd.net/none/zdf/17/02/170213_h19/1/170213_h19_2328k_p35v13.mp4
+# heute 19 Uhr 
+# mediathekview:  https://rodlzdf-a.akamaihd.net/none/zdf/17/02/170213_h19/1/170213_h19_2328k_p35v13.mp4  #h19
+# offiziell:      https://downloadzdf-a.akamaihd.net/mp4/zdf/17/02/170225_hjo/1/170225_hjo_476k_p9v13.mp4
+# 4.3.17:         https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170304_h19/1/170304_h19_476k_p9v13.mp4  #h19
+# 2.3.17: ERROR!  https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170302_sendung_h19/1/170302_sendung_h19_476k_p9v13.mp4  #h19
 URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
               format(date, "%y"), "/", format(date, "%m"), "/", 
               format(date, "%y%m%d"), sendung, "/1/", format(date, "%y%m%d"), 
@@ -164,7 +169,8 @@ output <- paste(date, sendung, prozentZensiert,  # Einfache Infos
                 paste0("1/",res), URL,  # Metadaten 
                 sep = ";")  # read.csv2
 
-cat(paste0(output, "\n"), file = logfile, append = TRUE)
+#cat(paste0(output, "\n"), file = logfile, append = TRUE)
+catlog(paste0(output, "\n"))
 
 
 
