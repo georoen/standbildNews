@@ -24,6 +24,14 @@ library(lubridate)
 library(stringr)
 library(anytime)
 
+# Function
+## Logfile
+Logfile <- "Logfile.csv"
+catlog <- function(msg, file = Logfile) {
+  cat(msg, file, append = TRUE)
+  message(msg)
+}
+
 
 
 # Parameter
@@ -66,18 +74,12 @@ header <- function(sendung, date){
 }
 msg <- c(header(sendung, date))
 
-## Zielbild
-zielbild <- "heuteZensiert.jpg"
-## Framerate in Sekunden
-res <- 10
-## Logfile
-#logfile <- "Logfile.csv"
-catlog <- function(msg, file = "Logfile.csv") {
-  cat(msg, file, append = TRUE)
-  message(msg)
-}
+
 
 # Nachrichtensendung herunterladen
+## Framerate in Sekunden
+res <- 10
+
 ## Paste0 URL
 # heute 19 Uhr 
 # mediathekview:  https://rodlzdf-a.akamaihd.net/none/zdf/17/02/170213_h19/1/170213_h19_2328k_p35v13.mp4  #h19
@@ -90,42 +92,44 @@ URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
               sendung, "_476k_p9v13.mp4")
 
 ## Tempdir
-Temp <- tempdir()
+#Temp <- tempdir()
+Temp <- paste0("archiv/", format(date, "%y%m%d"), sendung, "/")
+if(dir.exists(Temp))
+  stop("Directory exists. Avoid Dublicates")
 dir.create(Temp)
 TempImg <- paste0(Temp, "/img%03d.jpg")
+
 ## Download. Dauert ein paar Minuten...
 cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg)
 nokay <- try(system(cmd))
 if(nokay){
   (msg <- c(msg, "Konnte nicht geladen werden"))
+  unlink(Temp, recursive = TRUE)
   stop(paste("Streamfehler in", URL))
 }
 
 
 
 # Suche Zielbild in Stream
-## Zielbild laden
-aim <- readJPEG(zielbild)
-# raster <- as.raster(aim)
-# par(ask=FALSE)
-# plot(as.raster(aim))
+## Zielbilder laden
+#aim <- readJPEG("heuteZensiert.jpg")
+# liest einen Ordner
+# jpg ist das zielbild
+# Mean dient dazu passendes Bild schnell zu finden
+zielbilder <- list.files("lib/", pattern = ".jpg$", full.names = TRUE)
+readLib <- function(zielbild) {
+  ## Bild laden
+  aim <- readJPEG(zielbild)
+  ## Mittelwert ausrechnen
+  round(mean(aim),3)
+}
+zielbilder.mean <- sapply(zielbilder, readLib)
+
 
 ## Liste Frames auf
-img <- list.files(Temp, ".jpg$", full.names = TRUE)
-
-## Image Differencing:
-equalCensor <- function(frame, censor = aim){
-  # Einfache Veränderungsdetection: Substrahiere Frame von Zielbild
-  # Gibt den auf drei Stellen gerundeten Unterschied zurück.
-  # usage: equalCensor(censor = aim, frame = img[15])
-  
-  frame <- readJPEG(frame)
-  img.d <- censor - frame
-  #plot(as.raster(abs(img.d)))
-  #print(summary(img.d))
-  round(mean(img.d),3) == 0
-}
-censored <- sapply(img, FUN = equalCensor, simplify = TRUE)
+img <- list.files(Temp , pattern =  ".jpg$", full.names = TRUE, recursive = TRUE)
+img.mean <- sapply(img, readLib)
+censored <- img.mean %in% zielbilder.mean
 
 ## Prozent zensiert
 prozentZensiert <- length(censored[which(censored)])/length(censored)
@@ -254,7 +258,7 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
   system(cmd)
 
 }  # ENDE
-unlink(Temp, recursive = TRUE)
+#unlink(Temp, recursive = TRUE)
 
 
 
