@@ -136,7 +136,6 @@ prozentZensiert <- length(censored[which(censored)])/length(censored)
 prozentZensiert <- paste0(round(prozentZensiert, 3) * 100, "%")
 
 
-
 # Speichere Ergebniss
 encodeCensored <- function(censored){
   #' Komprimiert die booleansche Zeitreihe
@@ -173,8 +172,8 @@ output <- paste(date, sendung, prozentZensiert,  # Einfache Infos
                 paste0("1/",res), URL,  # Metadaten 
                 sep = ";")  # read.csv2
 
-#cat(paste0(output, "\n"), file = logfile, append = TRUE)
-catlog(paste0(output, "\n"))
+cat(paste0(output, "\n"), file = Logfile, append = TRUE)
+#catlog(paste0(output, "\n"))
 
 
 
