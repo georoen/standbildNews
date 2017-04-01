@@ -58,12 +58,14 @@ if (length(args)==0) {
     stop("Argument 2 ist kein Datum. Siehe ?anytime")
 }
 ### Checke ob Sendung zulässig
-if(!sendung %in% c("h19", "hjo"))
+if(!sendung %in% c("h19", "sendung_h19", "hjo"))
   stop("Sendung weder h19 (ZDF 19Uhr Nachrichten) noch hjo (heute Journal")
 sendung <- paste0("_", sendung)  # returns "_h19" or "_hjo"
 ### Komponierte Tweet [1]
 header <- function(sendung, date){
   if(sendung == "_h19")
+    s.name <- "ZDF Heute 19Uhr"
+  if(sendung == "sendung_h19")
     s.name <- "ZDF Heute 19Uhr"
   if(sendung == "_hjo")
     s.name <- "ZDF Heute Journal"
@@ -83,6 +85,7 @@ res <- 10
 ## Paste0 URL
 # heute 19 Uhr 
 # mediathekview:  https://rodlzdf-a.akamaihd.net/none/zdf/17/02/170213_h19/1/170213_h19_2328k_p35v13.mp4  #h19
+# 7.3.17:         http://download.zdf.de/mp4/zdf/17/03/170307_h19/1/170307_h19_3296k_p15v13.mp4
 # offiziell:      https://downloadzdf-a.akamaihd.net/mp4/zdf/17/02/170225_hjo/1/170225_hjo_476k_p9v13.mp4
 # 4.3.17:         https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170304_h19/1/170304_h19_476k_p9v13.mp4  #h19
 # 2.3.17: ERROR!  https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170302_sendung_h19/1/170302_sendung_h19_476k_p9v13.mp4  #h19
