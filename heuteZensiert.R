@@ -38,6 +38,7 @@ catlog <- function(msg, file = Logfile) {
 ## Manage Parameter. Vorbereitung für CRONTAB
 # www.r-bloggers.com/passing-arguments-to-an-r-script-from-command-lines/
 # args <- list(sen = "hjo", date = Sys.Date())
+# args <- list(sen = "h19", date = format(Sys.Date(), "%Y%m%d"))
 args = commandArgs(trailingOnly=TRUE)
 if (length(args)==0) {
   ### Keine Argumente. Run Defaults = 19Uhr von date( <HEUTE> )
@@ -53,21 +54,19 @@ if (length(args)==0) {
 } else if (length(args)==2){
   ### Sendung und Datum angegenen
   sendung <- args[1]
-  date <- anytime::anydate(args[2])
+  date <- anytime::anydate(unlist(args[2]))
   if(is.na(date))
     stop("Argument 2 ist kein Datum. Siehe ?anytime")
 }
 ### Checke ob Sendung zulässig
-if(!sendung %in% c("h19", "sendung_h19", "hjo"))
+if(!sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo"))
   stop("Sendung weder h19 (ZDF 19Uhr Nachrichten) noch hjo (heute Journal")
 sendung <- paste0("_", sendung)  # returns "_h19" or "_hjo"
 ### Komponierte Tweet [1]
 header <- function(sendung, date){
-  if(sendung == "_h19")
+  if(grepl("h19", sendung))
     s.name <- "ZDF Heute 19Uhr"
-  if(sendung == "sendung_h19")
-    s.name <- "ZDF Heute 19Uhr"
-  if(sendung == "_hjo")
+  if(grepl("hjo", sendung))
     s.name <- "ZDF Heute Journal"
   
   date <- format(date, format = "%d.%m.%Y")
@@ -103,7 +102,7 @@ dir.create(Temp)
 TempImg <- paste0(Temp, "/img%03d.jpg")
 
 ## Download. Dauert ein paar Minuten...
-cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg)
+(cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
 nokay <- try(system(cmd))
 if(nokay){
   (msg <- c(msg, "Konnte nicht geladen werden"))
