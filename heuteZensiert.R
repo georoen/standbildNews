@@ -105,6 +105,17 @@ TempImg <- paste0(Temp, "/img%03d.jpg")
 (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
 nokay <- try(system(cmd))
 if(nokay){
+  # Hat nich geklappt. Variere URL
+  sendung2 <- paste0("_sendung", sendung)
+  URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
+                format(date, "%y"), "/", format(date, "%m"), "/", 
+                format(date, "%y%m%d"), sendung2, "/1/", format(date, "%y%m%d"), 
+                sendung2, "_476k_p9v13.mp4")
+  (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
+  nokay <- try(system(cmd))
+}
+if(nokay){
+  # Hat immer noch nicht geklappt...
   (msg <- c(msg, "Konnte nicht geladen werden"))
   unlink(Temp, recursive = TRUE)
   stop(paste("Streamfehler in", URL))
@@ -185,6 +196,7 @@ cat(paste0(output, "\n"), file = Logfile, append = TRUE)
 # Zensur? Twittere Statisik
 if(!TRUE %in% censored){  # Gesamte Sendung online.
   (msg <- c(msg, "Super Sendung"))
+  mediaPath <- NULL
   # ENDE
   
 }else{  # Teile Nachrichtensendung fehlen
@@ -260,6 +272,9 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
   #http://unix.stackexchange.com/a/243545
   cmd <- "composite -blend 80 heuteStatisik.png ./extra/Hintergrund.png heuteStatisik.png"
   system(cmd)
+  
+  ## mediaPath für twitter
+  mediaPath <- "heuteStatisik.png"
 
 }  # ENDE
 #unlink(Temp, recursive = TRUE)
@@ -267,3 +282,4 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
 
 
 # Twittern
+source("extra/tweet.R")
