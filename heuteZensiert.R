@@ -11,7 +11,7 @@
 #' 
 #' Usage: 
 #' Rscript --vanilla heuteZensiert.R h19 `date +%Y%m%d`
-#' Rscript --vanilla heuteZensiert.R hjo `date --date="-2 day" +%Y%m%d`
+#' Rscript --vanilla heuteZensiert.R hjo `date --date="-1 day" +%Y%m%d`
 
 
 setwd("~/Programmierung/heuteZensiert/")
@@ -118,20 +118,30 @@ if(nokay){
 # liest einen Ordner
 # jpg ist das zielbild
 # Mean dient dazu passendes Bild schnell zu finden
+# auch andere Methoden sind denkbar: median(), sd()
+# ... sollen zukünftig erlauben auch komplexere sachen zu rechnen, zB 4*4 raster skalierung ähnlich OCR
 zielbilder <- list.files("lib/", pattern = ".jpg$", full.names = TRUE)
-readLib <- function(zielbild) {
+readLib <- function(zielbild, method = mean, digits = 4, ...) {
   ## Bild laden
   aim <- readJPEG(zielbild)
-  ## Mittelwert ausrechnen
-  round(mean(aim),3)
+  ## Methode anwenden
+  round(method(aim, ...), digits)
 }
 zielbilder.mean <- sapply(zielbilder, readLib)
 
 
 ## Liste Frames auf
 img <- list.files(Temp , pattern =  ".jpg$", full.names = TRUE, recursive = TRUE)
+### 1. Classification
+#' according to mean. fast (?) but inaccurate
 img.mean <- sapply(img, readLib)
 censored <- img.mean %in% zielbilder.mean
+### 2. Image matching
+zielbilder.sd <- sapply(zielbilder, readLib, sd)
+img2 <- img[which(censored)]
+img2.sd <- sapply(img, readLib, sd)
+censored2 <- img2.sd %in% zielbilder.sd
+# ... Discontinued. TODO: merge censorded und censored2
 
 ## Prozent zensiert
 prozentZensiert <- length(censored[which(censored)])/length(censored)
