@@ -16,3 +16,8 @@ Der etwas reißerische Begriff Zensur wurde mit Absicht gewählt.
 4) Ziel ist es datengratragene Krtik am ZDF zu üben, der resuliterende Datensatz ist frei verfügbar. 
 
 ![Kuchendiagramm](./heuteStatisik.png)  
+
+## CRONTAB:
+https://de.wikipedia.org/wiki/Heute-journal#Sendeplatz  
+19:30 h19  
+23:30 hjo  
