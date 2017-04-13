@@ -276,7 +276,7 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
   mediaPath <- "heuteStatisik.png"
 
 }  # ENDE
-#unlink(Temp, recursive = TRUE)
+unlink(Temp, recursive = TRUE)
 
 
 

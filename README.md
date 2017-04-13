@@ -21,3 +21,7 @@ Der etwas reißerische Begriff Zensur wurde mit Absicht gewählt.
 https://de.wikipedia.org/wiki/Heute-journal#Sendeplatz  
 19:30 h19  
 23:30 hjo  
+
+## Dependencies
+Linux software `sudo apt install ffmpeg imagemagick`.  
+R libraries `jpeg`, `ggplot2`, `tibble`, `lubridate`, `stringr`.
