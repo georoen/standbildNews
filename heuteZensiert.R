@@ -14,8 +14,6 @@
 #' Rscript --vanilla heuteZensiert.R hjo `date --date="-1 day" +%Y%m%d`
 
 
-setwd("~/Programmierung/heuteZensiert/")
-
 
 # Packages
 library(jpeg)
