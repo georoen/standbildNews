@@ -13,7 +13,7 @@ Der etwas reißerische Begriff Zensur wurde mit Absicht gewählt.
 1) Dem digitalen Nachrichtenschauer werden bewusst Inhalte vorenthalten. Da die Nachrichten online zeitgleich (oder gar später) ausgestrahlt werden, hat Letzterer keine Möglichkeit mehr, die zensierten Passagen im TV nachzuschauen.  
 2) Die Online-Version der Nachrichtensendung wird offensichtlich nachbearbeitet. Digital Natives sind besonders betroffen und im Vergleich zu analogen Nutzern schlechter informiert.  
 3) Da einzelne eMails an `Zuschauerredaktion@zdf.de` leider keine sichtbaren Folgen nach sich ziehen, möchten die Initiatoren eine große Masse zu mobilisieren, um den Druck auf das ZDF zu erhöhen. Gleiche Leistung für gleichen Rundfunkbeitrag!  
-4) Ziel ist es datengratragene Krtik am ZDF zu üben, der resuliterende Datensatz ist frei verfügbar. 
+4) Ziel ist es datengetragene Krtik am ZDF zu üben, der resuliterende Datensatz ist frei verfügbar. 
 
 ![Kuchendiagramm](./heuteStatisik.png)  
 
