@@ -21,7 +21,6 @@ library(ggplot2)
 library(tibble)
 library(lubridate)
 library(stringr)
-library(anytime)
 
 # Function
 ## Logfile
@@ -53,9 +52,10 @@ if (length(args)==0) {
 } else if (length(args)==2){
   ### Sendung und Datum angegenen
   sendung <- args[1]
-  date <- anytime::anydate(unlist(args[2]))
+  date <- as.numeric(unlist(args[2]))
   if(is.na(date))
-    stop("Argument 2 ist kein Datum. Siehe ?anytime")
+    stop("Argument 2 ist keine Zahl und kann nicht vom Datum abgezogen werden.")
+  date <- Sys.Date()-date
 }
 ### Checke ob Sendung zulässig
 if(!sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo"))
