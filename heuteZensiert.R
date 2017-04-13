@@ -19,7 +19,8 @@ setwd("~/Programmierung/heuteZensiert/")
 
 # Packages
 library(jpeg)
-library(tidyverse)
+library(ggplot2)
+library(tibble)
 library(lubridate)
 library(stringr)
 library(anytime)
