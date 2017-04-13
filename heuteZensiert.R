@@ -93,7 +93,7 @@ URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
               sendung, "_476k_p9v13.mp4")
 
 ## Tempdir
-Temp <- tempdir()
+Temp <- paste0(tempdir(), "/", format(date, "%y%m%d"), sendung, "/")
 #Temp <- paste0("archiv/", format(date, "%y%m%d"), sendung, "/")
 if(dir.exists(Temp))
   stop("Directory exists. Avoid Dublicates")
