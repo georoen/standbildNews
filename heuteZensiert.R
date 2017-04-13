@@ -78,7 +78,7 @@ msg <- c(header(sendung, date))
 
 # Nachrichtensendung herunterladen
 ## Framerate in Sekunden
-res <- 10
+res <- 3
 
 ## Paste0 URL
 # heute 19 Uhr 
@@ -276,7 +276,7 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
   mediaPath <- "heuteStatisik.png"
 
 }  # ENDE
-unlink(Temp, recursive = TRUE)
+#unlink(Temp, recursive = TRUE)
 
 
 
