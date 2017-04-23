@@ -124,15 +124,21 @@ compose_URL <- function(date, sendung, mode) {
       stop(paste("mode", mode, "nicht bekannt!"))
     } # ENDE ZDF
   
-  # ARD  
+  # ARD Tageschau 20Uhr
   } else if( sendung == "t20") {
     # Rveste URL vom RSS-Feed
+    # inspired by https://stackoverflow.com/questions/32127921/rvest-how-to-select-a-specific-css-node-by-id
     library(rvest)
     URLhtml <- "https://www.tagesschau.de/export/video-podcast/tagesschau/"
     URLs <- read_html(URLhtml) %>%
       html_nodes("enclosure") %>% 
       html_attr("url")
     URL <- URLs[[dateshift +1]]  # Wähle "Datum" (ungenau, eher RSS-Reihenfolge) aus
+    # Lese tatsächliches Datum aus URL...
+    URLdate <- regmatches(basename(URL), regexpr("\\d+", basename(URL)))
+    # ... und korrigiere `date` und `msg` im global enviroment
+    date <<- as.Date(URLdate, "%Y%m%d")
+    msg <<- c(header(sendung, date))
   }
   
   
@@ -318,9 +324,9 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
   mediaPath <- "heuteStatisik.png"
 
 }  # ENDE
-#unlink(Temp, recursive = TRUE)
+unlink(Temp, recursive = TRUE)
 
 
 
 # Twittern
-#source("extra/tweet.R")
+source("extra/tweet.R")
