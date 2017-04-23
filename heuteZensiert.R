@@ -102,7 +102,7 @@ res <- 3
 #' 23.4.17: http://download.media.tagesschau.de/video/2017/0423/TV-20170423-2033-4601.h264.mp4
 compose_URL <- function(date, sendung, mode) {
   # ZDF
-  if(sendung %in% c()){
+  if(sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo")){
     if(mode == 1){
       sendung2 <- paste0("_sendung", sendung)
       URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
