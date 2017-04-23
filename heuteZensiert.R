@@ -43,30 +43,34 @@ if (length(args)==0) {
   warning("Keine Argumente. Verwende default", call.=FALSE)
   sendung <- "h19"
   date <- Sys.Date()
+  dateshift <- 0
   
 } else if (length(args)==1) {
   ### Sendung angegeben. Datum fehlt
   sendung <- args[1]
   date <- Sys.Date()  # Heute
+  dateshift <- 0
   
 } else if (length(args)==2){
   ### Sendung und Datum angegenen
   sendung <- args[1]
-  date <- as.numeric(unlist(args[2]))
+  dateshift <- as.numeric(unlist(args[2]))
   if(is.na(date))
     stop("Argument 2 ist keine Zahl und kann nicht vom Datum abgezogen werden.")
-  date <- Sys.Date()-date
+  date <- Sys.Date()-dateshift
 }
 ### Checke ob Sendung zulässig
-if(!sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo"))
-  stop("Sendung weder h19 (ZDF 19Uhr Nachrichten) noch hjo (heute Journal")
-sendung <- paste0("_", sendung)  # returns "_h19" or "_hjo"
+if(!sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo", "t20"))
+  stop("Sendung nicht bekannt")
+
 ### Komponierte Tweet [1]
 header <- function(sendung, date){
   if(grepl("h19", sendung))
     s.name <- "ZDF Heute 19Uhr"
   if(grepl("hjo", sendung))
     s.name <- "ZDF Heute Journal"
+  if(grepl("t20", sendung))
+    s.name <- "ARD Tageschau"
   
   date <- format(date, format = "%d.%m.%Y")
   
@@ -78,7 +82,7 @@ msg <- c(header(sendung, date))
 
 # Nachrichtensendung herunterladen
 ## Stream in Tempdir speichern
-Temp <- paste0(tempdir(), "/", format(date, "%y%m%d"), sendung, "/")
+Temp <- paste0(tempdir(), "/", format(date, "%y%m%d"), "_", sendung, "/")
 #Temp <- paste0("archiv/", format(date, "%y%m%d"), sendung, "/")
 if(dir.exists(Temp))
   stop("Directory exists. Avoid Dublicates")
@@ -100,11 +104,12 @@ res <- 3
 # ARD
 #' tagesschau 20Uhr
 #' 23.4.17: http://download.media.tagesschau.de/video/2017/0423/TV-20170423-2033-4601.h264.mp4
+#' 22.4.17: http://download.media.tagesschau.de/video/2017/0422/TV-20170422-2131-2301.h264.mp4
 compose_URL <- function(date, sendung, mode) {
   # ZDF
-  if(sendung %in% c("_h19", "_sendung_h19", "_hjo", "_sendung_hjo")){
+  if(sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo")){
     if(mode == 1){
-      sendung2 <- paste0("_sendung", sendung)
+      sendung2 <- paste0("_sendung_", sendung)
       URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
                     format(date, "%y"), "/", format(date, "%m"), "/", 
                     format(date, "%y%m%d"), sendung2, "/1/", format(date, "%y%m%d"), 
@@ -113,22 +118,21 @@ compose_URL <- function(date, sendung, mode) {
       # Veraltet...?
       URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
                     format(date, "%y"), "/", format(date, "%m"), "/", 
-                    format(date, "%y%m%d"), sendung, "/1/", format(date, "%y%m%d"), 
-                    sendung, "_476k_p9v13.mp4")
+                    format(date, "%y%m%d"), "_", sendung, "/1/", 
+                    format(date, "%y%m%d"), "_",sendung, "_476k_p9v13.mp4")
     } else {
       stop(paste("mode", mode, "nicht bekannt!"))
     } # ENDE ZDF
   
   # ARD  
   } else if( sendung %in% c("t20")) {
-    # -2033-4601
-    # Woher kommt das?!
-    URL <- paste0("http://download.media.tagesschau.de/video/",
-                  format(date, "%y"), "/",
-                  format(date, "%m%d"), 
-                  "/TV-", format(date, "%y%m%d"), 
-                  ??? sendung, 
-                  ".h264.mp4")
+    # Rveste URL vom RSS-Feed
+    library(rvest)
+    URLhtml <- "https://www.tagesschau.de/export/video-podcast/tagesschau/"
+    URL <- read_html(URLhtml) %>%
+      html_nodes("enclosure") %>% 
+      html_attr("url")
+    URL<- URL[[dateshift +1]]  # Wähle "Datum" (ungenau, eher RSS-Reihenfolge) aus
   }
   
   
@@ -228,7 +232,7 @@ cat(paste0(output, "\n"), file = Logfile, append = TRUE)
 
 # Zensur? Twittere Statisik
 if(!TRUE %in% censored){  # Gesamte Sendung online.
-  (msg <- c(msg, "vollständig online."))
+  (msg <- paste(msg, "vollständig online."))
   mediaPath <- NULL
   # ENDE
   
