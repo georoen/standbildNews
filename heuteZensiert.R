@@ -41,7 +41,7 @@ args = commandArgs(trailingOnly=TRUE)
 if (length(args)==0) {
   ### Keine Argumente. Run Defaults = 19Uhr von date( <HEUTE> )
   warning("Keine Argumente. Verwende default", call.=FALSE)
-  sendung <- "h19"
+  sendung <- "t20"
   date <- Sys.Date()
   dateshift <- 0
   
@@ -125,14 +125,14 @@ compose_URL <- function(date, sendung, mode) {
     } # ENDE ZDF
   
   # ARD  
-  } else if( sendung %in% c("t20")) {
+  } else if( sendung == "t20") {
     # Rveste URL vom RSS-Feed
     library(rvest)
     URLhtml <- "https://www.tagesschau.de/export/video-podcast/tagesschau/"
-    URL <- read_html(URLhtml) %>%
+    URLs <- read_html(URLhtml) %>%
       html_nodes("enclosure") %>% 
       html_attr("url")
-    URL<- URL[[dateshift +1]]  # Wähle "Datum" (ungenau, eher RSS-Reihenfolge) aus
+    URL <- URLs[[dateshift +1]]  # Wähle "Datum" (ungenau, eher RSS-Reihenfolge) aus
   }
   
   
@@ -267,6 +267,7 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
   ## Abbildung erstellen
   colors <- c("dodgerblue", "orangered")
   
+  breite <- length(img)*res/60  # Länge der Sendung
   ggplot(df, aes(y=2, imgn, color = Online, fill = Online))+
     # Pie Chart
     coord_polar(start = 0) +
@@ -298,8 +299,7 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
     
     # Labels
     labs(title = msg[1],
-         subtitle = msg[2],
-         caption = "www.github.com/georoen/heuteZensiert")
+         subtitle = msg[2])
   
   
   ## Rausspeichern
@@ -307,7 +307,11 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
   
   ### Bild Hintergrund mit Imagick hinzufügen
   #http://unix.stackexchange.com/a/243545
-  cmd <- "composite -blend 80 heuteStatisik.png ./extra/Hintergrund.png heuteStatisik.png"
+  if(grepl("h", sendung)){
+    cmd <- "composite -blend 80 heuteStatisik.png ./extra/Hintergrund_ZDF.png heuteStatisik.png"
+  } else {
+    cmd <- "composite -blend 80 heuteStatisik.png ./extra/Hintergrund_ARD.png heuteStatisik.png"
+  }
   system(cmd)
   
   ## mediaPath für twitter
@@ -319,4 +323,4 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
 
 
 # Twittern
-source("extra/tweet.R")
+#source("extra/tweet.R")
