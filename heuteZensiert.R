@@ -97,16 +97,17 @@ res <- 3
 # 2.3.17: ERROR!  https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170302_sendung_h19/1/170302_sendung_h19_476k_p9v13.mp4  #h19
 compose_URL <- function(date, sendung, mode) {
   if(mode == 1){
-    URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
-                  format(date, "%y"), "/", format(date, "%m"), "/", 
-                  format(date, "%y%m%d"), sendung, "/1/", format(date, "%y%m%d"), 
-                  sendung, "_476k_p9v13.mp4")
-  } else {
     sendung2 <- paste0("_sendung", sendung)
     URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
                   format(date, "%y"), "/", format(date, "%m"), "/", 
                   format(date, "%y%m%d"), sendung2, "/1/", format(date, "%y%m%d"), 
                   sendung2, "_476k_p9v13.mp4")
+  } else {
+    # Veraltet...?
+    URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
+                  format(date, "%y"), "/", format(date, "%m"), "/", 
+                  format(date, "%y%m%d"), sendung, "/1/", format(date, "%y%m%d"), 
+                  sendung, "_476k_p9v13.mp4")
   }
   URL
 }
