@@ -89,26 +89,42 @@ TempImg <- paste0(Temp, "/img%03d.jpg")
 res <- 3
 
 ## Paste0 URL
-# heute 19 Uhr 
-# mediathekview:  https://rodlzdf-a.akamaihd.net/none/zdf/17/02/170213_h19/1/170213_h19_2328k_p35v13.mp4  #h19
-# 7.3.17:         http://download.zdf.de/mp4/zdf/17/03/170307_h19/1/170307_h19_3296k_p15v13.mp4
-# offiziell:      https://downloadzdf-a.akamaihd.net/mp4/zdf/17/02/170225_hjo/1/170225_hjo_476k_p9v13.mp4
-# 4.3.17:         https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170304_h19/1/170304_h19_476k_p9v13.mp4  #h19
-# 2.3.17: ERROR!  https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170302_sendung_h19/1/170302_sendung_h19_476k_p9v13.mp4  #h19
+# ZDF
+#' heute 19 Uhr 
+#' mediathekview:  https://rodlzdf-a.akamaihd.net/none/zdf/17/02/170213_h19/1/170213_h19_2328k_p35v13.mp4  #h19
+#' 7.3.17:         http://download.zdf.de/mp4/zdf/17/03/170307_h19/1/170307_h19_3296k_p15v13.mp4
+#' offiziell:      https://downloadzdf-a.akamaihd.net/mp4/zdf/17/02/170225_hjo/1/170225_hjo_476k_p9v13.mp4
+#' 4.3.17:         https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170304_h19/1/170304_h19_476k_p9v13.mp4  #h19
+#' 2.3.17: ERROR!  https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170302_sendung_h19/1/170302_sendung_h19_476k_p9v13.mp4  #h19
+# 
+# ARD
+#' tagesschau 20Uhr
+#' 23.4.17: http://download.media.tagesschau.de/video/2017/0423/TV-20170423-2033-4601.h264.mp4
 compose_URL <- function(date, sendung, mode) {
-  if(mode == 1){
-    sendung2 <- paste0("_sendung", sendung)
-    URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
-                  format(date, "%y"), "/", format(date, "%m"), "/", 
-                  format(date, "%y%m%d"), sendung2, "/1/", format(date, "%y%m%d"), 
-                  sendung2, "_476k_p9v13.mp4")
-  } else {
-    # Veraltet...?
-    URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
-                  format(date, "%y"), "/", format(date, "%m"), "/", 
-                  format(date, "%y%m%d"), sendung, "/1/", format(date, "%y%m%d"), 
-                  sendung, "_476k_p9v13.mp4")
+  # ZDF
+  if(sendung %in% c()){
+    if(mode == 1){
+      sendung2 <- paste0("_sendung", sendung)
+      URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
+                    format(date, "%y"), "/", format(date, "%m"), "/", 
+                    format(date, "%y%m%d"), sendung2, "/1/", format(date, "%y%m%d"), 
+                    sendung2, "_476k_p9v13.mp4")
+    } else if( mode == 2){
+      # Veraltet...?
+      URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
+                    format(date, "%y"), "/", format(date, "%m"), "/", 
+                    format(date, "%y%m%d"), sendung, "/1/", format(date, "%y%m%d"), 
+                    sendung, "_476k_p9v13.mp4")
+    } else {
+      stop(paste("mode", mode, "nicht bekannt!"))
+    } # ENDE ZDF
+  
+  # ARD  
+  } else if( sendung %in% c("t20")) {
+    # http://download.media.tagesschau.de/video/2017/0423/TV-20170423-2033-4601.h264.mp4
   }
+  
+  
   URL
 }
 
