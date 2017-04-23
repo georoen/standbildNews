@@ -229,7 +229,7 @@ censoredInformation <- encodeCensored(censored)
 output <- paste(date, sendung, prozentZensiert,  # Einfache Infos
                 censoredInformation,  # encoded censoredInformation
                 paste0("1/",res), URL,  # Metadaten 
-                sep = ";")  # read.csv2
+                sep = ",")  # read.csv
 
 cat(paste0(output, "\n"), file = Logfile, append = TRUE)
 #catlog(paste0(output, "\n"))
