@@ -77,6 +77,14 @@ msg <- c(header(sendung, date))
 
 
 # Nachrichtensendung herunterladen
+## Stream in Tempdir speichern
+Temp <- paste0(tempdir(), "/", format(date, "%y%m%d"), sendung, "/")
+#Temp <- paste0("archiv/", format(date, "%y%m%d"), sendung, "/")
+if(dir.exists(Temp))
+  stop("Directory exists. Avoid Dublicates")
+dir.create(Temp)
+TempImg <- paste0(Temp, "/img%03d.jpg")
+
 ## Framerate in Sekunden
 res <- 3
 
@@ -87,34 +95,36 @@ res <- 3
 # offiziell:      https://downloadzdf-a.akamaihd.net/mp4/zdf/17/02/170225_hjo/1/170225_hjo_476k_p9v13.mp4
 # 4.3.17:         https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170304_h19/1/170304_h19_476k_p9v13.mp4  #h19
 # 2.3.17: ERROR!  https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170302_sendung_h19/1/170302_sendung_h19_476k_p9v13.mp4  #h19
-URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
-              format(date, "%y"), "/", format(date, "%m"), "/", 
-              format(date, "%y%m%d"), sendung, "/1/", format(date, "%y%m%d"), 
-              sendung, "_476k_p9v13.mp4")
-
-## Tempdir
-Temp <- paste0(tempdir(), "/", format(date, "%y%m%d"), sendung, "/")
-#Temp <- paste0("archiv/", format(date, "%y%m%d"), sendung, "/")
-if(dir.exists(Temp))
-  stop("Directory exists. Avoid Dublicates")
-dir.create(Temp)
-TempImg <- paste0(Temp, "/img%03d.jpg")
+compose_URL <- function(date, sendung, mode) {
+  if(mode == 1){
+    URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
+                  format(date, "%y"), "/", format(date, "%m"), "/", 
+                  format(date, "%y%m%d"), sendung, "/1/", format(date, "%y%m%d"), 
+                  sendung, "_476k_p9v13.mp4")
+  } else {
+    sendung2 <- paste0("_sendung", sendung)
+    URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
+                  format(date, "%y"), "/", format(date, "%m"), "/", 
+                  format(date, "%y%m%d"), sendung2, "/1/", format(date, "%y%m%d"), 
+                  sendung2, "_476k_p9v13.mp4")
+  }
+  URL
+}
 
 ## Download. Dauert ein paar Minuten...
+URL <- compose_URL(date, sendung, mode = 1)
 (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
 nokay <- try(system(cmd))
+
 if(nokay){
-  # Hat nich geklappt. Variere URL
-  sendung2 <- paste0("_sendung", sendung)
-  URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
-                format(date, "%y"), "/", format(date, "%m"), "/", 
-                format(date, "%y%m%d"), sendung2, "/1/", format(date, "%y%m%d"), 
-                sendung2, "_476k_p9v13.mp4")
+  # Download hat nicht geklappt. Variere URL
+  URL <- compose_URL(date, sendung, mode = 2)
   (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
   nokay <- try(system(cmd))
 }
+
 if(nokay){
-  # Hat immer noch nicht geklappt...
+  # Download hat immer noch nicht geklappt... Breche ab!
   (msg <- c(msg, "Konnte nicht geladen werden"))
   unlink(Temp, recursive = TRUE)
   stop(paste("Streamfehler in", URL))
