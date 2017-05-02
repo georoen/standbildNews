@@ -159,8 +159,12 @@ if(nokay){
 
 if(nokay){
   # Download hat immer noch nicht geklappt... Breche ab!
-  (msg <- c(msg, "Konnte nicht geladen werden"))
+  (msg <- c(msg, "konnte nicht geladen werden."))
   unlink(Temp, recursive = TRUE)
+  # Twittern
+  mediaPath <- NULL
+  source("extra/tweet.R")
+  # Stop
   stop(paste("Streamfehler in", URL))
 }
 
