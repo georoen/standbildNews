@@ -19,7 +19,8 @@ Der etwas reißerische Begriff Zensur wurde mit Absicht gewählt.
 
 ## CRONTAB:
 https://de.wikipedia.org/wiki/Heute-journal#Sendeplatz  
-19:30 h19  
+19:50 h19  
+20:50 t20  
 23:30 hjo  
 
 ## Dependencies
