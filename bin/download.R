@@ -26,9 +26,9 @@ rss <- function(url, dateshift, sendung) {
 
 # Nachrichtensendung herunterladen
 ## Stream in Tempdir speichern
-Temp <- ifelse(dev,  # dev = TRUE means operational mode
+Temp <- ifelse(!dev,  # dev = TRUE um Frames zu archivieren
        paste0(tempdir(), "/", format(date, "%y%m%d"), "_", sendung, "/"),  # Tmp
-       paste0("./archiv/", format(date, "%y%m%d"), sendung, "/"))  # Archive Mode
+       paste0(wd, "/archiv/", format(date, "%y%m%d"), sendung, "/"))  # Archive Mode
 
 if(dir.exists(Temp))
   stop("Directory exists. Avoid Dublicates")

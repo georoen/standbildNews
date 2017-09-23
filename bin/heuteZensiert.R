@@ -23,7 +23,7 @@ library(lubridate)
 library(stringr)
 #library(heuteZensiert)
 
-dev <- FALSE  # Devmode?
+dev <- TRUE  # Devmode?
 
 # Function
 ## Logfile
@@ -45,8 +45,22 @@ header <- function(sendung, date){
 
   paste(s.name, "vom", date)
 }
-
-
+#' source files located in bin directory with…
+getScriptPath <- function(){
+  # https://stackoverflow.com/a/24020199
+  cmd.args <- commandArgs()
+  m <- regexpr("(?<=^--file=).+", cmd.args, perl=TRUE)
+  script.dir <- dirname(regmatches(cmd.args, m))
+  if(length(script.dir) == 0) stop("can't determine script dir: please call the script with Rscript")
+  if(length(script.dir) > 1) stop("can't determine script dir: more than one '--file' argument detected")
+  return(script.dir)
+}
+#' and…
+source2 <- function(file, ...) {
+  (file <- file.path(getScriptPath(), file))
+  source(file, ...)
+}
+wd <- getwd()  #
 
 
 # Parameter
@@ -88,14 +102,14 @@ res <- 30
 
 
 # Download
-source("download.R")
+source2("download.R", chdir = TRUE)
 
 
 
 
 # Suche Zielbild in Stream
-# source("mth_Classic.R")
-source("mth_OCR.R")
+# source2("mth_Classic.R")
+source2("mth_OCR.R", chdir = TRUE)
 
 
 
@@ -197,4 +211,4 @@ if(!dev)
 
 # Twittern
 if(!dev)
-  source("extra/tweet.R")
+  source2("tweet.R")

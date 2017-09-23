@@ -17,12 +17,15 @@ Der etwas reißerische Begriff Zensur wurde mit Absicht gewählt.
 
 ![Kuchendiagramm](./heuteStatisik.png)  
 
-## CRONTAB:
+## CRONTAB
+Jeden Tag werden die Nachrichten-Sendungen via RSS abgerufen und analyisiert. 50 Minuten Spielraum inklusive.
 https://de.wikipedia.org/wiki/Heute-journal#Sendeplatz  
-19:50 h19  
-20:50 t20  
-23:30 hjo  
+```
+# 50 19 * * * cd ~/heuteZensiert/ && nohup Rscript --vanilla heuteZensiert.R h19 &
+# 50 20 * * * cd ~/heuteZensiert/ && nohup Rscript --vanilla heuteZensiert.R t20 &
+# 50 23 * * *  cd ~/heuteZensiert/ && nohup Rscript --vanilla heuteZensiert.R hjo &
+```
 
 ## Dependencies
-Linux software `sudo apt install ffmpeg imagemagick`.  
-R libraries `jpeg`, `ggplot2`, `tibble`, `lubridate`, `stringr`.
+Linux software `sudo apt install ffmpeg imagemagick libmagick++-dev libtesseract-dev libleptonica-dev tesseract-ocr-eng tesseract-ocr-deu`.  
+R libraries `jpeg`, `ggplot2`, `tibble`, `lubridate`, `stringr`, `imagick`, `tesseract`.

@@ -10,7 +10,7 @@ library(twitteR)
 #' mediaPath
 
 ## Init API
-keyfile <- "./extra/twitter_credentials.R"
+keyfile <- paste0(wd, "/extra/twitter_credentials.R")
 source(keyfile)
 setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
 
