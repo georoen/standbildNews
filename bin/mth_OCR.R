@@ -82,6 +82,5 @@ output <- paste(date, sendung, prozentZensiert,  # Einfache Infos
                 sep = ",")  # read.csv
 
 cat(paste0(output, "\n"), file = Logfile, append = TRUE)
-#catlog(paste0(output, "\n"))
 
 

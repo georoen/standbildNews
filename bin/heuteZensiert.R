@@ -23,15 +23,18 @@ library(lubridate)
 library(stringr)
 #library(heuteZensiert)
 
+
+
+
+res <- 10  # Framerate in Sekunden
 dev <- TRUE  # Devmode?
+wd <- getwd()  # Helps sourcing code in bin/ 
+
 
 # Function
 ## Logfile
-Logfile <- "Logfile.csv"
-catlog <- function(msg, file = Logfile) {
-  cat(msg, file, append = TRUE)
-  message(msg)
-}
+Logfile <- file.path(wd, "Logfile.csv")
+
 ## msg Header [1]
 header <- function(sendung, date){
   if(grepl("h19", sendung))
@@ -60,7 +63,6 @@ source2 <- function(file, ...) {
   (file <- file.path(getScriptPath(), file))
   source(file, ...)
 }
-wd <- getwd()  #
 
 
 # Parameter
@@ -94,9 +96,6 @@ if (length(args)==0) {
 ### Checke ob Sendung zulässig
 if(!sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo", "t20"))
   stop("Sendung nicht bekannt")
-
-## Framerate in Sekunden
-res <- 30
 
 
 
