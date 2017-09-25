@@ -36,7 +36,7 @@ wd <- getwd()  # Helps sourcing code in bin/
 Logfile <- file.path(wd, "Logfile.csv")
 
 ## msg Header [1]
-header <- function(sendung, date){
+header <- function(sendung, date, sep = " vom "){
   if(grepl("h19", sendung))
     s.name <- "ZDF Heute 19Uhr"
   if(grepl("hjo", sendung))
@@ -46,7 +46,7 @@ header <- function(sendung, date){
 
   date <- format(date, format = "%d.%m.%Y")
 
-  paste(s.name, "vom", date)
+  paste(s.name, date, sep = sep)
 }
 #' source files located in bin directory with…
 getScriptPath <- function(){
@@ -54,7 +54,7 @@ getScriptPath <- function(){
   cmd.args <- commandArgs()
   m <- regexpr("(?<=^--file=).+", cmd.args, perl=TRUE)
   script.dir <- dirname(regmatches(cmd.args, m))
-  if(length(script.dir) == 0) stop("can't determine script dir: please call the script with Rscript")
+  if(length(script.dir) == 0) return("bin")  #stop("can't determine script dir: please call the script with Rscript")
   if(length(script.dir) > 1) stop("can't determine script dir: more than one '--file' argument detected")
   return(script.dir)
 }
@@ -183,8 +183,7 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
           legend.title=element_blank()) +
 
     # Labels
-    labs(title = msg[1],
-         subtitle = msg[2])
+    labs(title = msg[1])
 
 
   ## Rausspeichern
@@ -211,3 +210,4 @@ if(!dev)
 # Twittern
 if(!dev)
   source2("tweet.R")
+
