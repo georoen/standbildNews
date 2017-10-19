@@ -3,7 +3,7 @@
 #' Opt-In crontab
 
 ## Dependencie
-library(twitteR)
+# library(twitteR)
 
 ## Input
 #' msg

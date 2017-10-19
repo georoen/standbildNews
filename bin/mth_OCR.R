@@ -1,6 +1,6 @@
 ## OCR
-library(tesseract)
-library(magick)
+# library(tesseract)
+# library(magick)
 zdf_zensur <- function(img) {
   #' Gezielte OCR suche nach Zensur
   img <- image_read(img) %>%
