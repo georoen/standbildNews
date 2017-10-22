@@ -26,15 +26,6 @@ Der etwas reißerische Begriff Zensur wurde mit Absicht gewählt.
 
 
 # heuteMitmachen
-Das Open-Source Projekt läd zum mitmachen ein. Neben den Tweets wird auch eine [Tabelle](Logfile.csv) fortgeschrieben. Ein wissenschaftliches Projekt könnte diese auf ihre Muster hin analysieren. Auch ließe sich das OCR auf weitere Bildauschnitte hin fokusieren (Name und Partei der Interviewten).
+Das Open-Source Projekt läd zum mitmachen ein. Neben den Tweets wird auch eine [Tabelle](Logfile.csv) fortgeschrieben. Ein wissenschaftliches Projekt könnte diese auf ihre Muster hin analysieren. 
 
-Um das Programm zu installieren,  müssen folgende Dependencies erfüllt sein:  
-**Linux** `sudo apt install ffmpeg imagemagick libmagick++-dev libtesseract-dev libleptonica-dev tesseract-ocr-eng tesseract-ocr-deu`.  
-**R:** `jpeg`, `ggplot2`, `tibble`, `lubridate`, `stringr`, `imagick`, `tesseract`.
-
-Hier werden mit `CRONTAB` täglich die Nachrichten-Sendungen, 50 Minuten nach regulärer TV-Ausstrahlung, via RSS abgerufen.
-```
-# 50 19 * * * cd ~/heuteZensiert/ && nohup Rscript --vanilla bin/heuteZensiert.R h19 &
-# 50 20 * * * cd ~/heuteZensiert/ && nohup Rscript --vanilla bin/heuteZensiert.R t20 &
-# 50 23 * * *  cd ~/heuteZensiert/ && nohup Rscript --vanilla bin/heuteZensiert.R hjo &
-```
+Auch von der Software Seite her gibt es noch Potentziale. Bspw. ließe sich das OCR auch auf weitere Bildauschnitte hin fokusieren (Name und Organisation der Interviewten). Wie man die R-Skripte installiert, erfährst du [hier](./Install.md).
