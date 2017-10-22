@@ -143,7 +143,7 @@ if(!dev)
   source2("tweet.R")
 
 # push repo to git (Logfile.csv changed)
-source2("bin/git_push.R")
+source2("git_push.R")
 
 
 
