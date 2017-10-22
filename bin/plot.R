@@ -33,7 +33,7 @@ ggplot(df, aes(y=2, imgn, color = Online, fill = Online))+
             color="Gray20", nudge_y = 0.2) +
   
   # Label Start
-  geom_vline(xintercept = 0.5, color= "Gray20") +  # TODO: Kosmetische korrektur. Start bei exact 12Uhr
+  geom_vline(xintercept = 0.5, color= "Gray20") +  
   geom_text(aes(x = 0), label = "▶️", color="Gray20", nudge_y = 0.15,
             nudge_x =0.8, size =3) +
   
