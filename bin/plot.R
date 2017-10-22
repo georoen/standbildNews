@@ -33,15 +33,15 @@ ggplot(df, aes(y=2, imgn, color = Online, fill = Online))+
             color="Gray20", nudge_y = 0.2) +
   
   # Label Start
-  geom_vline(xintercept = 0, color= "Gray20") +  # TODO: Kosmetische korrektur. Start bei exact 12Uhr
+  # geom_vline(xintercept = 0, color= "Gray20") +  # TODO: Kosmetische korrektur. Start bei exact 12Uhr
   geom_text(aes(x = 0), label = "▶️", color="Gray20", nudge_y = 0.15,
             nudge_x =0.8, size =3) +
   
   # Label Zensiert
-  geom_point(aes(x = 0, y = 0),
+  geom_point(x = 0, y = 0,
              color="white", size = 50, alpha = 0.5,
              show.legend = FALSE) +
-  geom_text(aes(x = 0, y = 0),
+  geom_text(x = 0, y = 0,
             label = prozentZensiert, color="Black", size = 13,
             show.legend = FALSE) +
   
