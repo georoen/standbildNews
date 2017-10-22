@@ -19,11 +19,10 @@ df$Online <- factor(df$Online, levels = c("Online", "Offline"), ordered = TRUE)
 startZensur <- which(diff(!df$Zensiert)==-1) +1
 startZensur <- df[startZensur,]
 
-
 ## Abbildung erstellen
 colors <- c("dodgerblue", "orangered")
-
 breite <- length(img)*res/60  # Länge der Sendung
+
 ggplot(df, aes(y=2, imgn, color = Online, fill = Online))+
   # Pie Chart
   coord_polar(start = 0) +
@@ -43,7 +42,7 @@ ggplot(df, aes(y=2, imgn, color = Online, fill = Online))+
              color="white", size = 50, alpha = 0.5,
              show.legend = FALSE) +
   geom_text(aes(x = 0, y = 0),
-            label = prozentZensiert, color="Black", size = 15,
+            label = prozentZensiert, color="Black", size = 13,
             show.legend = FALSE) +
   
   # Theming
