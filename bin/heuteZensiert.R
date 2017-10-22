@@ -65,7 +65,8 @@ source2 <- function(file, ...) {
 }
 
 
-
+# Pull repo from github
+source2("git_pull.R")
 
 # Parameter
 ## Default
@@ -140,6 +141,9 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
 # Twittern
 if(!dev)
   source2("tweet.R")
+
+# push repo to git (Logfile.csv changed)
+source2("bin/git_push.R")
 
 
 
