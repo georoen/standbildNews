@@ -1,11 +1,13 @@
-#' Dieses R Skript untersucht das ZDF Heute Journal nach Frames,
-#' welche nicht im Internet verfügbar sind.
+#' Dieses R Skript untersucht die Sendungen ZDF Heute, ZDF Heute Journal und 
+#' ARD Tagesschau nach Frames, welche nicht im Internet verfügbar sind. 
+#' Diese Frames enthalten Nachrichten wie "Diese Bilder dürfen aus rechtlichen
+#' Gründen nicht gezeigt werden."
 #'
-#' Ziel ist es datengratragene Krtik am ZDF zu üben, digitalen wie analogen
-#' Rundfunksbeitrag-Zahler gleich zu behandeln.
+#' Ziel ist es datengratragene Krtik am ARD und ZDF zu üben, digitale wie 
+#' analoge Rundfunksbeitrag-Zahler gleich zu behandeln.
 #' Dafür sollen:
 #' 1) Im Falle von Zensur Statistiken per Twitterbot verbreitet werden.
-#' 2) Ein Datenarchiv für Medien-&Justizwissenschaftler erstellt werden.
+#' 2) Ein Datenarchiv für Medien- & Justizwissenschaftler erstellt werden.
 #'
 #' Contribution welcome. Helfe mit :-)
 #'
