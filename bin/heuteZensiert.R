@@ -142,10 +142,8 @@ if(!TRUE %in% censored){  # Gesamte Sendung online.
 if(!dev)
   source2("tweet.R")
 
-# push repo to git (Logfile.csv changed)
+
+
+
+# push Logfile auf Github
 source2("git_push.R")
-
-
-
-
-# TODO: Update Logfile on Github
