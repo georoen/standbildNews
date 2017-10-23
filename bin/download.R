@@ -16,7 +16,7 @@ rss <- function(url, dateshift, sendung) {
   URLdate <- regmatches(basename(URL), regexpr("\\d+", basename(URL)))
   # ... und korrigiere es im global enviroment
   format <- ifelse(sendung == "t20", "%Y%m%d", "%y%m%d")
-  date <<- as.Date(URLdate, format)
+  assign("date", as.Date(URLdate, format), envir = .GlobalEnv)
 
   return(URL)
 }
@@ -86,6 +86,7 @@ compose_URL <- function(date, sendung, mode) {
 
   URL
 }
+URL <- compose_URL(date, sendung, mode = 3)
 
 
 
@@ -99,7 +100,6 @@ if(sendung %in% Logfile.latest[which(as.character(date) == Logfile.latest[[1]]),
 
 
 ## Download. Dauert ein paar Minuten...
-URL <- compose_URL(date, sendung, mode = 3)
 (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
 nokay <- try(system(cmd))
 

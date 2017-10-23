@@ -18,7 +18,7 @@
 
 
 dev <- FALSE  # Devmode?
-
+start <- Sys.time()
 
 
 # Packages
@@ -123,7 +123,7 @@ if(!dev)  # Lösche Bilder
 
 
 
-# Vollständig?
+# Evaluation
 msg <- c(header(sendung, date))
 if(!TRUE %in% censored){  # Gesamte Sendung online.
   (msg <- paste(msg, "vollständig online."))
@@ -148,3 +148,9 @@ if(!dev)
 
 # push Logfile auf Github
 source2("git_push.R")
+
+
+
+
+# Ende
+Sys.time()- start
