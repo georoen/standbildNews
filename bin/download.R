@@ -87,6 +87,17 @@ compose_URL <- function(date, sendung, mode) {
   URL
 }
 
+
+
+
+# RSS kann anderes Datum haben. Doublecheck Logfile
+Logfile.latest <- read.csv(file.path(wd, "Logfile.csv"), stringsAsFactors = FALSE)
+if(sendung %in% Logfile.latest[which(as.character(date) == Logfile.latest[[1]]), 2])
+  stop("Diese Sendung wurde schon prozessiert.")
+
+
+
+
 ## Download. Dauert ein paar Minuten...
 URL <- compose_URL(date, sendung, mode = 3)
 (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))

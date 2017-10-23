@@ -12,8 +12,8 @@
 #' Contribution welcome. Helfe mit :-)
 #'
 #' Usage:
-# Rscript --vanilla heuteZensiert.R h19 `date +%Y%m%d`
-#' Rscript --vanilla heuteZensiert.R hjo `date --date="-1 day" +%Y%m%d`
+# Rscript --vanilla bin/heuteZensiert.R h19 `date +%Y%m%d`
+#' Rscript --vanilla bin/heuteZensiert.R hjo `date --date="-1 day" +%Y%m%d`
 
 
 
@@ -65,8 +65,7 @@ source2 <- function(file, ...) {
 }
 
 
-# Pull repo from github
-source2("git_pull.R")
+
 
 # Parameter
 ## Default
@@ -108,6 +107,8 @@ if(!sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo", "t20"))
 
 
 
+# Pull repo from github
+source2("git_pull.R")
 
 # Download
 source2("download.R", chdir = TRUE)
