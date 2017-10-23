@@ -12,7 +12,7 @@ Viele Personen/Haushalte verzichten aus diesem Grund auf ein Fernsehgerät und e
 Die betroffenen Themenbereiche sind zumeist der Sportteil, aber auch andere Abschnitte können betroffen sein. Welche Inhalte online verfügbar sind und welche nicht, ist für den Endnutzer nicht nachvollziehbar. Es ist anzunehmen, dass es die von Dritten angekaufen Videosequenzen sind. Doch eigentlich müssten die Sender, wenn sie den neuen Rundfunkbeitrag verwenden, sich bei Verträge mit Dritten für alle Beitragszahler gleichmäßig einsetzen. Ausstrahlungsrechte, welche lediglich die TV-Ausstrahulng zulassen, dürften nicht abgeschlossen werden.
 
 # heuteStatistik
-Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *heute 19Uhr*, *heute Journal* und *Tagesschau* von einem RaspberryPi angeschaut. Ein kleines *R* Programm erkennt mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die zensierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/di9Eizai) das Ergebnis.
+Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *heute 19Uhr*, *heute Journal* und *Tagesschau* von einem RaspberryPi angeschaut. Ein kleines *R* Programm erkennt mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die zensierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/heuteNichtDrin) das Ergebnis.
 
 TV und Online - wir zahlen das Gleiche, wir wollen das Gleiche sehen.
 
