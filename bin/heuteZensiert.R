@@ -39,11 +39,11 @@ library(twitteR)
 ## msg Header [1]
 header <- function(sendung, date, sep = " vom "){
   if(grepl("h19", sendung))
-    s.name <- "ZDF Heute 19Uhr"
+    s.name <- "#ZDFHeute 19Uhr"
   if(grepl("hjo", sendung))
-    s.name <- "ZDF Heute Journal"
+    s.name <- "#ZDFHeuteJournal"
   if(grepl("t20", sendung))
-    s.name <- "ARD Tageschau"
+    s.name <- "ARD #Tageschau"
   
   date <- format(date, format = "%d.%m.%Y")
   
