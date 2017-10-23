@@ -18,7 +18,8 @@
 
 
 dev <- FALSE  # Devmode?
-start <- Sys.time()
+file.remove("nohup.out")
+(start <- Sys.time())  # Start Time
 
 
 # Packages
@@ -152,5 +153,5 @@ source2("git_push.R")
 
 
 
-# Ende
-Sys.time()- start
+# End Time
+Sys.time() - start
