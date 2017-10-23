@@ -70,7 +70,7 @@ source2 <- function(file, ...) {
 
 # Parameter
 ## Default
-res <- 10  # Framerate in Sekunden
+res <- 3  # Framerate in Sekunden
 wd <- getwd()  # Helps sourcing code in bin/ 
 Logfile <- file.path(wd, "Logfile.csv")  # Logfile
 
