@@ -8,3 +8,5 @@
 .Rproj.user
 archiv
 .RData
+# Titter Credentials
+extra/twitter_credentials.R
