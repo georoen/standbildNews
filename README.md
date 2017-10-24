@@ -17,12 +17,12 @@ Die von der Zensur betroffenen Themenbereiche sind zumeist der Sportteil, aber a
 
 ## Ziel von heuteZensiert
 
-Das Ziel des Projektes ist eine eine strukturierte, standardisierte und transparente Auswertung von Bürgerfinanzierten Medieninhalten. So soll eine datengetragene Krtik an öffentlich-rechtlichen Rundfunkanstalten geübt werden und eine Disskussionsgrundlage geschaffen werden um die Medienlanschaft in Deutschland zu reformieren. 
-
-# heuteStatistik
-Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *heute 19Uhr*, *heute Journal* und *Tagesschau* automatisch online gestreamt. Ein kleines *R* Programm erkennt mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die zensierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/heuteNichtDrin) das Ergebnis.
+Das Ziel des Projektes ist eine strukturierte, standardisierte und transparente Auswertung von Bürgerfinanzierten Medieninhalten. So soll eine datengetragene Krtik an öffentlich-rechtlichen Rundfunkanstalten geübt und eine Disskussionsgrundlage geschaffen werden um die Medienlanschaft in Deutschland zu reformieren. 
 
 **TV und Online - wir zahlen das Gleiche, wir wollen das Gleiche sehen.**
+
+# heuteStatistik
+Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *ZDF heute 19 Uhr*, *ZDF heute Journal* und * ARD Tagesschau* automatisch online gestreamt. Ein kleines *R* Programm erkennt mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die zensierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/heuteNichtDrin) das Ergebnis.
 
 ![Kuchendiagramm](./heuteStatisik.png)  
 
