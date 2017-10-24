@@ -19,25 +19,21 @@ logdata$sendung <- factor(logdata$sendung,
 
 # Define UI
 ui <- fluidPage(theme = shinytheme("lumen"),
-                titlePanel("Daten Visualisierung"),
-                sidebarLayout(
-                  sidebarPanel(strong("Sendungen"),
-                    
-                    # Select Layers
-                    checkboxInput("showh19", "ZDF Heute 19 Uhr", TRUE),
-                    checkboxInput("showhjo", "ZDF Heute Journal", TRUE),
-                    checkboxInput("showt20", "ARD Tagesschau", TRUE),
-                    
-                    # Select date range to be plotted
-                    dateRangeInput("date", strong("Datum"), start = "2017-10-21", end = Sys.Date(),
-                                   min = min(logdata$date), max = Sys.Date(), language = "de")
+                # titlePanel("Daten Visualisierung"),
+                fluidRow(
+                  # Select Layers
+                  column(4,checkboxInput("showh19", "ZDF Heute 19 Uhr", TRUE)),
+                  column(4,checkboxInput("showhjo", "ZDF Heute Journal", TRUE)),
+                  column(4,checkboxInput("showt20", "ARD Tagesschau", TRUE))
                   ),
-                  
-                  # Output: Description, lineplot, and reference
-                  mainPanel(
-                    plotOutput(outputId = "lineplot", height = "300px")
-                  )
-                )
+                
+                # Output: Description, lineplot, and reference
+                plotOutput(outputId = "lineplot", height = "300px"),
+                
+                # Select date range to be plotted
+                fluidRow(dateRangeInput("date", strong("Datum"), start = "2017-10-21", end = Sys.Date(),
+                                        min = min(logdata$date), max = Sys.Date(), language = "de", width = "100%"))
+                
 )
 
 # Define server function
@@ -67,7 +63,7 @@ server <- function(input, output) {
     ggplot(selected_logdata(), aes(date, prozent, color = sendung)) +
       geom_line(alpha = 0.5) + geom_point(size=2) +
       labs(y = "Zensierter Anteil") +
-      theme(legend.position="bottom", legend.title=element_blank())
+      theme(legend.position="top", legend.title=element_blank())
   })
   
 }
