@@ -15,7 +15,11 @@ source(keyfile)
 setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
 
 ## Modify Tweet
-# msg[1] <- gsub("ARD", "@ARDde", msg[1])
+# #Hashtags
+msg[1] <- gsub("ARD", "#ARD", msg[1])
+msg[1] <- gsub("ZDF", "#ZDF", msg[1])
+# or @Mentions
+# msg[1] <- gsub("ARD", "ARD @tagesschau", msg[1])
 # msg[1] <- gsub("ZDF HeuteJournal", "@heutejournal", msg[1])  # 1.
 # msg[1] <- gsub("ZDF Heute", "@ZDFheute", msg[1])  # 2. Reihenfolge wichtig!
 
