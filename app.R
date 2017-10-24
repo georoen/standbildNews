@@ -3,34 +3,39 @@ library(shiny)
 library(shinythemes)
 library(dplyr)
 library(readr)
+library(ggplot2)
+library(curl)
+
+# German locale
+Sys.setlocale(category = "LC_ALL", locale = "German")
 
 # Load data
 logdata <- read_csv("https://georoen.github.io/heuteZensiert/Logfile.csv") %>% 
   arrange(date) %>% 
   mutate(prozent = as.numeric(gsub("%", "", prozent)),
-         date = as.POSIXct(date))
+         date = as.Date(date))
+logdata$sendung <- factor(logdata$sendung,
+                          labels = c("ZDF Heute 19 Uhr", "ZDF Heute Journal", "ARD Tagesschau"))
 
 # Define UI
 ui <- fluidPage(theme = shinytheme("lumen"),
-                titlePanel("Google Trend Index"),
+                titlePanel("Daten Visualisierung"),
                 sidebarLayout(
-                  sidebarPanel(
+                  sidebarPanel(strong("Sendungen"),
                     
-                    # Select type of trend to plot
-                    selectInput(inputId = "sendung", label = strong("sendung index"),
-                                choices = unique(logdata$sendung),
-                                selected = "Sendung"),
+                    # Select Layers
+                    checkboxInput("showh19", "ZDF Heute 19 Uhr", TRUE),
+                    checkboxInput("showhjo", "ZDF Heute Journal", TRUE),
+                    checkboxInput("showt20", "ARD Tagesschau", TRUE),
                     
                     # Select date range to be plotted
-                    dateRangeInput("date", strong("Date range"), start = "2017-10-21", end = Sys.Date(),
-                                   min = "2017-10-21", max = Sys.Date())
+                    dateRangeInput("date", strong("Datum"), start = "2017-10-21", end = Sys.Date(),
+                                   min = min(logdata$date), max = Sys.Date(), language = "de")
                   ),
                   
                   # Output: Description, lineplot, and reference
                   mainPanel(
-                    plotOutput(outputId = "lineplot", height = "300px"),
-                    textOutput(outputId = "desc"),
-                    tags$a(href = "https://www.google.com/finance/domestic_trends", "Source: Google Domestic Trends", target = "_blank")
+                    plotOutput(outputId = "lineplot", height = "300px")
                   )
                 )
 )
@@ -40,13 +45,17 @@ server <- function(input, output) {
   
   # Subset data
   selected_logdata <- reactive({
+    # Sendungen
+    Sendungen <- levels(logdata$sendung)[c(input$showh19, input$showhjo, input$showt20)]
+    # Datum
     req(input$date)
     validate(need(!is.na(input$date[1]) & !is.na(input$date[2]), "Error: Please provide both a start and an end date."))
     validate(need(input$date[1] < input$date[2], "Error: Start date should be earlier than end date."))
+    # Filter
     logdata %>%
       filter(
-        sendung == input$sendung,
-        date > as.POSIXct(input$date[1]) & date < as.POSIXct(input$date[2]
+        sendung %in% Sendungen,
+        date >= as.Date(input$date[1]) & date <= as.Date(input$date[2]
         ))
   })
   
@@ -55,16 +64,12 @@ server <- function(input, output) {
   output$lineplot <- renderPlot({
     color = "#434343"
     # par(mar = c(4, 4, 1, 1))
-    ggplot(selected_logdata(), aes(date, prozent, color = sendung)) +  geom_point()
-    # plot(x = selected_logdata()$date, y = selected_logdata()$prozent, type = "l",
-    #      xlab = "Date", ylab = "Trend index", col = color, fg = color, col.lab = color, col.axis = color)
+    ggplot(selected_logdata(), aes(date, prozent, color = sendung)) +
+      geom_line(alpha = 0.5) + geom_point(size=2) +
+      labs(y = "Zensierter Anteil") +
+      theme(legend.position="bottom", legend.title=element_blank())
   })
   
-  # Pull in description of trend
-  output$desc <- renderText({
-    trend_text <- filter(trend_description, type == input$type) %>% pull(text)
-    paste(trend_text, "The index is set to 1.0 on January 1, 2004 and is calculated only for US search traffic.")
-  })
 }
 
 # Create Shiny object
