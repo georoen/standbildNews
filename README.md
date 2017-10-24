@@ -17,7 +17,7 @@ Die von der Zensur betroffenen Themenbereiche sind zumeist der Sportteil, aber a
 
 ## Ziel von heuteZensiert
 
-Das Ziel des Projektes ist eine strukturierte, standardisierte und transparente Auswertung von Bürgerfinanzierten Medieninhalten. So soll eine datengetragene Krtik an öffentlich-rechtlichen Rundfunkanstalten geübt und eine Disskussionsgrundlage geschaffen werden um die Medienlanschaft in Deutschland zu reformieren. 
+Das Ziel des Projektes ist eine strukturierte, standardisierte und transparente Auswertung von Bürgerfinanzierten Medieninhalten. So soll eine datengetragene Krtik an öffentlich-rechtlichen Rundfunkanstalten geübt und eine Disskussionsgrundlage geschaffen werden, um die Medienlanschaft in Deutschland zu reformieren. 
 
 **TV und Online - wir zahlen das Gleiche, wir wollen das Gleiche sehen.**
 
@@ -27,7 +27,7 @@ Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, 
 ![Kuchendiagramm](./heuteStatisik.png)  
 
 Der etwas reißerische Begriff Zensur wurde mit Absicht gewählt.   
-1) Dem digitalen Nachrichtenschauer werden bewusst Inhalte vorenthalten. Da die Nachrichten online zeitgleich (oder gar später) ausgestrahlt werden, hat Letzterer keine Möglichkeit mehr, die zensierten Passagen im TV nachzuschauen.  
+1) Dem digitalen Nachrichtenschauer werden bewusst Inhalte vorenthalten. Da die Nachrichten online zeitgleich (oder gar später) ausgestrahlt werden, hat Letzterer keine Möglichkeit mehr die zensierten Passagen im TV nachzuschauen.  
 2) Die Online-Version der Nachrichtensendung wird offensichtlich nachbearbeitet. Digital Natives sind besonders betroffen und im Vergleich zu analogen Nutzern schlechter informiert. In Zeiten steigender Popularität von Internetstreaming-Angeboten ist es an der Zeit die Nutzungsgewohnheiten einer anzuerkennen und die Rechtepolitik anzupassen!
 3) Da einzelne eMails an `Zuschauerredaktion@zdf.de` leider keine sichtbaren Folgen nach sich ziehen, möchten die Initiatoren eine große Masse mobilisieren, um den Druck auf die öffentlich-rechtlichen Rundfunkanstalten erhöhen. Gleiche Leistung für gleichen Rundfunkbeitrag!  
 
@@ -35,5 +35,5 @@ Der etwas reißerische Begriff Zensur wurde mit Absicht gewählt.
 Das Open-Source Projekt läd zum mitmachen ein. Neben den Tweets wird auch ein [Tabelle](Logfile.csv) fortgeschrieben. Wir laden Interessierte und Wissenschaftler aller Disziplinen ein, diese Datengrundlage für sekundäre Analysen heranzuziehen. Die Installation des Projektes ist  [hier](./Install.md) beschrieben. 
 
 # heuteWeiterentwickeln
-Es zeigen sich weitere Potentiale der Analyse einiger der wichtigsten Nachrichtenquellen in Deutschland. Diese liese sich auszuweiten, um beispielsweise auch  Rede- bzw. Präsenzzeiten von Personen des öffentlichen und politischen Lebens zu analysieren. 
+Es zeigen sich weitere Potentiale der Analyse einiger der wichtigsten Nachrichtenquellen in Deutschland. Diese ließe sich auszuweiten, um beispielsweise auch  Rede- bzw. Präsenzzeiten von Personen des öffentlichen und politischen Lebens zu analysieren. 
 
