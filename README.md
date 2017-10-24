@@ -24,7 +24,7 @@ Das Ziel des Projektes ist eine strukturierte, standardisierte und transparente 
 # heuteStatistik
 Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *ZDF heute 19 Uhr*, *ZDF heute Journal* und * ARD Tagesschau* automatisch online gestreamt. Ein kleines *R* Programm erkennt mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die zensierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/heuteNichtDrin) das Ergebnis.
 
-<iframe = src="https://jeremybz.shinyapps.io/Hello_World/"></iframe>
+<iframe src="https://jeremybz.shinyapps.io/Hello_World/"></iframe>
 <!-- ![Kuchendiagramm](./heuteStatisik.png)  -->
 
 Der etwas reißerische Begriff Zensur wurde mit Absicht gewählt.   
