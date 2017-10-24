@@ -17,7 +17,7 @@ Die von der Zensur betroffenen Themenbereiche sind zumeist der Sportteil, aber a
 
 ## Ziel von heuteZensiert
 
-Das Ziel des Projektes ist eine strukturierte, standardisierte und transparente Auswertung von Bürgerfinanzierten Medieninhalten. So soll eine datengetragene Krtik an öffentlich-rechtlichen Rundfunkanstalten geübt und eine Disskussionsgrundlage geschaffen werden um die Medienlanschaft in Deutschland zu reformieren. 
+Das Ziel des Projektes ist eine strukturierte, standardisierte und transparente Auswertung von Bürgerfinanzierten Medieninhalten. So soll eine datengetragene Krtik an öffentlich-rechtlichen Rundfunkanstalten geübt und eine Disskussionsgrundlage geschaffen werden, um die Medienlanschaft in Deutschland zu reformieren. 
 
 **TV und Online - wir zahlen das Gleiche, wir wollen das Gleiche sehen.**
 
