@@ -14,7 +14,14 @@ keyfile <- paste0(wd, "/extra/twitter_credentials.R")
 source(keyfile)
 setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
 
+## Modify Tweet
+# msg[1] <- gsub("ARD", "@ARDde", msg[1])
+# msg[1] <- gsub("ZDF HeuteJournal", "@heutejournal", msg[1])  # 1.
+# msg[1] <- gsub("ZDF Heute", "@ZDFheute", msg[1])  # 2. Reihenfolge wichtig!
+
 ## Compose Tweet
-msg <- paste(msg, collapse = "\n")  
+(msg <- paste(msg, collapse = "\n"))
+
 ## Tweet 🚀
-tweet(msg, mediaPath = mediaPath)
+if(!dev)
+  tweet(msg, mediaPath = mediaPath)

@@ -93,7 +93,8 @@ URL <- compose_URL(date, sendung, mode = 3)
 
 # RSS kann anderes Datum haben. Doublecheck Logfile
 Logfile.latest <- read.csv(file.path(wd, "Logfile.csv"), stringsAsFactors = FALSE)
-if(sendung %in% Logfile.latest[which(as.character(date) == Logfile.latest[[1]]), 2])
+if(!dev && sendung %in% Logfile.latest[
+  which(as.character(date) == Logfile.latest[[1]]), 2])
   stop("Diese Sendung wurde schon prozessiert.")
 
 
