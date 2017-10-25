@@ -37,6 +37,20 @@ TempImg <- paste0(Temp, "/img%03d.jpg")
 
 
 ## Paste0 URL
+# ARD
+#' tagesschau 20Uhr
+#' 23.4.17: http://download.media.tagesschau.de/video/2017/0423/TV-20170423-2033-4601.h264.mp4
+#' 22.4.17: http://download.media.tagesschau.de/video/2017/0422/TV-20170422-2131-2301.h264.mp4
+#' 
+#' BR
+#' - Links seit in neuer Mediathek (veröffentlicht auf Rundfunkmesse Oktober 2017) z.B. 
+#' https://www.br.de/mediathek/video/rundschau-1830-uhr-sendung-vom-20102017-av:59afea204894ee001264f9c3
+#' - Jedoch änderung am Token nciht möglich. Daher weitersuchen
+#' - RSS (noch) nicht verfügbar, andere TV-Podcasts: 
+#' http://www.br-online.de/podcast/tv/mp3-download-podcast-uebersicht-bayerischesfernsehen.shtml
+#' - Hier alle Rundschau Sendungen gesammelt: https://www.br.de/mediathek/sendung/rundschau-av:584f4c183b467900117bf25f
+#' auch hier führt die Änderung des av:... tokens zu fehlern. 
+#' 
 # ZDF
 #' heute 19 Uhr
 #' mediathekview:  https://rodlzdf-a.akamaihd.net/none/zdf/17/02/170213_h19/1/170213_h19_2328k_p35v13.mp4  #h19
@@ -44,11 +58,6 @@ TempImg <- paste0(Temp, "/img%03d.jpg")
 #' offiziell:      https://downloadzdf-a.akamaihd.net/mp4/zdf/17/02/170225_hjo/1/170225_hjo_476k_p9v13.mp4
 #' 4.3.17:         https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170304_h19/1/170304_h19_476k_p9v13.mp4  #h19
 #' 2.3.17: ERROR!  https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170302_sendung_h19/1/170302_sendung_h19_476k_p9v13.mp4  #h19
-#
-# ARD
-#' tagesschau 20Uhr
-#' 23.4.17: http://download.media.tagesschau.de/video/2017/0423/TV-20170423-2033-4601.h264.mp4
-#' 22.4.17: http://download.media.tagesschau.de/video/2017/0422/TV-20170422-2131-2301.h264.mp4
 compose_URL <- function(date, sendung, mode) {
   # ZDF
   if(sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo")){
