@@ -14,15 +14,39 @@
 #' Usage:
 # Rscript --vanilla bin/heuteZensiert.R h19 `date +%Y%m%d`
 #' Rscript --vanilla bin/heuteZensiert.R hjo `date --date="-1 day" +%Y%m%d`
-
-
-
+#'
+#' Variablen Lookup Tabelle:
+#' | Variable | Erstellt in Skript | Beschreibung des Inhaltes                 | 
+#' |:-------- |:------------------ |:----------------------------------------- |
+#' | date     | heuteZensiert.R    | Datum der Ausgestrahlten Sendung          |
+#' | dev      | heuteZensiert.R    | Entwicklungsmodus (TRUE/FALSE)            |
+#' | s.name   | heuteZensiert.R    | Name der Sendung, Verwendung für Plot     |
+#' | start    | heutezensiert.R    | Startzeit des Skriptes                    |
+#' |  |  |  |
+#' |  |  |  |
+#' |  |  |  |
+#' 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#                                Preamble                                      #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#### Entwicklungsmodus ####
+#' Im Entwicklungsmodus werden die extrahierten Bilder aus dem Sendungsstream
+#' nicht gelöscht. Zusätzlich wird das errechnete Ergebnis nicht getwittert. 
+#' Der Entwicklungsmodus wird aktiviert indem die Variable `dev` auf TRUE 
+#' gesetzt wird. 
 dev <- FALSE  # Devmode?
+
+#### Parameter ####
+## Default
+res <- 3  # Framerate in Sekunden
+wd <- getwd()  # Helps sourcing code in bin/ 
+Logfile <- file.path(wd, "Logfile.csv")  # Logfile
+
+# Entfernen von bestehendem nohup Output
 file.remove("nohup.out")
 (start <- Sys.time())  # Start Time
 
-
-# Packages
+#### Packages ####
 library(jpeg)
 library(ggplot2)
 library(tibble)
@@ -32,10 +56,7 @@ library(tesseract)
 library(magick)
 library(twitteR)
 
-
-
-
-# Funktionen
+#### Funktionen ####
 ## msg Header [1]
 header <- function(sendung, date, sep = " vom "){
   if(grepl("h19", sendung))
@@ -49,36 +70,34 @@ header <- function(sendung, date, sep = " vom "){
   
   paste(s.name, date, sep = sep)
 }
-#' source files located in bin directory with…
+
+#' Skriptpfad erhalten oder generieren. 
 getScriptPath <- function(){
   # https://stackoverflow.com/a/24020199
   cmd.args <- commandArgs()
   m <- regexpr("(?<=^--file=).+", cmd.args, perl=TRUE)
   script.dir <- dirname(regmatches(cmd.args, m))
-  if(length(script.dir) == 0) return("bin")  #stop("can't determine script dir: please call the script with Rscript")
-  if(length(script.dir) > 1) stop("can't determine script dir: more than one '--file' argument detected")
+  if(length(script.dir) == 0) {
+    return("bin")  #stop("can't determine script dir: please call the script with Rscript")
+  }
+  if(length(script.dir) > 1) {
+    stop("can't determine script dir: more than one '--file' argument detected")
+  }
   return(script.dir)
 }
-#' and…
+#' Angepasste version von `source`
 source2 <- function(file, ...) {
   (file <- file.path(getScriptPath(), file))
   source(file, ...)
 }
 
 
-
-
-# Parameter
-## Default
-res <- 3  # Framerate in Sekunden
-wd <- getwd()  # Helps sourcing code in bin/ 
-Logfile <- file.path(wd, "Logfile.csv")  # Logfile
-
-## Argumente
+#### Argumente ####
+# Übernahme der Argumente aus dem Rscript-Prozess (siehe [Install.md](../Install.md))
 # www.r-bloggers.com/passing-arguments-to-an-r-script-from-command-lines/
 # args <- list(sen = "hjo", date = Sys.Date())
 # args <- list(sen = "h19", date = format(Sys.Date(), "%Y%m%d"))
-args = commandArgs(trailingOnly=TRUE)
+args <- commandArgs(trailingOnly=TRUE)
 if (length(args)==0) {
   ### Keine Argumente. Run Defaults = 19Uhr von date( <HEUTE> )
   warning("Keine Argumente. Verwende default", call.=FALSE)
@@ -86,7 +105,7 @@ if (length(args)==0) {
   sendung <- "h19"
   date <- Sys.Date()
   dateshift <- 0
-
+  
 } else if (length(args)==1) {
   ### Sendung angegeben. Datum fehlt
   sendung <- args[1]
@@ -97,61 +116,58 @@ if (length(args)==0) {
   ### Sendung und Datum angegenen
   sendung <- args[1]
   dateshift <- as.numeric(unlist(args[2]))
-  if(is.na(date))
+  if(is.na(date)){
     stop("Argument 2 ist keine Zahl und kann nicht vom Datum abgezogen werden.")
+  }
   date <- Sys.Date()-dateshift
 }
 
 ## Checke ob Sendung zulässig
-if(!sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo", "t20"))
+if(!sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo", "t20")){
   stop("Sendung nicht bekannt")
+}
 
 
-
-# Pull repo from github
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#                               Processing                                     #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#### Pull aktuelles Repo vom github ####
 source2("git_pull.R")
 
-# Download
+#### Download ####
 source2("download.R", chdir = TRUE)
 
-# Processing...
+#### Texterkennung ####
 # source2("mth_Classic.R")
 source2("mth_OCR.R", chdir = TRUE)
 
-if(!dev)  # Lösche Bilder
+# Lösche Bilder wenn nicht im Entwicklungsmodus
+if(!dev){ 
   unlink(Temp, recursive = TRUE)
+} 
 
-
-
-
-# Evaluation
+#### Evaluation ####
+# Ist die überprüfte Nachrichtensendung vollständig online verfügbar?
 msg <- c(header(sendung, date))
-if(!TRUE %in% censored){  # Gesamte Sendung online.
+if(!TRUE %in% censored){  
+  # Gesamte Sendung online verfügbar
   (msg <- paste(msg, "vollständig online."))
   mediaPath <- NULL
 
 }else{  # Unvollständig. Teile der Nachrichtensendung fehlen
   (msg <- c(msg, paste(prozentZensiert,
-                           "der Sendung wurden nicht im Internet gezeigt.")))
+                       "der Sendung wurden nicht im Internet gezeigt.")))
   # Erstelle Abbildung
   source2("plot.R")
 } 
 
-
-
-
-# Twittern
-if(!dev)
+#### Twittern ####
+if(!dev){
   source2("tweet.R")
+}
 
-
-
-
-# push Logfile auf Github
+#### push Logfile auf Github ####
 source2("git_push.R")
 
-
-
-
-# End Time
+#### End Time ####
 Sys.time() - start
