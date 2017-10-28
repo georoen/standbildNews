@@ -1,7 +1,7 @@
 # Installation
 Um das Programm zu installieren,  müssen folgende Dependencies erfüllt sein:  
   **Linux** `sudo apt install ffmpeg imagemagick libmagick++-dev libtesseract-dev libleptonica-dev tesseract-ocr-eng tesseract-ocr-deu`.  
-**R:** install.packages(c("jpeg", "rvest", "ggplot2", "tibble", "lubridate", "stringr", "magick", "tesseract", "twitteR"), repos = "https://cran.rstudio.com")
+**R:** `install.packages(c("jpeg", "rvest", "ggplot2", "tibble", "lubridate", "stringr", "magick", "tesseract", "twitteR"), repos = "https://cran.rstudio.com")`
 
 Hier werden mit [`CRONTAB`](https://wiki.ubuntuusers.de/Cron/) täglich die Nachrichten-Sendungen, 50 Minuten nach regulärer TV-Ausstrahlung, via RSS abgerufen.
 ```
