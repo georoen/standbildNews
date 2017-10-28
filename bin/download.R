@@ -58,6 +58,7 @@ TempImg <- paste0(Temp, "/img%03d.jpg")
 #' offiziell:      https://downloadzdf-a.akamaihd.net/mp4/zdf/17/02/170225_hjo/1/170225_hjo_476k_p9v13.mp4
 #' 4.3.17:         https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170304_h19/1/170304_h19_476k_p9v13.mp4  #h19
 #' 2.3.17: ERROR!  https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170302_sendung_h19/1/170302_sendung_h19_476k_p9v13.mp4  #h19
+#' 28.10.17:       https://downloadzdf-a.akamaihd.net/mp4/zdf/17/10/171025_sendung_h19/2/171025_sendung_h19_476k_p9v13.mp4  # h19
 compose_URL <- function(date, sendung, mode) {
   # ZDF
   if(sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo")){
@@ -82,6 +83,13 @@ compose_URL <- function(date, sendung, mode) {
         URL <- rss("http://www.zdf.de/rss/podcast/video/zdf/nachrichten/heute-journal",
                    dateshift, sendung)
       }
+    } else if( mode == 4){
+      # 28.10.2017
+      sendung2 <- paste0("_sendung", sendung)
+      URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
+                    format(date, "%y"), "/", format(date, "%m"), "/",
+                    format(date, "%y%m%d"), sendung2, "/2/", format(date, "%y%m%d"),
+                    sendung2, "_476k_p9v13.mp4")
     } else {
       stop(paste("mode", mode, "nicht bekannt!"))
     } # ENDE ZDF
@@ -100,19 +108,16 @@ URL <- compose_URL(date, sendung, mode = 3)
 
 
 
-# RSS kann anderes Datum haben. Doublecheck Logfile
-Logfile.latest <- read.csv(file.path(wd, "Logfile.csv"), stringsAsFactors = FALSE)
-if(!dev && sendung %in% Logfile.latest[
-  which(as.character(date) == Logfile.latest[[1]]), 2])
-  stop("Diese Sendung wurde schon prozessiert.")
-
-
-
-
 ## Download. Dauert ein paar Minuten...
 (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
 nokay <- try(system(cmd))
 
+if(nokay){
+  # Download hat nicht geklappt. Variere URL
+  URL <- compose_URL(date, sendung, mode = 4)
+  (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
+  nokay <- try(system(cmd))
+}
 if(nokay){
   # Download hat nicht geklappt. Variere URL
   URL <- compose_URL(date, sendung, mode = 2)
@@ -139,3 +144,10 @@ if(nokay){
 }
 
 
+
+
+# RSS kann anderes Datum haben. Doublecheck Logfile
+Logfile.latest <- read.csv(file.path(wd, "Logfile.csv"), stringsAsFactors = FALSE)
+if(!dev && sendung %in% Logfile.latest[
+  which(as.character(date) == Logfile.latest[[1]]), 2])
+  stop("Diese Sendung wurde schon prozessiert.")
