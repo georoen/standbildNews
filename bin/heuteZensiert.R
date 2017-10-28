@@ -12,8 +12,8 @@
 #' Contribution welcome. Helfe mit :-)
 #'
 #' Usage:
-# Rscript --vanilla bin/heuteZensiert.R h19 `date +%Y%m%d`
-#' Rscript --vanilla bin/heuteZensiert.R hjo `date --date="-1 day" +%Y%m%d`
+#' Rscript --vanilla bin/heuteZensiert.R hjo 1  # von vor einem Tag
+#' Rscript --vanilla bin/heuteZensiert.R h19 `date +%Y%m%d`
 #'
 #' Variablen Lookup Tabelle:
 #' | Variable | Erstellt in Skript | Beschreibung des Inhaltes                 | 

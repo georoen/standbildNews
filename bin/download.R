@@ -14,9 +14,9 @@ rss <- function(url, dateshift, sendung) {
   URL <- URLs[[dateshift +1]]  # Wähle "Datum" (ungenau, eher RSS-Reihenfolge) aus
   # Lese tatsächliches Datum aus URL...
   URLdate <- regmatches(basename(URL), regexpr("\\d+", basename(URL)))
-  # ... und korrigiere es im global enviroment
+  # ... und speicher es im global enviroment
   format <- ifelse(sendung == "t20", "%Y%m%d", "%y%m%d")
-  assign("date", as.Date(URLdate, format), envir = .GlobalEnv)
+  assign("date.rss", as.Date(URLdate, format), envir = .GlobalEnv)
 
   return(URL)
 }
@@ -33,7 +33,7 @@ Temp <- ifelse(!dev,  # dev = TRUE um Frames zu archivieren
 if(dir.exists(Temp))
   stop("Directory exists. Avoid Dublicates")
 dir.create(Temp)
-TempImg <- paste0(Temp, "/img%03d.jpg")
+TempImg <- paste0(Temp, "img%03d.jpg")
 
 
 ## Paste0 URL
@@ -59,6 +59,7 @@ TempImg <- paste0(Temp, "/img%03d.jpg")
 #' 4.3.17:         https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170304_h19/1/170304_h19_476k_p9v13.mp4  #h19
 #' 2.3.17: ERROR!  https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170302_sendung_h19/1/170302_sendung_h19_476k_p9v13.mp4  #h19
 #' 28.10.17:       https://downloadzdf-a.akamaihd.net/mp4/zdf/17/10/171025_sendung_h19/2/171025_sendung_h19_476k_p9v13.mp4  # h19
+#' 28.10.17:       https://downloadzdf-a.akamaihd.net/mp4/zdf/17/10/171025_sendung_h19/2/171025_sendung_h19_1496k_p13v13.mp4  # h19 med. resolution for OCR
 compose_URL <- function(date, sendung, mode) {
   # ZDF
   if(sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo")){
@@ -85,11 +86,11 @@ compose_URL <- function(date, sendung, mode) {
       }
     } else if( mode == 4){
       # 28.10.2017
-      sendung2 <- paste0("_sendung", sendung)
+      sendung2 <- paste0("_sendung_", sendung)
       URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
                     format(date, "%y"), "/", format(date, "%m"), "/",
                     format(date, "%y%m%d"), sendung2, "/2/", format(date, "%y%m%d"),
-                    sendung2, "_476k_p9v13.mp4")
+                    sendung2, "_1496k_p13v13.mp4")
     } else {
       stop(paste("mode", mode, "nicht bekannt!"))
     } # ENDE ZDF
@@ -103,29 +104,40 @@ compose_URL <- function(date, sendung, mode) {
 
   URL
 }
-URL <- compose_URL(date, sendung, mode = 3)
-
 
 
 
 ## Download. Dauert ein paar Minuten...
+URL <- compose_URL(date, sendung, mode = 4)  # 28.10.2017
 (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
 nokay <- try(system(cmd))
 
 if(nokay){
-  # Download hat nicht geklappt. Variere URL
-  URL <- compose_URL(date, sendung, mode = 4)
+  # RSS
+  URL <- compose_URL(date, sendung, mode = 3)
   (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
   nokay <- try(system(cmd))
+  if(!nokay){  # RSS hat geklappt...
+    # ... kann aber anderes Datum haben. Doublecheck Logfile
+    Logfile.latest <- read.csv(file.path(wd, "Logfile.csv"), stringsAsFactors = FALSE)
+    if(!dev && sendung %in% Logfile.latest[
+      which(as.character(date) == Logfile.latest[[1]]), 2]){
+      nokay <- TRUE  # Diese Sendung wurde schon prozessiert.
+    }
+    if(!nokay){
+      # ... und hat enthält ein firsches Datum
+      date <- date.rss  # Übernehme Datum
+    }
+  }
 }
 if(nokay){
-  # Download hat nicht geklappt. Variere URL
+  # Veraltet...?
   URL <- compose_URL(date, sendung, mode = 2)
   (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
   nokay <- try(system(cmd))
 }
 if(nokay){
-  # Download hat nicht geklappt. Variere URL
+  # ...
   URL <- compose_URL(date, sendung, mode = 1)
   (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
   nokay <- try(system(cmd))
@@ -144,10 +156,3 @@ if(nokay){
 }
 
 
-
-
-# RSS kann anderes Datum haben. Doublecheck Logfile
-Logfile.latest <- read.csv(file.path(wd, "Logfile.csv"), stringsAsFactors = FALSE)
-if(!dev && sendung %in% Logfile.latest[
-  which(as.character(date) == Logfile.latest[[1]]), 2])
-  stop("Diese Sendung wurde schon prozessiert.")
