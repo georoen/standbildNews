@@ -106,20 +106,32 @@ if (length(args)==0) {
   date <- Sys.Date()
   dateshift <- 0
   
+  # Wenn es heute noch vor 19 Uhr ist, wird der gestrige Tag angenommen, da 
+  # heutiges Video noch nicht online. 
+  if (lubridate::hour(Sys.time()) < 19){
+    date <- date - 1
+  }
+  
 } else if (length(args)==1) {
   ### Sendung angegeben. Datum fehlt
   sendung <- args[1]
   date <- Sys.Date()  # Heute
   dateshift <- 0
+  
+  # Wenn es heute noch vor 19 Uhr ist, wird der gestrige Tag angenommen, da 
+  # heutiges Video noch nicht online. 
+  if (lubridate::hour(Sys.time()) < 19){
+    date <- date - 1
+  }
 
 } else if (length(args)==2){
   ### Sendung und Datum angegenen
   sendung <- args[1]
   dateshift <- as.numeric(unlist(args[2]))
+  date <- Sys.Date()-dateshift
   if(is.na(date)){
     stop("Argument 2 ist keine Zahl und kann nicht vom Datum abgezogen werden.")
   }
-  date <- Sys.Date()-dateshift
 }
 
 ## Checke ob Sendung zulässig

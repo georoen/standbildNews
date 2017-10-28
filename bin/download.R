@@ -112,36 +112,36 @@ URL <- compose_URL(date, sendung, mode = 4)  # 28.10.2017
 (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
 nokay <- try(system(cmd))
 
-if(nokay){
-  # RSS
-  URL <- compose_URL(date, sendung, mode = 3)
-  (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
-  nokay <- try(system(cmd))
-  if(!nokay){  # RSS hat geklappt...
-    # ... kann aber anderes Datum haben. Doublecheck Logfile
-    Logfile.latest <- read.csv(file.path(wd, "Logfile.csv"), stringsAsFactors = FALSE)
-    if(!dev && sendung %in% Logfile.latest[
-      which(as.character(date) == Logfile.latest[[1]]), 2]){
-      nokay <- TRUE  # Diese Sendung wurde schon prozessiert.
-    }
-    if(!nokay){
-      # ... und hat enthält ein firsches Datum
-      date <- date.rss  # Übernehme Datum
-    }
-  }
-}
-if(nokay){
-  # Veraltet...?
-  URL <- compose_URL(date, sendung, mode = 2)
-  (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
-  nokay <- try(system(cmd))
-}
-if(nokay){
-  # ...
-  URL <- compose_URL(date, sendung, mode = 1)
-  (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
-  nokay <- try(system(cmd))
-}
+# if(nokay){
+#   # RSS
+#   URL <- compose_URL(date, sendung, mode = 3)
+#   (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
+#   nokay <- try(system(cmd))
+#   if(!nokay){  # RSS hat geklappt...
+#     # ... kann aber anderes Datum haben. Doublecheck Logfile
+#     Logfile.latest <- read.csv(file.path(wd, "Logfile.csv"), stringsAsFactors = FALSE)
+#     if(!dev && sendung %in% Logfile.latest[
+#       which(as.character(date) == Logfile.latest[[1]]), 2]){
+#       nokay <- TRUE  # Diese Sendung wurde schon prozessiert.
+#     }
+#     if(!nokay){
+#       # ... und hat enthält ein firsches Datum
+#       date <- date.rss  # Übernehme Datum
+#     }
+#   }
+# }
+# if(nokay){
+#   # Veraltet...?
+#   URL <- compose_URL(date, sendung, mode = 2)
+#   (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
+#   nokay <- try(system(cmd))
+# }
+# if(nokay){
+#   # ...
+#   URL <- compose_URL(date, sendung, mode = 1)
+#   (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
+#   nokay <- try(system(cmd))
+# }
 
 if(nokay){
   # Download hat immer noch nicht geklappt... Breche ab!
