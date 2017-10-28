@@ -60,7 +60,7 @@ TempImg <- paste0(Temp, "img%03d.jpg")
 #' 2.3.17: ERROR!  https://downloadzdf-a.akamaihd.net/mp4/zdf/17/03/170302_sendung_h19/1/170302_sendung_h19_476k_p9v13.mp4  #h19
 #' 28.10.17:       https://downloadzdf-a.akamaihd.net/mp4/zdf/17/10/171025_sendung_h19/2/171025_sendung_h19_476k_p9v13.mp4  # h19
 #' 28.10.17:       https://downloadzdf-a.akamaihd.net/mp4/zdf/17/10/171025_sendung_h19/2/171025_sendung_h19_1496k_p13v13.mp4  # h19 med. resolution for OCR
-compose_URL <- function(date, sendung, mode) {
+compose_URL <- function(date, sendung, mode) { # TODO Veraltete versionen löschen!
   # ZDF
   if(sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo")){
     if(mode == 1){
