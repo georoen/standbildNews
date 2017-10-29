@@ -22,7 +22,7 @@ Das Ziel des Projektes ist eine strukturierte, standardisierte und transparente 
 **TV und Online - wir zahlen das Gleiche, wir wollen das Gleiche sehen.**
 
 # heuteStatistik
-Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *ZDF heute 19 Uhr*, *ZDF heute Journal* und * ARD Tagesschau* automatisch online gestreamt. Ein kleines *R* Programm erkennt mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die zensierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/heuteNichtDrin) das Ergebnis.
+Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *ZDF heute 19 Uhr*, *ZDF heute Journal* und *ARD Tagesschau* automatisch online gestreamt. Ein kleines *R* Programm erkennt mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die zensierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/heuteNichtDrin) das Ergebnis.
 
 <!-- <iframe frameborder="0" width="500" height="600" src="https://jeremybz.shinyapps.io/heuteZensiert/"></iframe>  -->
 
@@ -38,4 +38,12 @@ Das Open-Source Projekt läd zum mitmachen ein. Neben den Tweets wird auch ein [
 
 # heuteWeiterentwickeln
 Es zeigen sich weitere Potentiale der Analyse einiger der wichtigsten Nachrichtenquellen in Deutschland. Diese ließe sich auszuweiten, um beispielsweise auch  Rede- bzw. Präsenzzeiten von Personen des öffentlichen und politischen Lebens zu analysieren. 
+
+# heuteDisclaimer
+Die Entwickler von **heuteZensiert** sind sich bewusst, dass die Methodik in diesem Projekt einige designbedingte Annahmen trifft. Grund dafür sind technische Herausforderungen. Es wird ausdrücklich darauf hingewiesen, dass alle Statistiken und Aussagen die aus der quelloffenen Methodik entstehen, stets in Relation zur technischen Entstehung zu sehen sind. Einige wichtige Annahmen sind: 
+
+ - Für die Analyse werden stets die offiziellen Online-Videoquellen (Mediatheken) der öffentlich-rechtlichen Rundfunkanstalten (ARD, ZDF) herangezogen. Externe Einflussnahme auf diese Quellen wird nicht geprüft!
+ - Als Anfang / Ende der Nachrichtensendung wird der Beginn / das Ende des zum Download stehenden Videos angenommen. Eventuelle Vorspann- oder Abspann-Sequenzen werden somit zum Video gezählt und können die Statistik beeinflussen. 
+ - Die Samplingrate ist aus technischen Gründen auf 1 Bild / 3 Sek. festgelegt. Diese Designentscheidung impliziert, dass die Zensur von Videomaterial, dass nicht durch diese Abtastungsrate erfasst wird, nicht ausgewertet werden kann. 
+ - Um die Transparenz zu wahren, werden alle Daten im [Logfile](Logfile.csv) langfristig archiviert. Zu jeder Analysierten Sendung wird auch der entsprechende Link archiviert. Es kann jedoch nicht gewährleistet werden, dass diese Links langfristig auf die entsprechende Videodatei verweisen.
 
