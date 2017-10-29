@@ -118,9 +118,13 @@ if (length(args)==0) {
   date <- Sys.Date()  # Heute
   dateshift <- 0
   
-  # Wenn es heute noch vor 19 Uhr ist, wird der gestrige Tag angenommen, da 
-  # heutiges Video noch nicht online. 
-  if (lubridate::hour(Sys.time()) < 19){
+  # Wenn es heute noch vor 19 (20, 23) Uhr ist, wird der gestrige Tag angenommen, da 
+  # heutiges Video noch nicht online.
+  zeitDerSendung <- switch(sendung, 
+                           h19 = 19, 
+                           t20 = 20, 
+                           hjo = 23)
+  if (lubridate::hour(Sys.time()) < zeitDerSendung){
     date <- date - 1
   }
 
