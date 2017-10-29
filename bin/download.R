@@ -86,7 +86,8 @@ compose_URL <- function(date, sendung, mode) { # TODO Veraltete versionen lösch
       }
     } else if( mode == 4){
       # 28.10.2017
-      sendung2 <- paste0("_sendung_", ifelse(sendung == "hjo", sendung, "19")) # am 28.10.17 war der link nicht mehr (..../171028_sendung_h19... sondern ...171028_sendung_19...)
+      sendung2 <- paste0("_sendung_", ifelse(sendung == "hjo", sendung, "h19")) # am 28.10.17 war der link nicht mehr (..../171028_sendung_h19... sondern ...171028_sendung_19...)
+      # Am 29.10. jedoch wieder h19
       URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
                     format(date, "%y"), "/", format(date, "%m"), "/",
                     format(date, "%y%m%d"), sendung2, 
