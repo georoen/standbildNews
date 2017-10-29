@@ -89,7 +89,9 @@ compose_URL <- function(date, sendung, mode) { # TODO Veraltete versionen lösch
       sendung2 <- paste0("_sendung_", sendung)
       URL <- paste0("https://downloadzdf-a.akamaihd.net/mp4/zdf/",
                     format(date, "%y"), "/", format(date, "%m"), "/",
-                    format(date, "%y%m%d"), sendung2, "/2/", format(date, "%y%m%d"),
+                    format(date, "%y%m%d"), sendung2, 
+                    ifelse(sendung == "hjo", "/1/", "/2/"), 
+                    format(date, "%y%m%d"),
                     sendung2, "_1496k_p13v13.mp4")
     } else {
       stop(paste("mode", mode, "nicht bekannt!"))
