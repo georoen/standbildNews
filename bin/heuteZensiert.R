@@ -55,6 +55,7 @@ library(stringr)
 library(tesseract)
 library(magick)
 library(twitteR)
+library(rvest)
 
 #### Funktionen ####
 ## msg Header [1]
