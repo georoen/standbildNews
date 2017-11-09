@@ -21,7 +21,7 @@ ui <- fluidPage(
   tabsetPanel(type = "tabs",
               tabPanel("Sendungen", plotOutput("plot")),
               tabPanel("Statistiken", tableOutput("stats")),
-              tabPanel("Tablle", dataTableOutput("view"))
+              tabPanel("Tabelle", dataTableOutput("view"))
   )
 )
 
