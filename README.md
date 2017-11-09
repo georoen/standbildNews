@@ -26,6 +26,7 @@ Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, 
 
 Die so erhoben Daten werden abschließend in einer [Tabelle](Logfile.csv) gespeichert. Das nachfolgende Widget ([Shiny-App](https://jeremybz.shinyapps.io/heuteZensiert/)) greift diese auf um die Ausstrahlungspraxis zu analysieren:
 
+
 <iframe src="https://jeremybz.shinyapps.io/heuteZensiert/" style='width: 1px;min-width: 100%;height: 500px' frameborder="0"></iframe>
 
 Es zeigt sich, dass alle Sender ihre Nachritensendungen bearbeiten, vor dass sie diese (mit blockierten Szenen) ins Netz laden. Da die Nachrichten online zeitgleich (oder gar später) ausgestrahlt werden, hat der digitalen Nachrichtenschauer keine Möglichkeit mehr die blockierten Passagen im TV nachzuschauen. 

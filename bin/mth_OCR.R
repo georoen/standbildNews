@@ -4,7 +4,7 @@
 zdf_zensur <- function(img) {
   #' Gezielte OCR suche nach Zensur
   img <- image_read(img) %>%
-    image_crop("300x200+500+170") %>%
+    image_crop("340x200+620+220") %>%
     image_quantize(max = 2, colorspace = 'gray')
   rtn <- ocr(img, engine = tesseract("deu"))
   # check
