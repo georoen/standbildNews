@@ -22,28 +22,17 @@ Das Ziel des Projektes ist eine strukturierte, standardisierte und transparente 
 **TV und Online - wir zahlen das Gleiche, wir wollen das Gleiche sehen.**
 
 # heuteStatistik
-Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *ZDF heute 19 Uhr*, *ZDF heute Journal* und *ARD Tagesschau* automatisch online gestreamt. Ein kleines *R* Programm erkennt mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die zensierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/heuteNichtDrin) das Ergebnis.
+Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *ZDF heute 19 Uhr*, *ZDF heute Journal* und *ARD Tagesschau* automatisch online gestreamt. Ein *R* Programm erkennt dann mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die blockierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/heuteNichtDrin) das Ergebnis. *Digital natives* können diesem followen, um sich vorab informieren zu lassen, welche Nachrichtensendung vollständig ist und sie gerne sehen möchten. 
 
-<!-- <iframe frameborder="0" width="500" height="600" src="https://jeremybz.shinyapps.io/heuteZensiert/"></iframe>  -->
+Die so erhoben Daten werden abschließend in einer [Tabelle](Logfile.csv) gespeichert. Das nachfolgende Widget ([Shiny-App](https://jeremybz.shinyapps.io/heuteZensiert/)) greift diese auf um die Ausstrahlungspraxis zu analysieren:
 
-![Kuchendiagramm](./heuteStatisik.png)
 
-Der etwas reißerische Begriff Zensur wurde mit Absicht gewählt.   
-1) Dem digitalen Nachrichtenschauer werden bewusst Inhalte vorenthalten. Da die Nachrichten online zeitgleich (oder gar später) ausgestrahlt werden, hat Letzterer keine Möglichkeit mehr die zensierten Passagen im TV nachzuschauen.  
-2) Die Online-Version der Nachrichtensendung wird offensichtlich nachbearbeitet. Digital Natives sind besonders betroffen und im Vergleich zu analogen Nutzern schlechter informiert. In Zeiten steigender Popularität von Internetstreaming-Angeboten ist es an der Zeit die Nutzungsgewohnheiten einer anzuerkennen und die Rechtepolitik anzupassen!
-3) Da einzelne eMails an `Zuschauerredaktion@zdf.de` leider keine sichtbaren Folgen nach sich ziehen, möchten die Initiatoren eine große Masse mobilisieren, um den Druck auf die öffentlich-rechtlichen Rundfunkanstalten erhöhen. Gleiche Leistung für gleichen Rundfunkbeitrag!  
+<iframe src="https://jeremybz.shinyapps.io/heuteZensiert/" style='width: 1px;min-width: 100%;height: 500px' frameborder="0"></iframe>
 
-# heuteMitmachen
-Das Open-Source Projekt läd zum mitmachen ein. Neben den Tweets wird auch ein [Tabelle](Logfile.csv) fortgeschrieben. Wir laden Interessierte und Wissenschaftler aller Disziplinen ein, diese Datengrundlage für sekundäre Analysen heranzuziehen. Die Installation des Projektes ist  [hier](./Install.md) beschrieben. 
+Es zeigt sich, dass alle Sender ihre Nachritensendungen bearbeiten, vor dass sie diese (mit blockierten Szenen) ins Netz laden. Da die Nachrichten online zeitgleich (oder gar später) ausgestrahlt werden, hat der digitalen Nachrichtenschauer keine Möglichkeit mehr die blockierten Passagen im TV nachzuschauen. 
 
-# heuteWeiterentwickeln
-Es zeigen sich weitere Potentiale der Analyse einiger der wichtigsten Nachrichtenquellen in Deutschland. Diese ließe sich auszuweiten, um beispielsweise auch  Rede- bzw. Präsenzzeiten von Personen des öffentlichen und politischen Lebens zu analysieren. 
+Digital Natives sind besonders betroffen und im Vergleich zu analogen Nutzern schlechter informiert. In Zeiten steigender Popularität von Internetstreaming-Angeboten ([ARD/ZDF-Onlinestudie, 2017](http://www.ard-zdf-onlinestudie.de/ardzdf-onlinestudie-2017/)) ist es an der Zeit die Nutzungsgewohnheiten einer anzuerkennen und die Rechtepolitik anzupassen. Wir möchten User und Politik aufrufen den Druck auf die öffentlich-rechtlichen Rundfunkanstalten erhöhen und [ARD](mailto:info@DasErste.de) und [ZDF](mailto:zuschauerredaktion@zdf.de) zu mailen. Gleiche Leistung für gleichen Rundfunkbeitrag!
 
-# heuteDisclaimer
-Die Entwickler von **heuteZensiert** sind sich bewusst, dass die Methodik in diesem Projekt einige designbedingte Annahmen trifft. Grund dafür sind technische Herausforderungen. Es wird ausdrücklich darauf hingewiesen, dass alle Statistiken und Aussagen die aus der quelloffenen Methodik entstehen, stets in Relation zur technischen Entstehung zu sehen sind. Einige wichtige Annahmen sind: 
+---
 
- - Für die Analyse werden stets die offiziellen Online-Videoquellen (Mediatheken) der öffentlich-rechtlichen Rundfunkanstalten (ARD, ZDF) herangezogen. Externe Einflussnahme auf diese Quellen wird nicht geprüft!
- - Als Anfang / Ende der Nachrichtensendung wird der Beginn / das Ende des zum Download stehenden Videos angenommen. Eventuelle Vorspann- oder Abspann-Sequenzen werden somit zum Video gezählt und können die Statistik beeinflussen. 
- - Die Samplingrate ist aus technischen Gründen auf 1 Bild / 3 Sek. festgelegt. Diese Designentscheidung impliziert, dass die Zensur von Videomaterial, dass nicht durch diese Abtastungsrate erfasst wird, nicht ausgewertet werden kann. 
- - Um die Transparenz zu wahren, werden alle Daten im [Logfile](Logfile.csv) langfristig archiviert. Zu jeder Analysierten Sendung wird auch der entsprechende Link archiviert. Es kann jedoch nicht gewährleistet werden, dass diese Links langfristig auf die entsprechende Videodatei verweisen.
-
+> [Mitmachen](Mitmachen.md) | [Disclaimer](Disclaimer.md)
