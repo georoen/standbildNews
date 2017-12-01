@@ -29,7 +29,7 @@ Die so erhoben Daten werden abschließend in einer [Tabelle](Logfile.csv) gespei
 
 <iframe src="https://jeremybz.shinyapps.io/heuteZensiert/" style='width: 1px;min-width: 100%;height: 500px' frameborder="0"></iframe>
 
-Es zeigt sich, dass alle Sender ihre Nachritensendungen bearbeiten, vor dass sie diese (mit blockierten Szenen) ins Netz laden. Da die Nachrichten online zeitgleich (oder gar später) ausgestrahlt werden, hat der digitalen Nachrichtenschauer keine Möglichkeit mehr die blockierten Passagen im TV nachzuschauen. 
+Es zeigt sich, dass alle Sender ihre Nachritensendungen bearbeiten, bevor sie diese (mit blockierten Szenen) ins Netz laden. Da die Nachrichten online zeitgleich (oder gar später) ausgestrahlt werden, hat der digitalen Nachrichtenschauer keine Möglichkeit mehr die blockierten Passagen im TV nachzuschauen. 
 
 Digital Natives sind besonders betroffen und im Vergleich zu analogen Nutzern schlechter informiert. In Zeiten steigender Popularität von Internetstreaming-Angeboten ([ARD/ZDF-Onlinestudie, 2017](http://www.ard-zdf-onlinestudie.de/ardzdf-onlinestudie-2017/)) ist es an der Zeit die Nutzungsgewohnheiten einer anzuerkennen und die Rechtepolitik anzupassen. Wir möchten User und Politik aufrufen den Druck auf die öffentlich-rechtlichen Rundfunkanstalten erhöhen und [ARD](mailto:info@DasErste.de) und [ZDF](mailto:zuschauerredaktion@zdf.de) zu mailen. Gleiche Leistung für gleichen Rundfunkbeitrag!
 
