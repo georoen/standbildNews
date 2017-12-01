@@ -42,7 +42,9 @@ server <- function(input, output) {
     logdata %>% 
       group_by(sendung) %>% 
       rename(Sendung = sendung) %>% 
-      summarise(Duchschnittlich = paste0(round(mean(prozent),1),"%"))
+      summarise("Anzahl Sendungen" = n(),
+                "Davon vollständig" = as.integer(sum(if_else(prozent == 0, 1, 0))),
+                "Zensierter Anteil je Sendung (Mittelwert)" = paste0(round(mean(prozent),1),"%"))
   })
   
   output$view <- renderDataTable(datatable(logdata))  # DT
