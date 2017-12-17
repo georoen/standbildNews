@@ -20,6 +20,7 @@ ui <- fluidPage(
   # Output: Tabset w/ plot, summary, and table ----
   tabsetPanel(type = "tabs",
               tabPanel("Sendungen", plotOutput("plot")),
+              tabPanel("Boxplot", plotOutput("boxplot")),
               tabPanel("Statistiken", tableOutput("stats")),
               tabPanel("Tabelle", dataTableOutput("view"))
   )
@@ -34,9 +35,25 @@ server <- function(input, output) {
       geom_line(size = 1.5, alpha = 0.5) +
       geom_point(size = 2) +
       labs(title = "Blockierter Anteil je Nachrichtensendung (in Prozent)",
-           y = "", x = "") +
+           y = NULL, x = NULL) +
       theme(legend.position="bottom", legend.title=element_blank()) +
-      scale_y_continuous(labels = scales::percent)
+      scale_y_continuous(labels = scales::percent) + 
+      scale_color_manual(values = c("darkorange", "darkgrey", "#3284be"))
+  })
+  output$boxplot <- renderPlot({
+    ggplot(logdata, aes(sendung, prozent/100, group = sendung, fill = sendung)) + 
+      geom_boxplot(alpha = 0.5) + 
+      stat_summary(fun.y = mean, color = "black", geom = "point", 
+                   shape = 23, size = 5, show.legend = TRUE, fill = "gold") + 
+      geom_text(data = means, 
+                aes(label = paste("Durchschn.:", round(prozent, 2), "%"), 
+                    y = prozent/100), 
+                nudge_y = 0.7/100) + 
+      scale_y_continuous(labels = scales::percent) + 
+      scale_fill_manual(values = c("darkorange", "darkgrey", "#3284be"),
+                        guide = "none") + 
+      labs(title = "Zensierter Anteil der Sendung (in Prozent)", 
+           x = NULL, y = NULL)
   })
   output$stats <- renderTable({
     logdata %>% 
