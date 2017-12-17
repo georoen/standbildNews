@@ -15,6 +15,8 @@ logdata <- read_csv("https://georoen.github.io/heuteZensiert/Logfile.csv") %>%
                                                  "Tageschau")),
             prozent = as.numeric(gsub("%", "", prozent))) %>% 
   arrange(desc(date))
+means <- aggregate(prozent ~ sendung, logdata, mean)
+
 # Define UI
 ui <- fluidPage(
   # Output: Tabset w/ plot, summary, and table ----
