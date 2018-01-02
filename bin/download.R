@@ -40,13 +40,22 @@ TempImg <- paste0(Temp, "img%03d.jpg")
 #' 25.10.17:       https://downloadzdf-a.akamaihd.net/mp4/zdf/17/10/171025_sendung_h19/2/171025_sendung_h19_1496k_p13v13.mp4  # h19 med. resolution for OCR
 #' 28.10.17:       https://rodlzdf-a.akamaihd.net/none/zdf/17/10/171028_sendung_19/2/171028_sendung_19_2328k_p35v13.mp4  # h19. sendung <- "19"
 #' 31.10.17:       https://rodlzdf-a.akamaihd.net/none/zdf/17/10/171031_h19/2/171031_h19_2328k_p35v13.mp4  # h19 via mediathekview
-compose_URL.ard <- function(date, ...) {
+compose_URL.ard <- function(date, sendung, ...) {
   #' ARD Tageschau 20Uhr via RSS
+  #' ARD Tagethemen via RSS
+  #' @param sendung ist die Sendung (t20 oder tth)
   #' @param ... Es (noch keine) weiteren Argumente. Doch so wird hiermit der
   #' Syntax von ARD und ZDF wrappern homogenisiert. Spart Argument-Errors.
   #' @import rvest
-  RSS <- read_html("https://www.tagesschau.de/export/video-podcast/tagesschau/") %>%
-    html_nodes("item")
+  if (sendung == "t20"){
+    RSS <- read_html("https://www.tagesschau.de/export/video-podcast/tagesschau/") %>%
+      html_nodes("item")
+  }
+  if (sendung == "tth"){
+    RSS <- read_html("https://www.tagesschau.de/export/video-podcast/tagesthemen/") %>%
+      html_nodes("item")
+  }
+  
   # Datum
   RSS.date <- RSS %>% 
     html_node("title") %>% 
@@ -105,9 +114,9 @@ compose_URL <- function(date, sendung, mode) {
   if(sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo")){
     # ZDF
     URL <- compose_URL.zdf(date, sendung)
-  } else if( sendung == "t20") {
+  } else if(sendung %in% c("t20", "tth")) {
     # ARD
-    URL <- (compose_URL.ard(date))
+    URL <- (compose_URL.ard(date, sendung))
   }
   
   # Test it

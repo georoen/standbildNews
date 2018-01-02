@@ -66,6 +66,8 @@ header <- function(sendung, date, sep = " vom "){
     s.name <- "ZDF HeuteJournal"
   if(grepl("t20", sendung))
     s.name <- "ARD Tageschau"
+  if(grepl("tth", sendung))
+    s.name <- "ARD Tagesthemen"
   
   date <- format(date, format = "%d.%m.%Y")
   
@@ -124,7 +126,8 @@ if (length(args)==0) {
   zeitDerSendung <- switch(sendung, 
                            h19 = 19, 
                            t20 = 20, 
-                           hjo = 23)
+                           hjo = 23, 
+                           tth = 22)
   if (lubridate::hour(Sys.time()) < zeitDerSendung){
     date <- date - 1
   }
@@ -140,7 +143,7 @@ if (length(args)==0) {
 }
 
 ## Checke ob Sendung zulässig
-if(!sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo", "t20")){
+if(!sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo", "t20", "tth")){
   stop("Sendung nicht bekannt")
 }
 
