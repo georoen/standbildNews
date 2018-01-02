@@ -32,7 +32,7 @@ ard_zensur <- function(img) {
   rtn
 }
 # Wähle Sendung
-ocr_zensur <- ifelse(sendung == "t20", ard_zensur, zdf_zensur)
+ocr_zensur <- ifelse(sendung %in% c("t20", "tth"), ard_zensur, zdf_zensur)
 
 ## Indeziere Heute Frames
 img <- list.files(Temp , pattern =  ".jpg$", full.names = TRUE, recursive = TRUE)
@@ -42,7 +42,11 @@ absoluteDauer <- dminutes(length(img)*res/60)
 img.mean <- sapply(img, ocr_zensur)
 
 ## Auswertung
-censored <- grepl("rechtlichen Gründen", img.mean)
+if (sendung %in% c("t20", "tth")) { # rechtliche Gründe ist nicht immer korrekt erkannt (z.B. tth 2017-12-17)
+  censored <- grepl("Kurze Unterbrechung", img.mean)
+} else {
+  censored <- grepl("rechtlichen Gründen", img.mean)
+}
 prozentZensiert <- length(censored[which(censored)])/length(censored)
 absolutZensiert <- absoluteDauer * prozentZensiert
 prozentZensiert <- paste0(round(prozentZensiert, 3) * 100, "%")  # Pastable String
