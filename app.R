@@ -12,7 +12,7 @@ logdata <- read_csv("https://georoen.github.io/heuteZensiert/Logfile.csv") %>%
   transmute(date = as.Date(date),
             sender = factor(ifelse(grepl("h", sendung), "ZDF", "ARD")),
             sendung = factor(sendung, labels = c("Heute 19Uhr", "Heute Journal",
-                                                 "Tageschau")),
+                                                 "Tageschau", "Tagesthemen")),
             prozent = as.numeric(gsub("%", "", prozent))) %>% 
   arrange(desc(date))
 means <- aggregate(prozent ~ sendung, logdata, mean)
@@ -40,7 +40,7 @@ server <- function(input, output) {
            y = NULL, x = NULL) +
       theme(legend.position="bottom", legend.title=element_blank()) +
       scale_y_continuous(labels = scales::percent) + 
-      scale_color_manual(values = c("darkorange", "darkgrey", "#3284be"))
+      scale_color_manual(values = c("darkorange", "darkgrey", "#3284be", "dodgerblue4"))
   })
   output$boxplot <- renderPlot({
     ggplot(logdata, aes(sendung, prozent/100, group = sendung, fill = sendung)) + 
@@ -52,7 +52,7 @@ server <- function(input, output) {
                     y = prozent/100), 
                 nudge_y = 0.7/100) + 
       scale_y_continuous(labels = scales::percent) + 
-      scale_fill_manual(values = c("darkorange", "darkgrey", "#3284be"),
+      scale_fill_manual(values = c("darkorange", "darkgrey", "#3284be", "dodgerblue4"),
                         guide = "none") + 
       labs(title = "Zensierter Anteil der Sendung (in Prozent)", 
            x = NULL, y = NULL)
