@@ -62,7 +62,7 @@ ggsave("heuteStatisik.png", width = 3, height = 3, scale = 2, dpi = 150)
 
 ### Bild Hintergrund mit Imagick hinzufügen
 #http://unix.stackexchange.com/a/243545
-if(grepl("h", sendung)){
+if(sendung %in% c("h19", "hjo")){
   cmd <- "composite -blend 80 heuteStatisik.png ./extra/Hintergrund_ZDF.png heuteStatisik.png"
 } else {
   cmd <- "composite -blend 80 heuteStatisik.png ./extra/Hintergrund_ARD.png heuteStatisik.png"
