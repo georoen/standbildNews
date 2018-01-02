@@ -34,8 +34,8 @@ ggplot(df, aes(y=2, imgn, color = Online, fill = Online))+
   
   # Label Start
   geom_vline(xintercept = 0.5, color= "Gray20") +  
-  geom_text(aes(x = 0), label = "▶️", color="Gray20", nudge_y = 0.15,
-            nudge_x =0.8, size =3) +
+  geom_text(aes(x = 0), label = "▶️", color = "Gray20", nudge_y = 0.15,
+            nudge_x = 6, size = 3) +
   
   # Label Zensiert
   geom_point(x = 0, y = 0,
@@ -54,7 +54,7 @@ ggplot(df, aes(y=2, imgn, color = Online, fill = Online))+
         legend.title=element_blank()) +
   
   # Labels
-  labs(title = msg[1])
+  labs(title = header(sendung, date))
 
 
 ## Rausspeichern

@@ -36,13 +36,16 @@ ocr_zensur <- ifelse(sendung == "t20", ard_zensur, zdf_zensur)
 
 ## Indeziere Heute Frames
 img <- list.files(Temp , pattern =  ".jpg$", full.names = TRUE, recursive = TRUE)
+absoluteDauer <- dminutes(length(img)*res/60)
+
+## OCR
 img.mean <- sapply(img, ocr_zensur)
 
 ## Auswertung
 censored <- grepl("rechtlichen Gründen", img.mean)
 prozentZensiert <- length(censored[which(censored)])/length(censored)
-prozentZensiert <- paste0(round(prozentZensiert, 3) * 100, "%")
-
+absolutZensiert <- absoluteDauer * prozentZensiert
+prozentZensiert <- paste0(round(prozentZensiert, 3) * 100, "%")  # Pastable String
 
 
 # Speichere Ergebniss
