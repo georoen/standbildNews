@@ -21,6 +21,7 @@ Anschließend werden mit [`CRONTAB`](https://wiki.ubuntuusers.de/Cron/) täglich
 # 50 19 * * * cd ~/heuteZensiert/ && nohup Rscript --vanilla bin/heuteZensiert.R h19 &
 # 50 20 * * * cd ~/heuteZensiert/ && nohup Rscript --vanilla bin/heuteZensiert.R t20 &
 # 50 23 * * *  cd ~/heuteZensiert/ && nohup Rscript --vanilla bin/heuteZensiert.R hjo &
+# 50 22 * * *  cd ~/heuteZensiert/ && nohup Rscript --vanilla bin/heuteZensiert.R tth &
 ```
 
 Voilà - Wilkommen im Team!
