@@ -22,7 +22,7 @@ Das Ziel des Projektes ist eine strukturierte, standardisierte und transparente 
 **TV und Online - wir zahlen das Gleiche, wir wollen das Gleiche sehen.**
 
 # heuteStatistik
-Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *ZDF heute 19 Uhr*, *ZDF heute Journal* und *ARD Tagesschau* automatisch online gestreamt. Ein *R* Programm erkennt dann mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die blockierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/heuteNichtDrin) das Ergebnis. *Digital natives* können diesem followen, um sich vorab informieren zu lassen, welche Nachrichtensendung vollständig ist und sie gerne sehen möchten. 
+Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *ZDF heute 19 Uhr*, *ZDF heute Journal* und *ARD Tagesschau* automatisch online gestreamt. Ein *R* Programm erkennt dann mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die blockierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/heuteZensiert) das Ergebnis. *Digital natives* können diesem followen, um sich vorab informieren zu lassen, welche Nachrichtensendung vollständig ist und sie gerne sehen möchten. 
 
 Die so erhoben Daten werden abschließend in einer [Tabelle](Logfile.csv) gespeichert. Das nachfolgende Widget ([Shiny-App](https://jeremybz.shinyapps.io/heuteZensiert/)) greift diese auf, um die Ausstrahlungspraxis zu analysieren:
 
