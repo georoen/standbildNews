@@ -34,7 +34,8 @@ server <- function(input, output) {
   # Plot
   output$plot <- renderPlot({
     ggplot(logdata, aes(date, prozent/100, color = sendung)) +
-      geom_line(size = 1.5, alpha = 0.5) +
+      geom_line(alpha = 0.2) +
+      geom_smooth(alpha = 0.5, se = FALSE, span = 0.1) +
       geom_point(size = 2) +
       labs(title = "Blockierter Anteil je Nachrichtensendung (in Prozent)",
            y = NULL, x = NULL) +
