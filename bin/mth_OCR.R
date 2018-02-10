@@ -7,14 +7,15 @@ zdf_zensur <- function(img) {
     image_crop("340x200+620+220") %>%
     image_quantize(max = 2, colorspace = 'gray')
   rtn <- ocr(img, engine = tesseract("deu"))
-  # check
-  if(FALSE %in% grepl("rechtlichen Gründen", rtn))
-    return("")
   # Minor OCR corrections
   rtn <- gsub("W-Bilder", "TV-Bilder", rtn)
   rtn <- gsub("Im", "im", rtn)
   rtn <- gsub("\n", " ", rtn)
-  rtn <- gsub("  ", "", rtn)
+  rtn <- gsub("[[:punct:]]", "", rtn) # just to remove artifacts like '
+  # remove double spaces a few times just to be sure
+  for (i in 1:3){
+    rtn <- gsub("  ", " ", rtn)
+  }
   rtn
 }
 

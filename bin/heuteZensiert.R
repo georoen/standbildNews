@@ -36,6 +36,10 @@
 #' gesetzt wird. 
 dev <- FALSE  # Devmode?
 
+if (dev){
+  dir.create("archiv")
+}
+
 #### Parameter ####
 ## Default
 res <- 3  # Framerate in Sekunden
