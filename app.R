@@ -10,7 +10,7 @@ Sys.setlocale(category = "LC_ALL", locale = "German")
 logdata <- read_csv("https://georoen.github.io/heuteZensiert/Logfile.csv") %>% 
   select(date:prozent) %>% 
   transmute(date = as.Date(date),
-            sender = factor(ifelse(grepl("h", sendung), "ZDF", "ARD")),
+            sender = factor(ifelse(grepl("^h", sendung), "ZDF", "ARD")),
             sendung = factor(sendung, labels = c("Heute 19Uhr", "Heute Journal",
                                                  "Tageschau", "Tagesthemen")),
             prozent = as.numeric(gsub("%", "", prozent))) %>% 
