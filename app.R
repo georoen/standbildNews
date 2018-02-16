@@ -12,7 +12,7 @@ logdata <- read_csv("https://georoen.github.io/heuteZensiert/Logfile.csv") %>%
   transmute(date = as.Date(date),
             sender = factor(ifelse(grepl("^h", sendung), "ZDF", "ARD")),
             sendung = factor(sendung, labels = c("Heute 19Uhr", "Heute Journal",
-                                                 "Tageschau", "Tagesthemen")),
+                                                 "Tagesschau", "Tagesthemen")),
             prozent = as.numeric(gsub("%", "", prozent))) %>% 
   arrange(desc(date))
 means <- aggregate(prozent ~ sendung, logdata, mean)

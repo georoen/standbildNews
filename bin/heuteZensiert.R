@@ -69,7 +69,7 @@ header <- function(sendung, date, sep = " vom "){
   if(grepl("hjo", sendung))
     s.name <- "ZDF HeuteJournal"
   if(grepl("t20", sendung))
-    s.name <- "ARD Tageschau"
+    s.name <- "ARD Tagesschau"
   if(grepl("tth", sendung))
     s.name <- "ARD Tagesthemen"
   

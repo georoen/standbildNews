@@ -41,8 +41,8 @@ TempImg <- paste0(Temp, "img%03d.jpg")
 #' 28.10.17:       https://rodlzdf-a.akamaihd.net/none/zdf/17/10/171028_sendung_19/2/171028_sendung_19_2328k_p35v13.mp4  # h19. sendung <- "19"
 #' 31.10.17:       https://rodlzdf-a.akamaihd.net/none/zdf/17/10/171031_h19/2/171031_h19_2328k_p35v13.mp4  # h19 via mediathekview
 compose_URL.ard <- function(date, sendung, ...) {
-  #' ARD Tageschau 20Uhr via RSS
-  #' ARD Tagethemen via RSS
+  #' ARD Tagesschau 20Uhr via RSS
+  #' ARD Tagesthemen via RSS
   #' @param sendung ist die Sendung (t20 oder tth)
   #' @param ... Es (noch keine) weiteren Argumente. Doch so wird hiermit der
   #' Syntax von ARD und ZDF wrappern homogenisiert. Spart Argument-Errors.
