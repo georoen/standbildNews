@@ -17,6 +17,7 @@ Am aktuellen Beispiel Olympia wollen wir nun auch eine qualitative Beobachtung z
 http://www.sportschau.de/
 https://olympia.zdf.de/
 
+Zwar lassen sich in den dezidierten Sport Mediatheken die olympischen Winterspiele 2018 verfolgen, jedoch sind auch hier, wenn auch kleinere Mängel festzustellen. Z.B. zu früh gestopptes Video [4]
 
 # Findings
 Viele Olympia Ausschnitte wurden in den Online Mediatheken gezeigt, in den Nachrichten jedoch gekachelt. Ein Muster war nicht zu erkennen. Hier wäre eine Stellungsnahme der Sender notwendig. 
@@ -26,3 +27,4 @@ Viele Olympia Ausschnitte wurden in den Online Mediatheken gezeigt, in den Nachr
 [1]: Link aus readme.md
 [2]: https://twitter.com/heuteZensiert/status/962479459755528193
 [3]: tweet vom ???
+[4]: http://www.sportschau.de/olympia/sportarten/snowboard/video-snowboard---das-big-air-finale-der-maenner-100.html
