@@ -4,8 +4,8 @@
 zdf_zensur <- function(img) {
   #' Gezielte OCR suche nach Zensur
   img <- image_read(img) %>%
-    image_crop("340x200+620+220") %>%
-    image_quantize(max = 2, colorspace = 'gray')
+    image_crop("340x200+620+220") #%>%
+    # image_quantize(max = 2, colorspace = 'gray')
   rtn <- ocr(img, engine = tesseract("deu"))
   # Minor OCR corrections
   rtn <- gsub("W-Bilder", "TV-Bilder", rtn)
@@ -46,7 +46,7 @@ img.mean <- sapply(img, ocr_zensur)
 if (sendung %in% c("t20", "tth")) { # rechtliche Gründe ist nicht immer korrekt erkannt (z.B. tth 2017-12-17)
   censored <- grepl("Kurze Unterbrechung", img.mean)
 } else {
-  censored <- grepl("rechtlichen Gründen", img.mean)
+  censored <- grepl("rechtlichen|redaktionellen Gründen", img.mean)
 }
 prozentZensiert <- length(censored[which(censored)])/length(censored)
 absolutZensiert <- absoluteDauer * prozentZensiert
