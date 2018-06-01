@@ -156,7 +156,9 @@ if(!sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo", "t20", "tth")){
 #                               Processing                                     #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #### Pull aktuelles Repo vom github ####
-source2("git_pull.R")
+if(!dev){ 
+  source2("git_pull.R")
+}
 
 #### Download ####
 source2("download.R", chdir = TRUE)
@@ -196,7 +198,9 @@ if(!dev){
 }
 
 #### push Logfile auf Github ####
-source2("git_push.R")
+if(!dev){
+  source2("git_push.R")
+}
 
 #### End Time ####
 Sys.time() - start
