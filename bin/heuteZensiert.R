@@ -165,8 +165,8 @@ source2("download.R", chdir = TRUE)
 
 #### Texterkennung ####
 # source2("mth_Classic.R")
-source2("mth_OCR.R", chdir = TRUE)
-# source2("mth_imageAlgebra.R", chdir = TRUE)
+# source2("mth_OCR.R", chdir = TRUE)
+source2("mth_imageAlgebra.R", chdir = TRUE)
 
 # Lösche Bilder wenn nicht im Entwicklungsmodus
 if(!dev){ 
