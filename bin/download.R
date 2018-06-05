@@ -74,15 +74,14 @@ compose_URL.zdf <- function(date, sendung) {
   #' Diese haben zwar eine gewisse Struktur, sind aber leider etwas
   #' unsystematisch. Geordnet nach Wahrscheinlichkeit.
   paste_ZDF <- function(date, sendung,
-                        server = "https://rodlzdf-a.akamaihd.net/none/zdf/",
-                        video = "_2328k_p35v13.mp4",
+                        server = "https://downloadzdf-a.akamaihd.net/mp4/zdf/",
+                        video = "_476k_p9v13.mp4",
                         seed = "/2/") {
     paste0(server,
            format(date, "%y"), "/", format(date, "%m"), "/",
            format(date, "%y%m%d"), sendung, seed, format(date, "%y%m%d"),
            sendung, video)
   }
-  
   
   #' URL-Muster von 25.10.2017
   #' https://rodlzdf-a.akamaihd.net/none/zdf/17/10/171028_sendung_19/2/171028_sendung_19_2328k_p35v13.mp4
