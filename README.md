@@ -35,4 +35,4 @@ Digital-Natives sind besonders betroffen und im Vergleich zu konventionellen Nut
 
 ---
 
-> [Installieren](Install.md) | [Mitmachen](Mitmachen.md) | [Disclaimer](Disclaimer.md)
+> [Installieren](docs/Install.md) | [Mitmachen](docs/Mitmachen.md) | [Disclaimer](docs/Disclaimer.md)
