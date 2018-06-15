@@ -71,6 +71,21 @@ compose_URL.zdf <- function(date, sendung) {
            sendung, video)
   }
   
+
+  #' URL-Muster von 14.6.2018  #TODO: Achtung, hier fehlt noch ein entsprechendes frameIMG, da WM Eröffnungsspiel gezeigt wurde :-)
+  #' https://downloadzdf-a.akamaihd.net/mp4/zdf/18/06/180614_sendung_h19/2/180614_sendung_h19_776k_p11v14.mp4
+  URL <- paste_ZDF(date,paste0("_sendung_", sendung), video = "_776k_p11v14.mp4")
+  if(!httr::http_error(URL)) {
+    return(URL)
+  }
+  
+  #' URL-Muster von 12.6.2018
+  #' https://downloadzdf-a.akamaihd.net/mp4/zdf/18/06/180612_sendung_h19/2/180612_sendung_h19_476k_p9v14.mp4
+  URL <- paste_ZDF(date,paste0("_sendung_", sendung), video = "_476k_p9v14.mp4")
+  if(!httr::http_error(URL)) {
+    return(URL)
+  }
+
   #' URL-Muster von 25.10.2017
   #' https://rodlzdf-a.akamaihd.net/none/zdf/17/10/171028_sendung_19/2/171028_sendung_19_2328k_p35v13.mp4
   URL <- paste_ZDF(date,paste0("_sendung_", sendung))
