@@ -1,4 +1,4 @@
-# heuteZensiert
+# heuteZensiert (Landing-Page Website. #TODO Switch Github-Pages Mode to docs/ folder!)
 
 ## Hintergrund
 
