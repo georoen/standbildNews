@@ -1,19 +1,7 @@
 #' Download Stream
 
 
-# Nachrichtensendung herunterladen
-## Stream in Tempdir speichern
-Temp <- ifelse(!dev,  # dev = TRUE um Frames zu archivieren
-       paste0(tempdir(), "/", format(date, "%y%m%d"), "_", sendung, "/"),  # Tmp
-       paste0(wd, "/archiv/", format(date, "%y%m%d"), sendung, "/"))  # Archive Mode
-
-if(dir.exists(Temp))
-  stop("Directory exists. Avoid Dublicates")
-dir.create(Temp)
-TempImg <- paste0(Temp, "img%03d.jpg")
-
-
-## Paste0 URL
+#### URL Generieren ####
 # ARD
 #' tagesschau 20Uhr
 #' 23.4.17: http://download.media.tagesschau.de/video/2017/0423/TV-20170423-2033-4601.h264.mp4
@@ -117,6 +105,7 @@ compose_URL <- function(date, sendung, mode) {
     # ARD
     URL <- (compose_URL.ard(date, sendung))
   }
+  print(URL)  # Print URL to console - verbosity
   
   # Test it
   if(!is.null(URL) && !httr::http_error(URL)) {
@@ -126,24 +115,37 @@ compose_URL <- function(date, sendung, mode) {
   ifelse(dev, NA, stop ("Kann die gesuchte Sendung zu diesem Datum nicht finden!"))
 }
 
-
-
-## Download. Dauert ein paar Minuten...
 URL <- compose_URL(date, sendung)  # 28.10.2017
-(cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
-nokay <- try(system(cmd))
 
+#### Temp Directory für Frames ####
+## Stream in Tempdir speichern
+Temp <- ifelse(!dev,  # dev = TRUE um Frames zu archivieren
+               paste0(tempdir(), "/", format(date, "%y%m%d"), "_", sendung, "/"),  # Tmp
+               paste0(wd, "/archiv/", format(date, "%y%m%d"), sendung, "/"))  # Archive Mode
 
-if(nokay){
-  # Download hat immer noch nicht geklappt... Breche ab!
-  msg <- c(header(sendung, date))
-  (msg <- c(msg, "konnte nicht geladen werden."))
-  #unlink(Temp, recursive = TRUE)
-  # Twittern
-  mediaPath <- NULL
-  #source("extra/tweet.R")
-  # Stop
-  stop(paste("Streamfehler in", URL))
-}
+if(dir.exists(Temp)){
+  message("Directory exists. Skipping Download")
 
+} else {
+  ## New Folder
+  dir.create(Temp)
+  TempImg <- paste0(Temp, "img%03d.jpg")
+  
+  #### Download ####
+  (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
+  nokay <- try(system(cmd))
+  
+  
+  if(nokay){
+    # Download hat immer noch nicht geklappt... Breche ab!
+    msg <- c(header(sendung, date))
+    (msg <- c(msg, "konnte nicht geladen werden."))
+    #unlink(Temp, recursive = TRUE)
+    # Twittern
+    mediaPath <- NULL
+    #source("extra/tweet.R")
+    # Stop
+    stop(paste("Streamfehler in", URL))
+  }
+}   
 

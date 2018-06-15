@@ -106,33 +106,25 @@ source2 <- function(file, ...) {
 # args <- list(sen = "h19", date = format(Sys.Date(), "%Y%m%d"))
 args <- commandArgs(trailingOnly=TRUE)
 if (length(args)==0) {
-  ### Keine Argumente. Run Defaults = 19Uhr von date( <HEUTE> )
+  ### Keine Argumente. Default ist h19 von heute.
   warning("Keine Argumente. Verwende default", call.=FALSE)
   # sendung <- "t20"
   sendung <- "h19"
-  date <- Sys.Date()
-  dateshift <- 0
-  
-  # Wenn es heute noch vor 19 Uhr ist, wird der gestrige Tag angenommen, da 
-  # heutiges Video noch nicht online. 
-  if (lubridate::hour(Sys.time()) < 19){
-    date <- date - 1
-  }
+  Sys.Date() - (dateshift <- 0) # Heute
   
 } else if (length(args)==1) {
   ### Sendung angegeben. Datum fehlt
   sendung <- args[1]
-  date <- Sys.Date()  # Heute
-  dateshift <- 0
+  Sys.Date() - (dateshift <- 0) # Heute
   
   # Wenn es heute noch vor 19 (20, 23) Uhr ist, wird der gestrige Tag angenommen, da 
   # heutiges Video noch nicht online.
-  zeitDerSendung <- switch(sendung, 
+  zeitDerAustrahlung <- switch(sendung, 
                            h19 = 19, 
                            t20 = 20, 
                            hjo = 23, 
                            tth = 22)
-  if (lubridate::hour(Sys.time()) < zeitDerSendung){
+  if (lubridate::hour(Sys.time()) < zeitDerAustrahlung){
     date <- date - 1
   }
 
@@ -140,7 +132,7 @@ if (length(args)==0) {
   ### Sendung und Datum angegenen
   sendung <- args[1]
   dateshift <- as.numeric(unlist(args[2]))
-  date <- Sys.Date()-dateshift
+  date <- Sys.Date() - dateshift
   if(is.na(date)){
     stop("Argument 2 ist keine Zahl und kann nicht vom Datum abgezogen werden.")
   }
@@ -163,7 +155,7 @@ if(!dev){
 #### Download ####
 source2("download.R", chdir = TRUE)
 
-#### Texterkennung ####
+#### Frames Prozessieren ####
 # source2("mth_Classic.R")
 # source2("mth_OCR.R", chdir = TRUE)
 source2("mth_imageAlgebra.R", chdir = TRUE)
