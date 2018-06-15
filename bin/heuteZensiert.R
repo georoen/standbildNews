@@ -110,12 +110,12 @@ if (length(args)==0) {
   warning("Keine Argumente. Verwende default", call.=FALSE)
   # sendung <- "t20"
   sendung <- "h19"
-  Sys.Date() - (dateshift <- 0) # Heute
+  date <- Sys.Date() - (dateshift <- 0) # Heute
   
 } else if (length(args)==1) {
   ### Sendung angegeben. Datum fehlt
   sendung <- args[1]
-  Sys.Date() - (dateshift <- 0) # Heute
+  date <- Sys.Date() - (dateshift <- 0) # Heute
   
   # Wenn es heute noch vor 19 (20, 23) Uhr ist, wird der gestrige Tag angenommen, da 
   # heutiges Video noch nicht online.
