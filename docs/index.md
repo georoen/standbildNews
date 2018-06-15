@@ -1,4 +1,4 @@
-# heuteZensiert (Landing-Page Website. #TODO Switch Github-Pages Mode to docs/ folder!)
+# standbildNews (Landing-Page Website. #TODO Switch Github-Pages Mode to docs/ folder!)
 
 ## Hintergrund
 
@@ -15,14 +15,14 @@ Dieses Projekt beschäftigt sich im Speziellen mit den abendlichen Nachrichtense
 
 Die von der Zensur betroffenen Themenbereiche sind zumeist der Sportteil, aber auch andere Abschnitte können betroffen sein. Welche Inhalte online verfügbar sind und welche nicht, ist für den Endnutzer nicht nachvollziehbar. Es ist anzunehmen, dass es die von Dritten angekaufen Videosequenzen sind. Doch eigentlich müssten die Sender, wenn sie den neuen Rundfunkbeitrag verwenden, sich bei Verträgen mit Dritten für alle Beitragszahler gleichmäßig einsetzen. Ausstrahlungsverträge einzelner Inhalte, welche lediglich die TV-Ausstrahlung zulassen, dürften nicht abgeschlossen werden.
 
-## Ziel von heuteZensiert
+## Ziel von standbildNews
 
 Das Ziel des Projektes ist eine strukturierte, standardisierte und transparente Auswertung von bürgerfinanzierten Medieninhalten. So soll datengetriebene Kritik an öffentlich-rechtlichen Rundfunkanstalten geübt und eine Diskussionsgrundlage geschaffen werden, um die Medienlanschaft in Deutschland zu reformieren. 
 
 **TV und Online - wir zahlen das Gleiche, wir wollen das Gleiche sehen.**
 
-# heuteStatistik
-Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *ZDF heute 19 Uhr*, *ZDF heute Journal* und *ARD Tagesschau* automatisch online gestreamt. Ein *R* Programm erkennt dann mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die blockierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/heuteZensiert) das Ergebnis. *Digital natives* können diesem followen, um sich vorab informieren zu lassen, welche Nachrichtensendung vollständig ist und sie gerne sehen möchten. 
+# standbildStatistik
+Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *ZDF heute 19 Uhr*, *ZDF heute Journal* und *ARD Tagesschau* automatisch online gestreamt. Ein *R* Programm erkennt dann mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die blockierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/standbildNews) das Ergebnis. *Digital natives* können diesem followen, um sich vorab informieren zu lassen, welche Nachrichtensendung vollständig ist und sie gerne sehen möchten. 
 
 Die so erhoben Daten werden abschließend in einer [Tabelle](Logfile.csv) gespeichert. Das nachfolgende Widget ([Shiny-App](https://jeremybz.shinyapps.io/heuteZensiert/)) greift diese auf, um die Ausstrahlungspraxis zu analysieren:
 

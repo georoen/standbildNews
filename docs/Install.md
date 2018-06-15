@@ -8,9 +8,9 @@ Zunächst müssen folgende Dependencies / Packages installiert werden:
 **R:** `install.packages(c("jpeg", "rvest", "ggplot2", "tibble", "lubridate", "stringr", "magick", "tesseract", "twitteR"), repos = "https://cran.rstudio.com")`
 
 
-## heuteZensiert herunterladen & ausprobieren
+## standbildNews herunterladen & ausprobieren
 Dann kannst du das Repository klonen  
-**Linux:** `git clone git@github.com:georoen/heuteZensiert.git`
+**Linux:** `git clone git@github.com:georoen/standbildNews.git`
 
 und bspw. die *heute 19Uhr* Nachrichten prozessieren:  
 `Rscript --vanilla bin/heuteZensiert.R h19`
@@ -19,10 +19,10 @@ und bspw. die *heute 19Uhr* Nachrichten prozessieren:
 ## Zeitschaltung
 Anschließend werden mit [`CRONTAB`](https://wiki.ubuntuusers.de/Cron/) täglich alle vier Nachrichten-Sendungen prozessiert.
 ```
-0 20 * * * cd ~/heuteZensiert/ && nohup Rscript --vanilla bin/heuteZensiert.R h19 &
-0 21 * * * cd ~/heuteZensiert/ && nohup Rscript --vanilla bin/heuteZensiert.R t20 &
-0 22 * * *  cd ~/heuteZensiert/ && nohup Rscript --vanilla bin/heuteZensiert.R tth &
-0 23 * * *  cd ~/heuteZensiert/ && nohup Rscript --vanilla bin/heuteZensiert.R hjo &
+0 20 * * * cd ~/standbildNews/ && nohup Rscript --vanilla bin/heuteZensiert.R h19 &
+0 21 * * * cd ~/standbildNews/ && nohup Rscript --vanilla bin/heuteZensiert.R t20 &
+0 22 * * *  cd ~/standbildNews/ && nohup Rscript --vanilla bin/heuteZensiert.R tth &
+0 23 * * *  cd ~/standbildNews/ && nohup Rscript --vanilla bin/heuteZensiert.R hjo &
 ```
 
 Voilà - Wilkommen im Team!
