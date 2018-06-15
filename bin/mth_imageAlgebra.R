@@ -9,10 +9,11 @@ if(sendung %in% c("h19", "hjo")){
 }
 
 # list all downloaded frames
-fls <- list.files(Temp, pattern = ".jpg$", full.names = TRUE)
+# fls <- list.files(Temp, pattern = ".jpg$", full.names = TRUE)
+img <- list.files(Temp , pattern =  ".jpg$", full.names = TRUE, recursive = TRUE)  # mth_OCR.R:39
 
 # calculate array difference between reference and all frames
-diffs <- sapply(fls, function(x, y = frameIMG){
+diffs <- sapply(img, function(x, y = frameIMG){
   diff <- readJPEG(x) - y
   return(mean(abs(diff)))
 })
@@ -20,7 +21,7 @@ diffs <- sapply(fls, function(x, y = frameIMG){
 
 # identify freeze frames
 censored <- diffs < 0.05
-absoluteDauer <- dminutes(length(fls)*res/60)
+absoluteDauer <- dminutes(length(img)*res/60)
 prozentZensiert <- length(censored[which(censored)])/length(censored)
 absolutZensiert <- absoluteDauer * prozentZensiert
 prozentZensiert <- paste0(round(prozentZensiert, 3) * 100, "%")  # Pastable String
