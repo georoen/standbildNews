@@ -114,7 +114,7 @@ compose_URL.zdf <- function(date, sendung) {
 }
 
 
-compose_URL <- function(date, sendung, mode) {
+compose_URL <- function(date, sendung) {
   # Get URL
   if(sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo")){
     # ZDF

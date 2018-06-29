@@ -15,17 +15,6 @@
 #' Rscript --vanilla bin/heuteZensiert.R hjo 1  # von vor einem Tag
 #' Rscript --vanilla bin/heuteZensiert.R h19 `date +%Y%m%d`
 #'
-#' Variablen Lookup Tabelle:
-#' | Variable | Erstellt in Skript | Beschreibung des Inhaltes                 | 
-#' |:-------- |:------------------ |:----------------------------------------- |
-#' | date     | heuteZensiert.R    | Datum der Ausgestrahlten Sendung          |
-#' | dev      | heuteZensiert.R    | Entwicklungsmodus (TRUE/FALSE)            |
-#' | s.name   | heuteZensiert.R    | Name der Sendung, Verwendung für Plot     |
-#' | start    | heutezensiert.R    | Startzeit des Skriptes                    |
-#' |  |  |  |
-#' |  |  |  |
-#' |  |  |  |
-#' 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #                                Preamble                                      #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -158,7 +147,7 @@ source2("download.R", chdir = TRUE)
 #### Frames Prozessieren ####
 # source2("mth_Classic.R")
 # source2("mth_OCR.R", chdir = TRUE)
-source2("mth_imageAlgebra.R", chdir = TRUE)
+source2("mth_imageAlgebra.R")
 
 # Lösche Bilder wenn nicht im Entwicklungsmodus
 if(!dev){ 
