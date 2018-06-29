@@ -3,9 +3,9 @@ library(jpeg)
 # select corresponding reference frame
 # TODO check if tagesthemen and heute journal need separate frames
 if(sendung %in% c("h19", "hjo")){
-  frameIMG <- readJPEG("../extra/zdf_frame.jpg")
+  frameIMG <- readJPEG("extra/zdf_frame.jpg")
 } else {
-  frameIMG <- readJPEG("../extra/ard_frame.jpg")
+  frameIMG <- readJPEG("extra/ard_frame.jpg")
 }
 
 # list all downloaded frames
