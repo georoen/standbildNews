@@ -7,7 +7,7 @@ library(DT)
 Sys.setlocale(category = "LC_ALL", locale = "German")
 
 # Load data
-logdata <- read_csv("https://georoen.github.io/heuteZensiert/Logfile.csv") %>% 
+logdata <- read_csv("https://georoen.github.io/standbildNews/Logfile.csv") %>% 
   select(date:prozent) %>% 
   transmute(date = as.Date(date),
             sender = factor(ifelse(grepl("^h", sendung), "ZDF", "ARD")),
