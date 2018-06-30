@@ -36,3 +36,46 @@ rss <- read_html(url)
 str(rss)
 rss %>% 
   html_node()
+
+
+
+
+
+
+
+
+#### Offizielle MVW API ####
+addr <- "https://mediathekviewweb.de/api/query?"
+body <- list(queries = list(list(fields = c("title", "topic"), query = "Tagesschau"),
+                            list(fields = "channel", query = "ard")),
+             sortBy = "timestamp",
+             sortOrder = "desc",
+             future = FALSE,
+             offset = 0,
+             size = 10)
+jsonlite::toJSON(body)
+out <- httr::POST(addr, data = jsonlite::toJSON(body))
+#, auto_unbox = TRUE)
+out
+
+
+
+
+#### DEV API ####
+# https://testing.mediathekviewweb.de/dev
+{
+  "body": {
+    "range": {
+      "field": "timestamp",
+      "lte": "now/m"
+    }
+  },
+  "sort": [
+    {
+      "field": "timestamp",
+      "order": "descending"
+    }
+    ],
+  "skip": 0,
+  "limit": 10
+}
