@@ -31,7 +31,7 @@ if (dev){
 
 #### Parameter ####
 ## Default
-res <- 3  # Framerate in Sekunden
+res <- 1  # Framerate in Sekunden
 wd <- getwd()  # Helps sourcing code in bin/ 
 Logfile <- file.path(wd, "Logfile.csv")  # Logfile
 
