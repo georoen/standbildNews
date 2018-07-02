@@ -939,10 +939,8 @@ date,sendung,prozent,frames,res,url
 2018-06-29,t20,0%,335FNANA,1/3,http://media.tagesschau.de/video/2018/0629/TV-20180629-2052-1001.h264.mp4
 2018-06-29,tth,0%,332FNANA,1/3,http://media.tagesschau.de/video/2018/0629/TV-20180629-2211-0401.h264.mp4
 2018-06-29,hjo,0%,705FNANA,1/3,https://downloadzdf-a.akamaihd.net/mp4/zdf/18/06/180629_sendung_hjo/1/180629_sendung_hjo_776k_p11v14.mp4
-<<<<<<< HEAD
-2018-06-30,h19,8.8%,7F3T,1/3,https://downloadzdf-a.akamaihd.net/mp4/zdf/18/06/180630_sendung_h19/2/180630_sendung_h19_776k_p11v14.mp4
-=======
 2018-06-30,h19,8.8%,7F3T,1/3,https://downloadzdf-a.akamaihd.net/mp4/zdf/18/06/180630_sendung_h19/1/180630_sendung_h19_776k_p11v14.mp4
->>>>>>> 0334c92df60ff1d66b12620f5330eaed418ac5b9
 2018-06-30,t20,9.4%,253F29T,1/3,http://media.tagesschau.de/video/2018/0630/TV-20180630-2026-3001.h264.mp4
 2018-06-30,tth,16.4%,288F35T,1/3,http://media.tagesschau.de/video/2018/0630/TV-20180630-2335-1301.h264.mp4
+2018-06-30,hjo,0%,323FNANA,1/3,https://downloadzdf-a.akamaihd.net/mp4/zdf/18/06/180630_sendung_hjo/1/180630_sendung_hjo_776k_p11v14.mp4
+2018-07-01,h19,0%,193FNANA,1/3,https://downloadzdf-a.akamaihd.net/mp4/zdf/18/07/180701_sendung_h19/1/180701_sendung_h19_776k_p11v14.mp4
