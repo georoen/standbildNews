@@ -17,7 +17,12 @@ diffs <- sapply(img, function(x, y = frameIMG){
   diff <- readJPEG(x) - y
   return(mean(abs(diff)))
 })
+# q90 <- sapply(img, function(x, y = frameIMG){
+#   diff <- readJPEG(x) - y
+#   return(quantile(abs(diff), 0.9))
+# })
 # hist(diffs)
+# hist(q90)
 
 # identify freeze frames
 censored <- diffs < 0.05
