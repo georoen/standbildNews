@@ -147,7 +147,7 @@ if(dir.exists(Temp)){
 } else {
   ## New Folder
   dir.create(Temp)
-  TempImg <- paste0(Temp, "img%03d.jpg")
+  TempImg <- paste0(Temp, "img%04d.jpg")
   
   #### Download ####
   (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
