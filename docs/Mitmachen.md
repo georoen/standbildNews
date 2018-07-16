@@ -5,4 +5,4 @@ Auch von der Software-Seite zeigen sich weitere Potentiale der Analyse. So ließ
 
 ![newTarget](./extra/optional_Target.jpg)
 
-Möchtest du einen eigen Knoten betreiben und zur dezentralen Erfassung beitragen? Wie du das Projekt (auf einm eigen RaspberryPi) installierst findst du [hier](./Install.md).
+Möchtest du einen eigen Knoten betreiben und zur dezentralen Erfassung beitragen? Wie du das Projekt (auf einm eigen RaspberryPi) installierst findst du [hier](../README.md).
