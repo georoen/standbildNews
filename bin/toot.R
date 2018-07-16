@@ -16,8 +16,8 @@
 source(paste0(wd, "/extra/mastodon_credentials.R"))
 ## Modify Tweet
 # #Hashtags
-msg <- gsub("ARD", "#ARD", msg)
-msg <- gsub("ZDF", "#ZDF", msg)
+# msg <- gsub("ARD", "#ARD", msg)
+# msg <- gsub("ZDF", "#ZDF", msg)
 
 ## Toot!
 if(!dev){
