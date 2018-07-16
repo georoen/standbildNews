@@ -21,5 +21,9 @@ msg <- gsub("ZDF", "#ZDF", msg)
 
 ## Toot!
 if(!dev){
-  dump <- post_media(token, status = msg, file = mediaPath)
+  if(!TRUE %in% censored){
+    dump <- post_status(token, msg)
+  } else {
+    dump <- post_media(token, msg, file = mediaPath)
+  }
 }
