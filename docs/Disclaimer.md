@@ -1,5 +1,5 @@
-# heuteDisclaimer
-Die Entwickler von **heuteZensiert** sind sich bewusst, dass die Methodik in diesem Projekt einige designbedingte Annahmen trifft. Grund dafür sind technische Herausforderungen. Es wird ausdrücklich darauf hingewiesen, dass alle Statistiken und Aussagen die aus der quelloffenen Methodik entstehen, stets in Relation zur technischen Entstehung zu sehen sind. Einige wichtige Annahmen sind: 
+# standbildDisclaimer
+Die Entwickler von **standbildNews** sind sich bewusst, dass die Methodik in diesem Projekt einige designbedingte Annahmen trifft. Grund dafür sind technische Herausforderungen. Es wird ausdrücklich darauf hingewiesen, dass alle Statistiken und Aussagen die aus der quelloffenen Methodik entstehen, stets in Relation zur technischen Entstehung zu sehen sind. Einige wichtige Annahmen sind: 
 
  - Für die Analyse werden stets die offiziellen Online-Videoquellen (Mediatheken) der öffentlich-rechtlichen Rundfunkanstalten (ARD, ZDF) herangezogen. Externe Einflussnahme auf diese Quellen wird nicht geprüft!
  - Als Anfang / Ende der Nachrichtensendung wird der Beginn / das Ende des zum Download stehenden Videos angenommen. Eventuelle Vorspann- oder Abspann-Sequenzen werden somit zum Video gezählt und können die Statistik beeinflussen. 
