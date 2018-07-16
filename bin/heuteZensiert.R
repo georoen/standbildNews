@@ -33,7 +33,7 @@ if (dev){
 res <- 1  # Framerate in Sekunden
 wd <- getwd()  # Helps sourcing code in bin/ 
 source(paste0(wd, "/extra/mastodon_credentials.R"))
-dump <- post_media(token, status = "test", file = mediaPath)
+dump <- post_status(token, status = "@standBildNews sind jetzt auch auf Mastodon vertreten!! #rstats #öffentlichRechtlicherRundfunk")
 Logfile <- file.path(wd, "Logfile.csv")  # Logfile
 
 # Entfernen von bestehendem nohup Output
