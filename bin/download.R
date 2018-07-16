@@ -71,10 +71,13 @@ compose_URL.zdf <- function(date, sendung) {
            sendung, video)
   }
   
-
   #' URL-Muster von 14.6.2018  #TODO: Achtung, hier fehlt noch ein entsprechendes frameIMG, da WM Eröffnungsspiel gezeigt wurde :-)
   #' https://downloadzdf-a.akamaihd.net/mp4/zdf/18/06/180614_sendung_h19/2/180614_sendung_h19_776k_p11v14.mp4
   URL <- paste_ZDF(date,paste0("_sendung_", sendung), video = "_776k_p11v14.mp4")
+  if(!httr::http_error(URL)) {
+    return(URL)
+  }
+  URL <- paste_ZDF(date,paste0("_sendung_", sendung), seed = "/1/", video = "_776k_p11v14.mp4")
   if(!httr::http_error(URL)) {
     return(URL)
   }
@@ -111,7 +114,7 @@ compose_URL.zdf <- function(date, sendung) {
 }
 
 
-compose_URL <- function(date, sendung, mode) {
+compose_URL <- function(date, sendung) {
   # Get URL
   if(sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo")){
     # ZDF
@@ -144,7 +147,7 @@ if(dir.exists(Temp)){
 } else {
   ## New Folder
   dir.create(Temp)
-  TempImg <- paste0(Temp, "img%03d.jpg")
+  TempImg <- paste0(Temp, "img%04d.jpg")
   
   #### Download ####
   (cmd <- paste("ffmpeg -i", URL, "-vf", paste0("fps=1/",res), TempImg))
