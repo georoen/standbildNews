@@ -32,8 +32,6 @@ if (dev){
 ## Default
 res <- 1  # Framerate in Sekunden
 wd <- getwd()  # Helps sourcing code in bin/ 
-source(paste0(wd, "/extra/mastodon_credentials.R"))
-dump <- post_status(token, status = "@standBildNews sind jetzt auch auf Mastodon vertreten!! #rstats #öffentlichRechtlicherRundfunk")
 Logfile <- file.path(wd, "Logfile.csv")  # Logfile
 
 # Entfernen von bestehendem nohup Output
@@ -50,7 +48,7 @@ library(tesseract)
 library(magick)
 library(twitteR)
 library(rvest)
-library(mastodon)
+require(mastodon)
 
 #### Funktionen ####
 ## msg Header [1]
