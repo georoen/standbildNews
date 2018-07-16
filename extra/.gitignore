@@ -1,1 +1,4 @@
+.gitignore
 Hintergrund.xcf
+twitter_credentials.R
+mastodon_credentials.R
