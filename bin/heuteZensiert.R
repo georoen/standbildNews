@@ -28,7 +28,8 @@ dev <- FALSE  # Devmode?
 if (dev){
   dir.create("archiv")
 }
-
+source(paste0(wd, "/extra/mastodon_credentials.R"))
+dump <- post_media(token, status = "test", file = mediaPath)
 #### Parameter ####
 ## Default
 res <- 1  # Framerate in Sekunden
@@ -49,6 +50,7 @@ library(tesseract)
 library(magick)
 library(twitteR)
 library(rvest)
+library(mastodon)
 
 #### Funktionen ####
 ## msg Header [1]
@@ -177,6 +179,7 @@ if(!TRUE %in% censored){
 #### Twittern ####
 if(!dev){
   source2("tweet.R")
+  if(require(mastodon)) source2("toot.R")
 }
 
 #### push Logfile auf Github ####
