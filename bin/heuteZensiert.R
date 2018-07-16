@@ -28,12 +28,12 @@ dev <- FALSE  # Devmode?
 if (dev){
   dir.create("archiv")
 }
-source(paste0(wd, "/extra/mastodon_credentials.R"))
-dump <- post_media(token, status = "test", file = mediaPath)
 #### Parameter ####
 ## Default
 res <- 1  # Framerate in Sekunden
 wd <- getwd()  # Helps sourcing code in bin/ 
+source(paste0(wd, "/extra/mastodon_credentials.R"))
+dump <- post_media(token, status = "test", file = mediaPath)
 Logfile <- file.path(wd, "Logfile.csv")  # Logfile
 
 # Entfernen von bestehendem nohup Output
