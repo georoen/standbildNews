@@ -23,7 +23,7 @@ Das Ziel des Projektes ist eine strukturierte, standardisierte und transparente 
 # heuteErgebnisse
 Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *ZDF heute 19 Uhr*, *ZDF heute Journal* und *ARD Tagesschau* automatisch online gestreamt. Ein *R* Programm erkennt dann mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die blockierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/standbildNews) das Ergebnis. *Digital natives* können diesem followen, um sich vorab informieren zu lassen, welche Nachrichtensendung vollständig ist und sie gerne sehen möchten. 
 
-Die so erhoben Daten werden abschließend in einer [Tabelle](../Logfile.csv) gespeichert. Das nachfolgende Widget ([Shiny-App](https://jeremybz.shinyapps.io/heuteZensiert/)) greift diese auf, um die Ausstrahlungspraxis zu analysieren:
+Die so erhoben Daten werden abschließend in einer [Tabelle](https://raw.githubusercontent.com/georoen/standbildNews/master/Logfile.csv) gespeichert. Das nachfolgende Widget ([Shiny-App](https://jeremybz.shinyapps.io/heuteZensiert/)) greift diese auf, um die Ausstrahlungspraxis zu analysieren:
 
 <iframe src="https://heutezensiert.shinyapps.io/heuteZensiert/" style='width: 1px;min-width: 100%;height: 500px' frameborder="0"></iframe>  
 
