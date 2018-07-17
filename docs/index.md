@@ -8,7 +8,7 @@ Seit der Einführung des neuen Rundfunkbeitrags am 1.1.2013, ehemals GEZ, zahlen
 
 Doch dies trifft nicht auf die gesamten Inhalte zu. Allzuhäufig sind im Online-Angebot der öffentlich-rechtlichen Rundfunkanstalten Banner zu sehen, welche darauf hinweisen, dass bestimmte Inhalte nicht im Internet gezeigt werden können. So lautet die Information auf dem Standbild der Tagesschau
 
-![Kurze Unterbrechung - Diese Bilder dürfen aus rechtlichen Gründen nicht im Internet gezeigt werden](extra/Twitter.png)
+![Kurze Unterbrechung - Diese Bilder dürfen aus rechtlichen Gründen nicht im Internet gezeigt werden](../extra/Twitter.png)
 
 Dieses Projekt beschäftigt sich im Speziellen mit den abendlichen Nachrichtensendungen von ARD und ZDF.
 
@@ -21,9 +21,9 @@ Das Ziel des Projektes ist eine strukturierte, standardisierte und transparente 
 
 
 # heuteErgebnisse
-Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *ZDF heute 19 Uhr*, *ZDF heute Journal* und *ARD Tagesschau* automatisch online gestreamt. Ein *R* Programm erkennt dann mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die blockierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/heuteZensiert) das Ergebnis. *Digital natives* können diesem followen, um sich vorab informieren zu lassen, welche Nachrichtensendung vollständig ist und sie gerne sehen möchten. 
+Um den genauen Anteil der nicht ausgestrahlen Nachrichtensendungen zu erfassen, werden *ZDF heute 19 Uhr*, *ZDF heute Journal* und *ARD Tagesschau* automatisch online gestreamt. Ein *R* Programm erkennt dann mithilfe von [Texterkennungssoftware](https://github.com/ropensci/tesseract) die blockierten Frames. Anschließend veröffentlicht dieser [Twitter-Bot](https://twitter.com/standbildNews) das Ergebnis. *Digital natives* können diesem followen, um sich vorab informieren zu lassen, welche Nachrichtensendung vollständig ist und sie gerne sehen möchten. 
 
-Die so erhoben Daten werden abschließend in einer [Tabelle](Logfile.csv) gespeichert. Das nachfolgende Widget ([Shiny-App](https://jeremybz.shinyapps.io/heuteZensiert/)) greift diese auf, um die Ausstrahlungspraxis zu analysieren:
+Die so erhoben Daten werden abschließend in einer [Tabelle](../Logfile.csv) gespeichert. Das nachfolgende Widget ([Shiny-App](https://jeremybz.shinyapps.io/heuteZensiert/)) greift diese auf, um die Ausstrahlungspraxis zu analysieren:
 
 <iframe src="https://heutezensiert.shinyapps.io/heuteZensiert/" style='width: 1px;min-width: 100%;height: 500px' frameborder="0"></iframe>  
 
@@ -33,4 +33,4 @@ Digital-Natives sind besonders betroffen und im Vergleich zu konventionellen Nut
 
 ---
 
-> [Mitmachen](../Mitmachen.md) | [Disclaimer](Disclaimer.md)
+> [Mitmachen](Mitmachen.md) | [Disclaimer](Disclaimer.md)
