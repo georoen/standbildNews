@@ -8,7 +8,7 @@ Seit der Einführung des neuen Rundfunkbeitrags am 1.1.2013, ehemals GEZ, zahlen
 
 Doch dies trifft nicht auf die gesamten Inhalte zu. Allzuhäufig sind im Online-Angebot der öffentlich-rechtlichen Rundfunkanstalten Banner zu sehen, welche darauf hinweisen, dass bestimmte Inhalte nicht im Internet gezeigt werden können. So lautet die Information auf dem Standbild der Tagesschau
 
-![Kurze Unterbrechung - Diese Bilder dürfen aus rechtlichen Gründen nicht im Internet gezeigt werden](../extra/Twitter.png)
+![Kurze Unterbrechung - Diese Bilder dürfen aus rechtlichen Gründen nicht im Internet gezeigt werden](Banner.png)
 
 Dieses Projekt beschäftigt sich im Speziellen mit den abendlichen Nachrichtensendungen von ARD und ZDF.
 
