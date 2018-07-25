@@ -1045,5 +1045,9 @@ date,sendung,prozent,frames,res,url
 2018-07-24,h19,6.9%,1109F21T,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/18/07/180724_sendung_h19/1/180724_sendung_h19_776k_p11v14.mp4
 2018-07-24,t20,3.5%,801F32T,1/1,http://media.tagesschau.de/video/2018/0724/TV-20180724-2028-5601.h264.mp4
 2018-07-24,hjo,0%,1759FNANA,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/18/07/180724_sendung_hjo/1/180724_sendung_hjo_776k_p11v14.mp4
+<<<<<<< HEAD
 2018-07-24,hjo,0%,1759FNANA,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/18/07/180724_sendung_hjo/1/180724_sendung_hjo_776k_p11v14.mp4
+=======
+>>>>>>> 9c44f328407ef89a66c5d7ad723d1421ed4ce337
 2018-07-24,tth,1.7%,1430F32T,1/1,http://media.tagesschau.de/video/2018/0724/TV-20180724-2300-4601.h264.mp4
+2018-07-25,h19,4.2%,1048F54T,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/18/07/180725_sendung_h19/1/180725_sendung_h19_776k_p11v14.mp4
