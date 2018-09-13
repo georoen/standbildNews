@@ -20,7 +20,7 @@ source(paste0(wd, "/extra/mastodon_credentials.R"))
 # msg <- gsub("ZDF", "#ZDF", msg)
 
 ## Toot!
-if(!dev){
+if(!dev.offline){
   if(!TRUE %in% censored){
     dump <- post_status(token, msg)
   } else {

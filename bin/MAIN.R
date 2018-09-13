@@ -12,21 +12,27 @@
 #' Contribution welcome. Helfe mit :-)
 #'
 #' Usage:
-#' Rscript --vanilla bin/heuteZensiert.R hjo 1  # von vor einem Tag
-#' Rscript --vanilla bin/heuteZensiert.R h19 `date +%Y%m%d`
+#' Rscript --vanilla bin/MAIN.R hjo 1  # von vor einem Tag
+#' Rscript --vanilla bin/MAIN.R h19 `date +%Y%m%d`
 #'
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #                                Preamble                                      #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #### Entwicklungsmodus ####
-#' Im Entwicklungsmodus werden die extrahierten Bilder aus dem Sendungsstream
-#' nicht gelöscht. Zusätzlich wird das errechnete Ergebnis nicht getwittert. 
-#' Der Entwicklungsmodus wird aktiviert indem die Variable `dev` auf TRUE 
-#' gesetzt wird. 
-dev <- FALSE  # Devmode?
+#' Im Normalbetrieb stehen alle `dev.` Parameter auf `FALSE`. Mit dem
+#' Entwicklungsmodus lassen sich gezielt Optionen steuern. Um z.B. die Methode
+#' zu entwickeln, werden mit `dev.archive <- TRUE` die aufgezeichneten Frames
+#' aus dem Sendungsstream nicht unmittelbar gelöscht. Ebenso optinal lässt sich
+#' mit `dev.offline <- TRUE` die Verbinungen zu GitHub, Twitter und Mastodon
+#' kappen. Achtung! Es kommt schnell mal zu einem Mergekonflikt wegen der
+#' Logfile.csv.
 
-if (dev){
-  dir.create("archiv")
+# Devmode
+dev.offline <- FALSE  # Offline Mode? Achtung! Schnell mal Mergekonflikt mit Logfile.csv, etc...
+dev.archive <- FALSE  # Archive Frames? Schont die Bandbreite ;-)
+
+if (dev.archive){
+  dir.create("archive")
 }
 #### Parameter ####
 ## Default
@@ -109,14 +115,14 @@ if (length(args)==0) {
   # Wenn es heute noch vor 19 (20, 23) Uhr ist, wird der gestrige Tag angenommen, da 
   # heutiges Video noch nicht online.
   zeitDerAustrahlung <- switch(sendung, 
-                           h19 = 19, 
-                           t20 = 20, 
-                           hjo = 23, 
-                           tth = 22)
+                               h19 = 19, 
+                               t20 = 20, 
+                               hjo = 23, 
+                               tth = 22)
   if (lubridate::hour(Sys.time()) < zeitDerAustrahlung){
     date <- date - 1
   }
-
+  
 } else if (length(args)==2){
   ### Sendung und Datum angegenen
   sendung <- args[1]
@@ -137,7 +143,7 @@ if(!sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo", "t20", "tth")){
 #                               Processing                                     #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #### Pull aktuelles Repo vom github ####
-if(!dev){ 
+if(!dev.offline){ 
   source2("git_pull.R")
 }
 
@@ -150,7 +156,7 @@ source2("download.R", chdir = TRUE)
 source2("mth_imageAlgebra.R")
 
 # Lösche Bilder wenn nicht im Entwicklungsmodus
-if(!dev){ 
+if(!dev.archive){ 
   unlink(Temp, recursive = TRUE)
 } 
 
@@ -160,7 +166,7 @@ if(!TRUE %in% censored){
   # Gesamte Sendung online verfügbar
   (msg <- paste(c(header(sendung, date)), "vollständig online."))
   mediaPath <- NULL
-
+  
 }else{  # Unvollständig. Teile der Nachrichtensendung fehlen
   lubridate2string <- function(x){
     gsub("M ", " Minuten ",
@@ -175,13 +181,13 @@ if(!TRUE %in% censored){
 } 
 
 #### Twittern ####
-if(!dev){
+if(!dev.offline){
   source2("tweet.R")
   if(require(mastodon)) source2("toot.R")
 }
 
 #### push Logfile auf Github ####
-if(!dev){
+if(!dev.offline){
   source2("git_push.R")
 }
 

@@ -27,5 +27,5 @@ msg <- gsub("ZDF", "#ZDF", msg)
 # (msg <- paste(msg, collapse = "\n"))
 
 ## Tweet 🚀
-if(!dev)
+if(!dev.offline)
   tweet(msg, mediaPath = mediaPath)
