@@ -1,6 +1,7 @@
 library(dplyr)
 library(lubridate)
 library(ggplot2)
+library(ggjoy)
 
 x <- read.csv("Logfile.csv", stringsAsFactors = FALSE)
 x$date <- as.Date(x$date)
@@ -19,28 +20,29 @@ x1 <- x %>% filter(date >= date_all) %>%
          sender = ifelse(grepl("ZDF", sendung), "ZDF", "ARD"), 
          frames = gsub("NANA", "0T", frames), 
          censored_frames = as.numeric(gsub("^[[:digit:]]*F|T", "", frames)), 
-         censored_secs = res_sec * censored_frames)
+         censored_secs = res_sec * censored_frames, 
+         sendung = ordered(sendung, c("ZDF Heute 19 Uhr", "ZDF Heute Journal","ARD Tagesschau", "ARD Tagesthemen")))
 
 x1
-
-gsub("^[[:digit:]]*F|T", "", x$frames)
 
 x1sum <- x1 %>% group_by(sendung) %>% summarize(sender = first(sender), 
                                                 censored_secs = sum(censored_secs))
 x1max <- x1 %>% group_by(sendung) %>% summarize(Prozent = max(prozent_num))
 
 x1 %>% 
-  ggplot(aes(x = sendung, y = prozent_num, group = sendung, fill = sendung)) + 
+  ggplot(aes(y = sendung, x = prozent_num, group = sendung, fill = sendung)) + 
   # geom_boxplot(outlier.size = 0.5) + 
   geom_violin() + 
+  geom_joy(color = "lightgrey") + 
   # geom_point(data = x1max, aes(x = sendung, y = Prozent, color = sendung), 
              # shape = 18, size = 5) + 
   # geom_label(data = x1max, aes(x = sendung, y = Prozent, label = paste("max.\n", Prozent, "%"))) + 
   theme_minimal() + 
-  labs(y = "Prozent der Sendung als Standbild", x = "Sendung") + 
+  labs(x = "Standbild pro Sendung", y = element_blank()) + 
   guides(color = "none", 
          fill = "none") + 
-  scale_fill_manual(values = alpha(c("#3284be", "dodgerblue4", "darkorange", "darkgrey"), alpha = 0.7)) + 
-  # facet_grid(sender~.)
-  scale_color_manual(values = c("#3284be", "dodgerblue4", "darkorange", "darkgrey"))# + 
+  scale_fill_manual(values = alpha(c("darkorange", "darkgrey", "#3284be", "dodgerblue4"), alpha = 0.7)) + 
+  scale_x_continuous(limits = c(0,40)) #+ 
+  # theme(panel.grid.major.y = element_blank())
+  # scale_y_discrete(breaks = NULL)
   
