@@ -5,10 +5,10 @@ This open-source project concerns the public german television. They host on-dem
 
 ## Dependencies
 To run the software writen in [R](https://www.r-project.org/), you'll aditionally have to install some Linux libraries:   
-`sudo apt install r-base ffmpeg libcurl4-openssl-dev imagemagick libmagick++-dev libtesseract-dev libleptonica-dev tesseract-ocr-eng tesseract-ocr-deu`
+`sudo apt install r-base ffmpeg libcurl4-openssl-dev libssl-dev libssh2-1-dev imagemagick libmagick++-dev git`
 
 Next install the depending R packages:      
-`install.packages(c("jpeg", "rvest", "ggplot2", "tibble", "lubridate", "stringr", "magick", "tesseract", "twitteR"))`  
+`install.packages(c("jpeg", "rvest", "ggplot2", "tibble", "lubridate", "stringr", "magick", "twitteR"))`  
 as well aslong the [Mastodon package](https://github.com/ThomasChln/mastodon) is not on CRAN:  
 `devtools::install_github('ThomasChln/mastodon')  # install.packages("devtools")`
 
@@ -18,7 +18,7 @@ as well aslong the [Mastodon package](https://github.com/ThomasChln/mastodon) is
 Simply clone this repo with `git clone git@github.com:georoen/standbildNews.git`.  
 
 Now give it a spin by e.g. processing the latest *ZDF 19Uhr* news:  
-`Rscript --vanilla bin/heuteZensiert.R h19 2`  
+`Rscript --vanilla bin/MAIN.R h19 2`  
 The syntax is `Rscript --vanilla` for sourcing the R script without saving the enviroment, `bin/heuteZensiert.R` calling the main, `h19` defining the news broadcast you want to stream and `2` for selecting the broadcast of two days ago.  
 Along `h19` for *Heute 19Uhr*, also the other show of *ZDF* `hjo` for *Heute Journal*, as well as the two shows of *ARD*, `t20` for *Tagesschau* and `tth` *Tagesthemen* are implemented.  
 The number `2` is an optional date parameter, selecting the show of two days ago.
@@ -39,3 +39,4 @@ There are several ways how to contribute to this project:
 - Are the tweets correct? If you watch the above news on a regular basis and have a social account, please fave/interact with, if the blocked frames were detected correct. This helps to access the classifieres accuracy.  
 - Add context to the blocked frames. It is not only interesting to know how much frames are missing, put also what is missing. Thus when you post a short reply about the blocked content, that would be very cool.
 - Run a node. If you have a Raspberry Pi or any other server you can help processing the shows every day. Please do not hestitate to contact us, so we can share the credentials with you.
+
