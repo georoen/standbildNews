@@ -71,6 +71,13 @@ compose_URL.zdf <- function(date, sendung) {
            sendung, video)
   }
   
+  #' URL Muster hjo vom 9.12.2019
+  #' https://downloadzdf-a.akamaihd.net/mp4/zdf/19/12/191209_sendung_hjo/2/191209_sendung_hjo_808k_p11v15.mp4
+  URL <- paste_ZDF(date,paste0("_sendung_", sendung), seed = "/2/", video = "_808k_p11v15.mp4")
+  if(!httr::http_error(URL)) {
+    return(URL)
+  }
+  
   #' URL-Muster vom 9.12.2019
   #' https://downloadzdf-a.akamaihd.net/mp4/zdf/19/12/191209_sendung_h19/3/191209_sendung_h19_808k_p11v15.mp4
   URL <- paste_ZDF(date,paste0("_sendung_", sendung), seed = "/3/", video = "_808k_p11v15.mp4")
