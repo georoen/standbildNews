@@ -44,7 +44,6 @@ library(ggplot2)
 library(tibble)
 library(lubridate)
 library(stringr)
-library(tesseract)
 library(magick)
 library(twitteR)
 library(rvest)
@@ -145,8 +144,6 @@ if(!dev){
 source2("download.R", chdir = TRUE)
 
 #### Frames Prozessieren ####
-# source2("mth_Classic.R")
-# source2("mth_OCR.R", chdir = TRUE)
 source2("mth_imageAlgebra.R")
 
 # Lösche Bilder wenn nicht im Entwicklungsmodus

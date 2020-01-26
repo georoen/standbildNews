@@ -71,6 +71,27 @@ compose_URL.zdf <- function(date, sendung) {
            sendung, video)
   }
   
+  #' URL Muster hjo vom 9.12.2019
+  #' https://downloadzdf-a.akamaihd.net/mp4/zdf/19/12/191209_sendung_hjo/2/191209_sendung_hjo_808k_p11v15.mp4
+  URL <- paste_ZDF(date,paste0("_sendung_", sendung), seed = "/2/", video = "_808k_p11v15.mp4")
+  if(!httr::http_error(URL)) {
+    return(URL)
+  }
+  
+  #' URL-Muster vom 9.12.2019
+  #' https://downloadzdf-a.akamaihd.net/mp4/zdf/19/12/191209_sendung_h19/3/191209_sendung_h19_808k_p11v15.mp4
+  URL <- paste_ZDF(date,paste0("_sendung_", sendung), seed = "/3/", video = "_808k_p11v15.mp4")
+  if(!httr::http_error(URL)) {
+    return(URL)
+  }
+  
+  #' URL-Muster vom 7.12.2019
+  #' https://downloadzdf-a.akamaihd.net/mp4/zdf/19/12/191207_sendung_h19/4/191207_sendung_h19_808k_p11v15.mp4
+  URL <- paste_ZDF(date,paste0("_sendung_", sendung), seed = "/4/", video = "_808k_p11v15.mp4")
+  if(!httr::http_error(URL)) {
+    return(URL)
+  }
+  
   #' URL-Muster von 14.6.2018  #TODO: Achtung, hier fehlt noch ein entsprechendes frameIMG, da WM Eröffnungsspiel gezeigt wurde :-)
   #' https://downloadzdf-a.akamaihd.net/mp4/zdf/18/06/180614_sendung_h19/2/180614_sendung_h19_776k_p11v14.mp4
   URL <- paste_ZDF(date,paste0("_sendung_", sendung), video = "_776k_p11v14.mp4")
