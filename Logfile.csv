@@ -3016,5 +3016,17 @@ date,sendung,prozent,frames,res,url
 2020-01-30,h19,7.4%,932F56T,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/01/200130_sendung_h19/2/200130_sendung_h19_808k_p11v15.mp4
 2020-01-30,hjo,1%,1519F18T,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/01/200130_sendung_hjo/2/200130_sendung_hjo_808k_p11v15.mp4
 2020-01-31,h19,5.2%,20F9T,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/01/200131_sendung_h19/2/200131_sendung_h19_808k_p11v15.mp4
+<<<<<<< HEAD
 2020-01-31,hjo,1%,1450F17T,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/01/200131_sendung_hjo/2/200131_sendung_hjo_808k_p11v15.mp4
 2020-02-01,h19,4.4%,25F10T,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/02/200201_sendung_h19/2/200201_sendung_h19_808k_p11v15.mp4
+=======
+2020-01-28,h19,4.3%,933F50T,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/01/200128_sendung_h19/3/200128_sendung_h19_808k_p11v15.mp4
+2020-01-27,h19,12.3%,906F85T,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/01/200127_sendung_h19/3/200127_sendung_h19_808k_p11v15.mp4
+2020-01-26,h19,0%,590FNANA,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/01/200126_sendung_h19/4/200126_sendung_h19_808k_p11v15.mp4
+2020-01-28,hjo,0%,1740FNANA,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/01/200128_sendung_hjo/2/200128_sendung_hjo_808k_p11v15.mp4
+2020-01-27,hjo,0%,1775FNANA,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/01/200127_sendung_hjo/4/200127_sendung_hjo_808k_p11v15.mp4
+2020-01-26,hjo,0%,1805FNANA,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/01/200126_sendung_hjo/2/200126_sendung_hjo_808k_p11v15.mp4
+2020-01-26,t20,6.5%,631F60T,1/1,http://media.tagesschau.de/video/2020/0126/TV-20200126-2032-2101.webs.h264.mp4
+2020-01-26,tth,23.4%,631F143T,1/1,http://media.tagesschau.de/video/2020/0126/TV-20200126-2317-3501.webs.h264.mp4
+>>>>>>> f7ed4bd0a73c00c10666ed17d45ed098c81bf265
+2020-02-01,hjo,0%,958FNANA,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/02/200201_sendung_hjo/2/200201_sendung_hjo_808k_p11v15.mp4
