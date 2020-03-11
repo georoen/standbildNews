@@ -3266,7 +3266,15 @@ date,sendung,prozent,frames,res,url
 2020-03-09,tth,0%,1791FNANA,1/1,http://media.tagesschau.de/video/2020/0309/TV-20200309-2255-4800.webs.h264.mp4
 >>>>>>> d05ce4036d8ccd57508582423063d268b4b41228
 2020-03-10,h19,5.3%,976F64T,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/03/200310_sendung_h19/2/200310_sendung_h19_808k_p11v15.mp4
+<<<<<<< HEAD
 2020-03-10,t20,0%,906FNANA,1/1,http://media.tagesschau.de/video/2020/0310/TV-20200310-2021-3900.webs.h264.mp4
 2020-03-10,hjo,0%,1751FNANA,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/03/200310_sendung_hjo/2/200310_sendung_hjo_808k_p11v15.mp4
 2020-03-10,tth,0%,1885FNANA,1/1,http://media.tagesschau.de/video/2020/0310/TV-20200310-2317-2900.webs.h264.mp4
 2020-03-11,h19,10.1%,800F31T,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/03/200311_sendung_h19/2/200311_sendung_h19_808k_p11v15.mp4
+=======
+2020-03-10,t20,0%,907FNANA,1/1,http://media.tagesschau.de/video/2020/0310/TV-20200310-2021-3900.webs.h264.mp4
+2020-03-10,hjo,0%,1752FNANA,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/03/200310_sendung_hjo/2/200310_sendung_hjo_808k_p11v15.mp4
+2020-03-10,tth,0%,1886FNANA,1/1,http://media.tagesschau.de/video/2020/0310/TV-20200310-2317-2900.webs.h264.mp4
+>>>>>>> 296d486ab40edd196dba172c78f5fd158248ae70
+2020-03-11,t20,0%,923FNANA,1/1,http://media.tagesschau.de/video/2020/0311/TV-20200311-2023-2600.webs.h264.mp4
+2020-03-11,tth,4.5%,1552F81T,1/1,http://media.tagesschau.de/video/2020/0311/TV-20200311-2257-1800.webs.h264.mp4
