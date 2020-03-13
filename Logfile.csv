@@ -3294,6 +3294,12 @@ date,sendung,prozent,frames,res,url
 2020-03-12,hjo,0%,1977FNANA,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/03/200312_sendung_hjo/2/200312_sendung_hjo_808k_p11v15.mp4
 =======
 2020-03-12,t20,0%,934FNANA,1/1,http://media.tagesschau.de/video/2020/0312/TV-20200312-2020-5900.webs.h264.mp4
+<<<<<<< HEAD
 >>>>>>> 398d0774c9eb7a2a332d7f142591ebdd57abcb3f
 2020-03-12,tth,0%,1891FNANA,1/1,http://media.tagesschau.de/video/2020/0312/TV-20200312-2326-2500.webs.h264.mp4
+=======
+2020-03-12,hjo,0%,1976FNANA,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/03/200312_sendung_hjo/2/200312_sendung_hjo_808k_p11v15.mp4
+2020-03-12,tth,0%,1890FNANA,1/1,http://media.tagesschau.de/video/2020/0312/TV-20200312-2326-2500.webs.h264.mp4
+>>>>>>> a6cdf510b5b49d508026136ff7a2492dfbd7f116
 2020-03-13,h19,2.3%,1566F42T,1/1,https://downloadzdf-a.akamaihd.net/mp4/zdf/20/03/200313_sendung_h19/2/200313_sendung_h19_808k_p11v15.mp4
+2020-03-13,t20,0%,948FNANA,1/1,http://media.tagesschau.de/video/2020/0313/TV-20200313-2021-4500.webs.h264.mp4
