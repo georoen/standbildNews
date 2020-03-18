@@ -176,6 +176,13 @@ if(!dev){
   source2("tweet.R")
   if(require(mastodon)) source2("toot.R")
 }
+ 
+#### Telegram Bot Message ####
+if (require(telegram.bot) && 
+    file.exists("extra/standbildNews_bot.key") && 
+    file.exists("extra/standbildNews_group.id")) {
+  source2("telegram_bot.R")
+}
 
 #### push Logfile auf Github ####
 if(!dev){
