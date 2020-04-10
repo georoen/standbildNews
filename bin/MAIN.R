@@ -153,7 +153,7 @@ if(!dev){
 # Ist die überprüfte Nachrichtensendung vollständig online verfügbar?
 if(!TRUE %in% censored){  
   # Gesamte Sendung online verfügbar
-  (msg <- paste(c(header(sendung, date)), "vollständig online."))
+  (msg <- paste(c(header(sendung, date)), "vollständig in der Mediathek abrufbar."))
   mediaPath <- NULL
 
 }else{  # Unvollständig. Teile der Nachrichtensendung fehlen
@@ -161,10 +161,10 @@ if(!TRUE %in% censored){
     gsub("M ", " Minuten ",
          gsub("S$", " Sekunden", as.period(x)))
   }
-  (msg <- c(paste0(lubridate2string(absolutZensiert), " von ",
-                   lubridate2string(absoluteDauer), " der ", 
-                   c(header(sendung, date, " Sendung vom ")), " ",
-                   "wurden nicht im Internet gezeigt (", prozentZensiert, ")")))
+  (msg <- paste(header(sendung, date),
+                "zeigt", lubridate2string(absolutZensiert), "lang Standbilder.",
+                "Das entspricht ", prozentZensiert, "der Sendung."))
+  
   # Erstelle Abbildung
   source2("plot.R")
 } 
