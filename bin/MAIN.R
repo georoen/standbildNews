@@ -45,9 +45,7 @@ library(tibble)
 library(lubridate)
 library(stringr)
 library(magick)
-library(twitteR)
 library(rvest)
-require(mastodon)
 
 #### Funktionen ####
 ## msg Header [1]
@@ -171,23 +169,36 @@ if(!TRUE %in% censored){
   source2("plot.R")
 } 
 
-#### Twittern ####
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#                            Publish Results                                   #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 if(!dev){
-  source2("tweet.R")
-  if(require(mastodon)) source2("toot.R")
-}
- 
-#### Telegram Bot Message ####
-if (require(telegram.bot) && 
-    file.exists("extra/standbildNews_bot.key") && 
-    file.exists("extra/standbildNews_group.id")) {
-  source2("telegram_bot.R")
+  #### push Logfile auf Github ####
+  source2("git_push.R")
+  
+  #### Twitter ####
+  if (require(twitteR) && 
+      file.exists("extra/twitter_credentials.R")) {
+    source2("tweet.R")
+  }
+  
+  #### Mastodon ####
+  if (require(mastodon) && 
+      file.exists("extra/mastodon_credentials.R")) {
+    source2("toot.R")
+  }
+  
+  #### Telegram Bot Message ####
+  if (require(telegram.bot) && 
+      file.exists("extra/standbildNews_bot.key") && 
+      file.exists("extra/standbildNews_group.id")) {
+    source2("telegram_bot.R")
+  }
 }
 
-#### push Logfile auf Github ####
-if(!dev){
-  source2("git_push.R")
-}
+
 
 #### End Time ####
 Sys.time() - start

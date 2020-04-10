@@ -8,8 +8,11 @@ To run the software writen in [R](https://www.r-project.org/), you'll aditionall
 `sudo apt install r-base ffmpeg libcurl4-openssl-dev libssl-dev libssh2-1-dev imagemagick libmagick++-dev git`
 
 Next install the depending R packages:      
-`install.packages(c("jpeg", "rvest", "ggplot2", "tibble", "lubridate", "stringr", "magick", "twitteR", "telegram.bot"))`  
-as well aslong the [Mastodon package](https://github.com/ThomasChln/mastodon) is not on CRAN:  
+`install.packages(c("jpeg", "rvest", "ggplot2", "tibble", "lubridate", "stringr", "magick"))`.
+
+Further, for communicating the results:
+`install.packages("twitteR", "telegram.bot")`
+and the [Mastodon package](https://github.com/ThomasChln/mastodon) not on CRAN:  
 `devtools::install_github('ThomasChln/mastodon')  # install.packages("devtools")`
 
 
