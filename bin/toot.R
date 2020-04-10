@@ -13,7 +13,7 @@
 #' mediaPath
 
 ## Init API
-source(paste0(wd, "/extra/mastodon_credentials.R"))
+source("/extra/mastodon_credentials.R")
 ## Modify Tweet
 # #Hashtags
 # msg <- gsub("ARD", "#ARD", msg)
@@ -21,7 +21,7 @@ source(paste0(wd, "/extra/mastodon_credentials.R"))
 
 ## Toot!
 if(!dev){
-  if(!TRUE %in% censored){
+  if (is.null(mediaPath)) {
     dump <- post_status(token, msg)
   } else {
     dump <- post_media(token, msg, file = mediaPath)

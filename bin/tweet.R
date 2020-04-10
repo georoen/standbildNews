@@ -1,6 +1,5 @@
 #' Make PaspberryPi post status to twitter
 #' This twitterbot allows to actually stay in touch with the instrument.
-#' Opt-In crontab
 
 ## Dependencie
 # library(twitteR)
