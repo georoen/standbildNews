@@ -30,7 +30,6 @@ absoluteDauer <- dminutes(length(img)*res/60)
 prozentZensiert <- length(censored[which(censored)])/length(censored)
 absolutZensiert <- absoluteDauer * prozentZensiert
 prozentZensiert <- paste0(round(prozentZensiert, 3) * 100, "%")  # Pastable String
-prozentOnline <- paste0(round(1-prozentZensiert, 3) * 100, "%")  # Pastable String
 
 encodeCensored <- function(censored){
   #' Komprimiert die booleansche Zeitreihe
