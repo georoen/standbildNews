@@ -14,10 +14,6 @@
 
 ## Init API
 source("/extra/mastodon_credentials.R")
-## Modify Tweet
-# #Hashtags
-# msg <- gsub("ARD", "#ARD", msg)
-# msg <- gsub("ZDF", "#ZDF", msg)
 
 ## Toot!
 if(!dev){

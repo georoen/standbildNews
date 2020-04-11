@@ -178,6 +178,10 @@ if(!dev){
   #### push Logfile auf Github ####
   source2("git_push.R")
   
+  #### Add Hashtags ###
+  msg <- gsub("ARD", "#ARD", msg)
+  msg <- gsub("ZDF", "#ZDF", msg)
+  
   #### Twitter ####
   if (require(twitteR) && 
       file.exists("extra/twitter_credentials.R")) {
