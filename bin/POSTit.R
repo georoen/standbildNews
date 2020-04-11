@@ -24,18 +24,18 @@ if (length(args)==0) {
 #### Twitter ####
 if (require(twitteR) && 
     file.exists("extra/twitter_credentials.R")) {
-  source2("tweet.R")
+  source("bin/tweet.R")
 }
 
 #### Mastodon ####
 if (require(mastodon) && 
     file.exists("extra/mastodon_credentials.R")) {
-  source2("toot.R")
+  source("bin/toot.R")
 }
 
 #### Telegram Bot Message ####
 if (require(telegram.bot) && 
     file.exists("extra/standbildNews_bot.key") && 
     file.exists("extra/standbildNews_group.id")) {
-  source2("telegram_bot.R")
+  source("bin/telegram_bot.R")
 }
