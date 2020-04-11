@@ -13,7 +13,7 @@
 #' mediaPath
 
 ## Init API
-source("/extra/mastodon_credentials.R")
+source("extra/mastodon_credentials.R")
 
 ## Toot!
 if(!dev){
