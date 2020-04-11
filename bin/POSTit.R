@@ -21,6 +21,8 @@ if (length(args)==0) {
   mediaPath <- args[2]
 }
   
+dev <- FALSE
+
 #### Twitter ####
 if (require(twitteR) && 
     file.exists("extra/twitter_credentials.R")) {
