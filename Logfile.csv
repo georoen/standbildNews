@@ -3431,5 +3431,10 @@ date,sendung,prozent,frames,res,url
 2020-05-09,h19,0%,1260FNANA,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/05/200509_sendung_h19/2/200509_sendung_h19_808k_p11v15.mp4
 =======
 2020-05-08,hjo,0%,1999FNANA,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/05/200508_sendung_hjo/2/200508_sendung_hjo_808k_p11v15.mp4
+<<<<<<< HEAD
 >>>>>>> 01d657a50d2473e4b64d1e3b4a01a4da2b956d37
 2020-05-09,t20,0%,911FNANA,1/1,http://media.tagesschau.de/video/2020/0509/TV-20200509-2034-2900.webs.h264.mp4
+=======
+2020-05-09,h19,0%,1259FNANA,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/05/200509_sendung_h19/2/200509_sendung_h19_808k_p11v15.mp4
+>>>>>>> e4ebd78f88ec10a2d3bef5d74bded84eff6a2694
+2020-05-09,hjo,0%,1052FNANA,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/05/200509_sendung_hjo/2/200509_sendung_hjo_808k_p11v15.mp4
