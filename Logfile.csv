@@ -3668,5 +3668,10 @@ date,sendung,prozent,frames,res,url
 2020-06-16,tth,0%,1828FNANA,1/1,http://media.tagesschau.de/video/2020/0616/TV-20200616-2258-4200.webs.h264.mp4
 =======
 2020-06-16,tth,0%,1829FNANA,1/1,http://media.tagesschau.de/video/2020/0616/TV-20200616-2258-4200.webs.h264.mp4
+<<<<<<< HEAD
 >>>>>>> 9345bf6ef6dcf6781559afede51d79cbda0e8de8
 2020-06-16,hjo,0%,2004FNANA,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/06/200616_sendung_hjo/2/200616_sendung_hjo_808k_p11v15.mp4
+=======
+2020-06-16,hjo,0%,2005FNANA,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/06/200616_sendung_hjo/2/200616_sendung_hjo_808k_p11v15.mp4
+>>>>>>> 51471a0242fc6a1159ca6304524b23bb9b71e08c
+2020-06-17,h19,4.2%,32F10T,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/06/200617_sendung_h19/2/200617_sendung_h19_808k_p11v15.mp4
