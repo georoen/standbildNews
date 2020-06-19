@@ -3706,5 +3706,10 @@ date,sendung,prozent,frames,res,url
 2020-06-19,h19,6%,1075F36T,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/06/200619_sendung_h19/2/200619_sendung_h19_808k_p11v15.mp4
 =======
 2020-06-19,t20,0%,1011FNANA,1/1,http://media.tagesschau.de/video/2020/0619/TV-20200619-2025-0100.webs.h264.mp4
+<<<<<<< HEAD
 >>>>>>> b15a4543e7fb5c168c17dab49ad136393757268a
 2020-06-19,tth,0%,1802FNANA,1/1,http://media.tagesschau.de/video/2020/0619/TV-20200619-2235-4000.webs.h264.mp4
+=======
+2020-06-19,tth,0%,1801FNANA,1/1,http://media.tagesschau.de/video/2020/0619/TV-20200619-2235-4000.webs.h264.mp4
+>>>>>>> 86cf063fb5f2bacb638a4c39394dc23be25e383c
+2020-06-19,hjo,0%,2167FNANA,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/06/200619_sendung_hjo/2/200619_sendung_hjo_808k_p11v15.mp4
