@@ -3746,5 +3746,12 @@ date,sendung,prozent,frames,res,url
 2020-06-24,hjo,0%,1728FNANA,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/06/200624_sendung_hjo/2/200624_sendung_hjo_808k_p11v15.mp4
 =======
 2020-06-24,tth,0%,1774FNANA,1/1,http://media.tagesschau.de/video/2020/0624/TV-20200624-2256-0200.webs.h264.mp4
+<<<<<<< HEAD
 >>>>>>> 0dcbcbc290feef0eca816a93cc8248c56979551a
 2020-06-25,h19,6.2%,1013F47T,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/06/200625_sendung_h19/2/200625_sendung_h19_808k_p11v15.mp4
+=======
+2020-06-24,hjo,0%,1729FNANA,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/06/200624_sendung_hjo/2/200624_sendung_hjo_808k_p11v15.mp4
+2020-06-25,h19,6.2%,1013F47T,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/06/200625_sendung_h19/2/200625_sendung_h19_808k_p11v15.mp4
+2020-06-25,t20,0%,944FNANA,1/1,http://media.tagesschau.de/video/2020/0625/TV-20200625-2021-4700.webs.h264.mp4
+>>>>>>> 3fbd4da2301e3846bba254b541bdf422a7d174ec
+2020-06-25,t20,0%,943FNANA,1/1,http://media.tagesschau.de/video/2020/0625/TV-20200625-2021-4700.webs.h264.mp4
