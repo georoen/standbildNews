@@ -3862,4 +3862,9 @@ date,sendung,prozent,frames,res,url
 2020-07-14,h19,3.6%,1108F45T,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/07/200714_sendung_h19/2/200714_sendung_h19_808k_p11v15.mp4
 2020-07-14,h19,3.6%,1108F45T,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/07/200714_sendung_h19/2/200714_sendung_h19_808k_p11v15.mp4
 2020-07-14,t20,0%,933FNANA,1/1,http://media.tagesschau.de/video/2020/0714/TV-20200714-2021-1100.webs.h264.mp4
+<<<<<<< HEAD
 2020-07-14,hjo,0%,1967FNANA,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/07/200714_sendung_hjo/2/200714_sendung_hjo_808k_p11v15.mp4
+=======
+2020-07-14,tth,0%,1826FNANA,1/1,http://media.tagesschau.de/video/2020/0714/TV-20200714-2258-3200.webs.h264.mp4
+>>>>>>> 9f9ecab61435bc68cba88e74ce3d66d0ae7c39b7
+2020-07-15,h19,0%,1282FNANA,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/07/200715_sendung_h19/2/200715_sendung_h19_808k_p11v15.mp4
