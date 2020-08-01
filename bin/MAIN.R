@@ -23,9 +23,9 @@
 #' nicht gelöscht. Zusätzlich wird das errechnete Ergebnis nicht getwittert. 
 #' Der Entwicklungsmodus wird aktiviert indem die Variable `dev` auf TRUE 
 #' gesetzt wird. 
-opt_dev <- TRUE  # Devmode? Save Images, etc..
-opt_git <- FALSE  # Github Interaction
-opt_social <- FALSE  # Social Media Interaction
+opt_dev <- FALSE  # Devmode? Save Images, etc..
+opt_git <- TRUE  # Github Interaction
+opt_social <- TRUE  # Social Media Interaction
 
 if (opt_dev){
   dir.create("archiv")
