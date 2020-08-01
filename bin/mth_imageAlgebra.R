@@ -31,7 +31,7 @@ diffs <- apply(diffs, 2, median, na.rm = TRUE)  # Aggregate Multi Frame Assessme
 
 # identify freeze frames
 censored <- diffs < 0.05
-absoluteDauer <- dminutes(length(img)*res/60)
+absoluteDauer <- dminutes(length(imgPaths)*res/60)
 prozentZensiert <- length(censored[which(censored)])/length(censored)
 absolutZensiert <- absoluteDauer * prozentZensiert
 prozentZensiert <- paste0(round(prozentZensiert, 3) * 100, "%")  # Pastable String
