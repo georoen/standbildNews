@@ -16,7 +16,7 @@
 source("extra/mastodon_credentials.R")
 
 ## Toot!
-if(!dev){
+if(opt_social){
   if (is.null(mediaPath)) {
     dump <- post_status(token, msg)
   } else {

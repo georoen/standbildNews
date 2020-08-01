@@ -1,6 +1,6 @@
 # Visualization
 ## Timecode
-if(length(censored) != length(img))
+if(length(censored) != length(imgPaths))
   stop("Missing Frame?")
 imgn <- 1:length(censored)
 timecode <- seconds_to_period(imgn*res)

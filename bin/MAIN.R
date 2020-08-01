@@ -12,8 +12,8 @@
 #' Contribution welcome. Helfe mit :-)
 #'
 #' Usage:
-#' Rscript --vanilla bin/heuteZensiert.R hjo 1  # von vor einem Tag
-#' Rscript --vanilla bin/heuteZensiert.R h19 `date +%Y%m%d`
+#' Rscript --vanilla bin/MAIN.R hjo 1  # von vor einem Tag
+#' Rscript --vanilla bin/MAIN.R h19 `date +%Y%m%d`
 #'
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #                                Preamble                                      #
@@ -23,9 +23,11 @@
 #' nicht gelöscht. Zusätzlich wird das errechnete Ergebnis nicht getwittert. 
 #' Der Entwicklungsmodus wird aktiviert indem die Variable `dev` auf TRUE 
 #' gesetzt wird. 
-dev <- FALSE  # Devmode?
+opt_dev <- TRUE  # Devmode? Save Images, etc..
+opt_git <- FALSE  # Github Interaction
+opt_social <- FALSE  # Social Media Interaction
 
-if (dev){
+if (opt_dev){
   dir.create("archiv")
 }
 #### Parameter ####
@@ -114,14 +116,21 @@ if (length(args)==0) {
     date <- date - 1
   }
 
-} else if (length(args)==2){
-  ### Sendung und Datum angegenen
+} else if (length(args)>=2){
+  ### Sendung und Datum angegeben
   sendung <- args[1]
   dateshift <- as.numeric(unlist(args[2]))
   date <- Sys.Date() - dateshift
   if(is.na(date)){
     stop("Argument 2 ist keine Zahl und kann nicht vom Datum abgezogen werden.")
   }
+# } else if (length(args)==3){
+#   ### Debug-Flagge für in der Konsole = 100
+#   if (args[3] == 100){
+#   opt_dev <- FALSE
+#   opt_git <- FALSE
+#   opt_social <- FALSE
+#   }
 }
 
 ## Checke ob Sendung zulässig
@@ -134,7 +143,7 @@ if(!sendung %in% c("h19", "sendung_h19", "hjo", "sendung_hjo", "t20", "tth")){
 #                               Processing                                     #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #### Pull aktuelles Repo vom github ####
-if(!dev){ 
+if(opt_git){ 
   source2("git_pull.R")
 }
 
@@ -145,7 +154,7 @@ source2("download.R", chdir = TRUE)
 source2("mth_imageAlgebra.R")
 
 # Lösche Bilder wenn nicht im Entwicklungsmodus
-if(!dev){ 
+if(!opt_dev){ 
   unlink(Temp, recursive = TRUE)
 } 
 
@@ -174,10 +183,12 @@ if(!TRUE %in% censored){
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #                            Publish Results                                   #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-if(!dev){
+if(opt_git){
   #### push Logfile auf Github ####
   source2("git_push.R")
-  
+}
+
+if(opt_social){
   #### Add Hashtags ###
   msg <- gsub("ARD", "#ARD", msg)
   msg <- gsub("ZDF", "#ZDF", msg)
