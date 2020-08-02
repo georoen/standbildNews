@@ -3948,6 +3948,7 @@ date,sendung,prozent,frames,res,url
 2020-08-01,hjo,1.8%,837F17T,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/08/200801_sendung_hjo/2/200801_sendung_hjo_808k_p11v15.mp4
 2020-08-02,h19,11.1%,20F12T,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/08/200802_sendung_h19/2/200802_sendung_h19_808k_p11v15.mp4
 2020-08-02,h19,11.1%,20F12T,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/08/200802_sendung_h19/2/200802_sendung_h19_808k_p11v15.mp4
+<<<<<<< HEAD
 2020-08-01,t20,0%,1000FNANA,1/1,http://media.tagesschau.de/video/2020/0801/TV-20200801-2022-2900.webs.h264.mp4
 2020-07-31,t20,0%,922FNANA,1/1,http://media.tagesschau.de/video/2020/0731/TV-20200731-2021-2300.webs.h264.mp4
 2020-07-30,t20,0%,934FNANA,1/1,http://media.tagesschau.de/video/2020/0730/TV-20200730-2022-0600.webs.h264.mp4
@@ -3992,3 +3993,6 @@ date,sendung,prozent,frames,res,url
 2020-07-10,tth,10%,274F185T,1/1,http://media.tagesschau.de/video/2020/0723/TV-20200723-1755-0800.webs.h264.mp4
 2020-08-01,tth,0%,1234FNANA,1/1,http://media.tagesschau.de/video/2020/0801/TV-20200801-2342-2000.webs.h264.mp4
 2020-08-02,t20,7.1%,741F63T,1/1,http://media.tagesschau.de/video/2020/0802/TV-20200802-2023-5800.webs.h264.mp4
+=======
+2020-08-02,hjo,0%,1760FNANA,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/08/200802_sendung_hjo/2/200802_sendung_hjo_808k_p11v15.mp4
+>>>>>>> c5a90a18fe96e0f9823ad29841bdc5547962f28b
