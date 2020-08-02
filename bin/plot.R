@@ -21,7 +21,7 @@ startZensur <- df[startZensur,]
 
 ## Abbildung erstellen
 colors <- c("dodgerblue", "orangered")
-breite <- length(img)*res/60  # Länge der Sendung
+breite <- length(imgPaths)*res/60  # Länge der Sendung
 
 ggplot(df, aes(y=2, imgn, color = Online, fill = Online))+
   # Pie Chart
