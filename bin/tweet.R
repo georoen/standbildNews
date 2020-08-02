@@ -17,5 +17,5 @@ setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
 # (msg <- paste(msg, collapse = "\n"))
 
 ## Tweet 🚀
-if(!dev)
+if(opt_social)
   tweet(msg, mediaPath = mediaPath)

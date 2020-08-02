@@ -1,6 +1,6 @@
 # Visualization
 ## Timecode
-if(length(censored) != length(img))
+if(length(censored) != length(imgPaths))
   stop("Missing Frame?")
 imgn <- 1:length(censored)
 timecode <- seconds_to_period(imgn*res)
@@ -21,7 +21,7 @@ startZensur <- df[startZensur,]
 
 ## Abbildung erstellen
 colors <- c("dodgerblue", "orangered")
-breite <- length(img)*res/60  # Länge der Sendung
+breite <- length(imgPaths)*res/60  # Länge der Sendung
 
 ggplot(df, aes(y=2, imgn, color = Online, fill = Online))+
   # Pie Chart

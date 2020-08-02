@@ -15,7 +15,7 @@ group <- readLines("extra/standbildNews_group.id")
 bot <- Bot(token = token)
 
 ## Send!
-if(!dev){
+if(opt_social){
   if (is.null(mediaPath)) {
     bot$sendMessage(chat_id = group,
                     text = msg)

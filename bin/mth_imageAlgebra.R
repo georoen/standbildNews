@@ -1,32 +1,37 @@
 library(jpeg)
 
-# select corresponding reference frame
+# select corresponding reference frames
 # TODO check if tagesthemen and heute journal need separate frames
 if(sendung %in% c("h19", "hjo")){
-  frameIMG <- readJPEG("extra/zdf_frame.jpg")
+  framePaths <- list.files("lib", "^zds", full.names = TRUE)
 } else {
-  frameIMG <- readJPEG("extra/ard_frame.jpg")
+  framePaths <- list.files("lib", "^ard", full.names = TRUE)
 }
+frameIMGs <- sapply(framePaths, readJPEG)
 
 # list all downloaded frames
 # fls <- list.files(Temp, pattern = ".jpg$", full.names = TRUE)
-img <- list.files(Temp , pattern =  ".jpg$", full.names = TRUE, recursive = TRUE)  # mth_OCR.R:39
+imgPaths <- list.files(Temp , pattern =  ".jpg$", full.names = TRUE, recursive = TRUE)  # mth_OCR.R:39
 
-# calculate array difference between reference and all frames
-diffs <- sapply(img, function(x, y = frameIMG){
-  diff <- readJPEG(x) - y
-  return(mean(abs(diff)))
+# calculate array difference between all frames and all references
+diffs <- sapply(imgPaths, function(xPath, yIMGS = frameIMGs){
+  xIMG <- readJPEG(xPath)
+  sapply(frameIMGs, function(y, x = xIMG) {
+    if(!identical(dim(x), dim(y))){
+      return(NA)
+    }
+    
+    diff <- x - y
+    return(mean(abs(diff)))
+  })
 })
-# q90 <- sapply(img, function(x, y = frameIMG){
-#   diff <- readJPEG(x) - y
-#   return(quantile(abs(diff), 0.9))
-# })
-# hist(diffs)
-# hist(q90)
+  
+diffs <- apply(diffs, 2, median, na.rm = TRUE)  # Aggregate Multi Frame Assessment using Median
+# hist(diffs)  # Worth watching when seting threshold!
 
 # identify freeze frames
 censored <- diffs < 0.05
-absoluteDauer <- dminutes(length(img)*res/60)
+absoluteDauer <- dminutes(length(imgPaths)*res/60)
 prozentZensiert <- length(censored[which(censored)])/length(censored)
 absolutZensiert <- absoluteDauer * prozentZensiert
 prozentZensiert <- paste0(round(prozentZensiert, 3) * 100, "%")  # Pastable String

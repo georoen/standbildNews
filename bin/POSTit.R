@@ -21,7 +21,7 @@ if (length(args)==0) {
   mediaPath <- args[2]
 }
   
-dev <- FALSE
+opt_social <- FALSE
 
 #### Twitter ####
 if (require(twitteR) && 

@@ -160,14 +160,14 @@ compose_URL <- function(date, sendung) {
     return(URL)
   }
   
-  ifelse(dev, NA, stop ("Kann die gesuchte Sendung zu diesem Datum nicht finden!"))
+  ifelse(opt_dev, NA, stop ("Kann die gesuchte Sendung zu diesem Datum nicht finden!"))
 }
 
 URL <- compose_URL(date, sendung)  # 28.10.2017
 
 #### Temp Directory für Frames ####
 ## Stream in Tempdir speichern
-Temp <- ifelse(!dev,  # dev = TRUE um Frames zu archivieren
+Temp <- ifelse(!opt_dev,  # dev = TRUE um Frames zu archivieren
                paste0(tempdir(), "/", format(date, "%y%m%d"), "_", sendung, "/"),  # Tmp
                paste0(wd, "/archiv/", format(date, "%y%m%d"), sendung, "/"))  # Archive Mode
 
