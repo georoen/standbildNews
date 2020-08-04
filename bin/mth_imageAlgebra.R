@@ -3,7 +3,7 @@ library(jpeg)
 # select corresponding reference frames
 # TODO check if tagesthemen and heute journal need separate frames
 if(sendung %in% c("h19", "hjo")){
-  framePaths <- list.files("lib", "^zds", full.names = TRUE)
+  framePaths <- list.files("lib", "^zdf", full.names = TRUE)
 } else {
   framePaths <- list.files("lib", "^ard", full.names = TRUE)
 }
