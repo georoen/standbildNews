@@ -4030,4 +4030,9 @@ date,sendung,prozent,frames,res,url
 =======
 >>>>>>> 6025584d07f0dbafe9d91737c73bd1a5cfeaa360
 2020-08-08,h19,6%,944F36T,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/08/200808_sendung_h19/2/200808_sendung_h19_808k_p11v15.mp4
+<<<<<<< HEAD
 2020-08-08,t20,0%,944FNANA,1/1,http://media.tagesschau.de/video/2020/0808/TV-20200808-2021-1600.webs.h264.mp4
+=======
+2020-08-08,t20,0%,945FNANA,1/1,http://media.tagesschau.de/video/2020/0808/TV-20200808-2021-1600.webs.h264.mp4
+>>>>>>> d7a4207fb21ebed6bedd0139e6603b0a8cab6780
+2020-08-08,hjo,0%,886FNANA,1/1,https://rodlzdf-a.akamaihd.net/none/zdf/20/08/200808_sendung_hjo/2/200808_sendung_hjo_808k_p11v15.mp4
